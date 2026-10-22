@@ -2,4 +2,7 @@
   <Folder Name="/Backend/">
     <Project Path="LibreriaClases/LibreriaClases.csproj" />
   </Folder>
+  <Folder Name="/Frontend/">
+    <Project Path="PruebasBackend/PruebasBackend.csproj" Id="46c96793-8220-4251-bc98-6ba3cbad474d" />
+  </Folder>
 </Solution>
