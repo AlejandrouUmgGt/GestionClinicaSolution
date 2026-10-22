@@ -2,5 +2,4 @@
   <Folder Name="/Backend/">
     <Project Path="LibreriaClases/LibreriaClases.csproj" />
   </Folder>
-  <Folder Name="/Backend/Datos/" />
 </Solution>
