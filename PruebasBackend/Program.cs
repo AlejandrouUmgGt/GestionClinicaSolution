@@ -62,18 +62,18 @@ try
     Console.WriteLine();
     Console.WriteLine("=== 2. LOGIN Y SESIÓN ===");
     Usuario? admin = usuarioRepo.Validar("admin", "Admin123");
-    Verificar("Login correcto (admin / Admin123)", admin != null && admin.Rol == "Administrador");
+    Verificar("Login correcto (admin / Admin123)", admin != null && admin.Rol == Usuario.RolAdministrador);
     Verificar("Clave incorrecta devuelve null", usuarioRepo.Validar("admin", "clave-mala") == null);
     Verificar("Usuario inexistente devuelve null", usuarioRepo.Validar("nadie", "x") == null);
 
     Usuario? medicoUsuario = usuarioRepo.Validar("medico", "Medico123");
-    Verificar("Login correcto (medico / Medico123)", medicoUsuario != null && medicoUsuario.Rol == "Medico");
+    Verificar("Login correcto (medico / Medico123)", medicoUsuario != null && medicoUsuario.Rol == Usuario.RolMedico);
 
     if (admin != null)
         Sesion.Iniciar(admin);
     Verificar("Sesion.HaySesion es verdadero", Sesion.HaySesion);
-    Verificar("Sesion.TieneRol(Administrador) es verdadero", Sesion.TieneRol("Administrador"));
-    Verificar("Sesion.TieneRol(Recepcion) es falso", !Sesion.TieneRol("Recepcion"));
+    Verificar("Sesion.TieneRol(Administrador) es verdadero", Sesion.TieneRol(Usuario.RolAdministrador));
+    Verificar("Sesion.TieneRol(Recepcion) es falso", !Sesion.TieneRol(Usuario.RolRecepcion));
     Sesion.Cerrar();
     Verificar("Cerrar sesión deja HaySesion en falso", !Sesion.HaySesion);
 
@@ -110,8 +110,14 @@ try
     personas.AddRange(pacientes);
     foreach (Persona persona in personas)
         Console.WriteLine($"  [{persona.ObtenerRol()}] {persona.ObtenerResumen()}");
-    Verificar("La lista mezcla médicos y pacientes",
-        personas.Any(p => p.ObtenerRol() == "Médico") && personas.Any(p => p.ObtenerRol() == "Paciente"));
+    bool hayMedico = false;
+    bool hayPaciente = false;
+    foreach (Persona unaPersona in personas)
+    {
+        if (unaPersona.ObtenerRol() == "Médico") hayMedico = true;
+        if (unaPersona.ObtenerRol() == "Paciente") hayPaciente = true;
+    }
+    Verificar("La lista mezcla médicos y pacientes", hayMedico && hayPaciente);
 
     // ---------------------------------------------------------------
     Console.WriteLine();
@@ -242,11 +248,16 @@ try
     }
 
     // Modificar: cambiar el estado a Atendida
-    cita.Estado = "Atendida";
+    cita.Estado = Cita.EstadoAtendida;
     gestor.Modificar(cita);
-    Cita? citaGuardada = citaRepo.ListarPorPaciente(nuevo.Id).FirstOrDefault();
-    Verificar("Modificar guarda el nuevo estado", citaGuardada != null && citaGuardada.Estado == "Atendida");
-    Verificar("Listar por médico incluye la cita", citaRepo.ListarPorMedico(medico.Id).Any(c => c.Id == cita.Id));
+    List<Cita> citasDelPaciente = citaRepo.ListarPorPaciente(nuevo.Id);
+    Verificar("Modificar guarda el nuevo estado", citasDelPaciente.Count == 1 && citasDelPaciente[0].Estado == Cita.EstadoAtendida);
+    bool citaEnLista = false;
+    foreach (Cita unaCita in citaRepo.ListarPorMedico(medico.Id))
+    {
+        if (unaCita.Id == cita.Id) citaEnLista = true;
+    }
+    Verificar("Listar por médico incluye la cita", citaEnLista);
 
     // ---------------------------------------------------------------
     Console.WriteLine();
@@ -298,8 +309,13 @@ try
     DataTable porPaciente = reporteRepo.CitasPorPaciente(nuevo.Id);
     DataTable realizados = reporteRepo.TratamientosRealizados();
 
-    Console.WriteLine("  Columnas de CitasPorMedico: " +
-        string.Join(", ", porMedicoTodos.Columns.Cast<DataColumn>().Select(c => c.ColumnName)));
+    string columnas = "";
+    foreach (DataColumn columna in porMedicoTodos.Columns)
+    {
+        if (columnas != "") columnas += ", ";
+        columnas += columna.ColumnName;
+    }
+    Console.WriteLine("  Columnas de CitasPorMedico: " + columnas);
     Verificar("CitasPorMedico(0) trae las citas de todos", porMedicoTodos.Rows.Count >= 7);
     Verificar("CitasPorMedico(id) trae al menos la cita de prueba", porMedico.Rows.Count >= 1);
     Verificar("CitasPorPaciente(id) trae exactamente 1 cita", porPaciente.Rows.Count == 1);
