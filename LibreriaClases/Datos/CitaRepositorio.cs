@@ -105,7 +105,7 @@ public class CitaRepositorio
         using var comando = new SqlCommand(sql, conexion);
         AgregarParametros(comando, c);
         conexion.Open();
-        return (int)comando.ExecuteScalar()!;
+        return Convert.ToInt32(comando.ExecuteScalar());
     }
 
     public void Actualizar(Cita c)
@@ -174,7 +174,8 @@ public class CitaRepositorio
         comando.Parameters.AddWithValue("@actual", idCitaActual);
         comando.Parameters.AddWithValue("@cancelada", Cita.EstadoCancelada);
         conexion.Open();
-        return (int)comando.ExecuteScalar()! > 0;
+        int cantidad = Convert.ToInt32(comando.ExecuteScalar());
+        return cantidad > 0;
     }
 
     // ---------- métodos privados de apoyo ----------
