@@ -102,7 +102,7 @@ public class MedicoRepositorio
         using var comando = new SqlCommand(sql, conexion);
         AgregarParametros(comando, m);
         conexion.Open();
-        return (int)comando.ExecuteScalar()!;
+        return Convert.ToInt32(comando.ExecuteScalar());
     }
 
     public void Actualizar(Medico m)
