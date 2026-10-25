@@ -9,33 +9,97 @@ public class CitaRepositorio
 {
     // Consulta base: une Cita con Medico y Paciente para traer los nombres en una sola ida a la base
     private const string ConsultaBase = @"
-        SELECT c.IdCita, c.IdMedico, c.IdPaciente, c.FechaHora, c.Motivo, c.Estado,
-               m.Nombres AS MedNombres, m.Apellidos AS MedApellidos, m.Especialidad,
-               p.Nombres AS PacNombres, p.Apellidos AS PacApellidos
+        SELECT
+            c.IdCita,
+            c.IdMedico,
+            c.IdPaciente,
+            c.FechaHora,
+            c.Motivo,
+            c.Estado,
+            m.Nombres AS MedNombres,
+            m.Apellidos AS MedApellidos,
+            m.Especialidad,
+            p.Nombres AS PacNombres,
+            p.Apellidos AS PacApellidos
         FROM Cita c
-        INNER JOIN Medico m   ON m.IdMedico = c.IdMedico
-        INNER JOIN Paciente p ON p.IdPaciente = c.IdPaciente";
+        INNER JOIN Medico m ON m.IdMedico = c.IdMedico
+        INNER JOIN Paciente p ON p.IdPaciente = c.IdPaciente
+        ORDER BY c.FechaHora DESC";
 
     public List<Cita> Listar()
     {
-        return Consultar(ConsultaBase + " ORDER BY c.FechaHora DESC", null, null);
+        // Consulta todos los registros, ordenados del más reciente al más antiguo.
+        return Consultar(ConsultaBase, null, null);
     }
 
     public List<Cita> ListarPorMedico(int idMedico)
     {
-        return Consultar(ConsultaBase + " WHERE c.IdMedico = @id ORDER BY c.FechaHora DESC", "@id", idMedico);
+        // Consulta las citas correspondientes al médico.
+        const string sql = @"
+        SELECT
+            c.IdCita,
+            c.IdMedico,
+            c.IdPaciente,
+            c.FechaHora,
+            c.Motivo,
+            c.Estado,
+            m.Nombres AS MedNombres,
+            m.Apellidos AS MedApellidos,
+            m.Especialidad,
+            p.Nombres AS PacNombres,
+            p.Apellidos AS PacApellidos
+        FROM Cita c
+        INNER JOIN Medico m ON m.IdMedico = c.IdMedico
+        INNER JOIN Paciente p ON p.IdPaciente = c.IdPaciente
+        WHERE c.IdMedico = @id
+        ORDER BY c.FechaHora DESC";
+        return Consultar(sql, "@id", idMedico);
     }
 
     public List<Cita> ListarPorPaciente(int idPaciente)
     {
-        return Consultar(ConsultaBase + " WHERE c.IdPaciente = @id ORDER BY c.FechaHora DESC", "@id", idPaciente);
+        // Consulta las citas correspondientes al paciente.
+        const string sql = @"
+        SELECT
+            c.IdCita,
+            c.IdMedico,
+            c.IdPaciente,
+            c.FechaHora,
+            c.Motivo,
+            c.Estado,
+            m.Nombres AS MedNombres,
+            m.Apellidos AS MedApellidos,
+            m.Especialidad,
+            p.Nombres AS PacNombres,
+            p.Apellidos AS PacApellidos
+        FROM Cita c
+        INNER JOIN Medico m ON m.IdMedico = c.IdMedico
+        INNER JOIN Paciente p ON p.IdPaciente = c.IdPaciente
+        WHERE c.IdPaciente = @id
+        ORDER BY c.FechaHora DESC";
+        return Consultar(sql, "@id", idPaciente);
     }
 
     public int Insertar(Cita c)
     {
-        const string sql = @"INSERT INTO Cita (IdMedico, IdPaciente, FechaHora, Motivo, Estado)
-                             VALUES (@medico, @paciente, @fecha, @motivo, @estado);
-                             SELECT CAST(SCOPE_IDENTITY() AS INT);";
+        // Inserta una cita y devuelve el identificador.
+        const string sql = @"INSERT INTO Cita
+        (
+            IdMedico,
+            IdPaciente,
+            FechaHora,
+            Motivo,
+            Estado
+        )
+        VALUES
+        (
+            @medico,
+            @paciente,
+            @fecha,
+            @motivo,
+            @estado
+        );
+        SELECT CAST(SCOPE_IDENTITY() AS INT);";
 
         using var conexion = Conexion.Crear();
         using var comando = new SqlCommand(sql, conexion);
@@ -46,9 +110,15 @@ public class CitaRepositorio
 
     public void Actualizar(Cita c)
     {
-        const string sql = @"UPDATE Cita SET IdMedico = @medico, IdPaciente = @paciente, FechaHora = @fecha,
-                                    Motivo = @motivo, Estado = @estado
-                             WHERE IdCita = @id";
+        // Actualiza los datos de la cita.
+        const string sql = @"UPDATE Cita
+        SET
+            IdMedico = @medico,
+            IdPaciente = @paciente,
+            FechaHora = @fecha,
+            Motivo = @motivo,
+            Estado = @estado
+        WHERE IdCita = @id";
 
         using var conexion = Conexion.Crear();
         using var comando = new SqlCommand(sql, conexion);
@@ -60,17 +130,23 @@ public class CitaRepositorio
 
     public void Eliminar(int id)
     {
+        // Borra la cita por su identificador.
+        const string sql = @"DELETE FROM Cita
+        WHERE IdCita = @id";
         using var conexion = Conexion.Crear();
-        using var comando = new SqlCommand("DELETE FROM Cita WHERE IdCita = @id", conexion);
+        using var comando = new SqlCommand(sql, conexion);
         comando.Parameters.AddWithValue("@id", id);
         conexion.Open();
         try
         {
             comando.ExecuteNonQuery();
         }
-        catch (SqlException ex) when (ex.Number == 547)
+        catch (SqlException ex)
         {
-            throw new InvalidOperationException("No se puede eliminar la cita porque tiene tratamientos asociados.");
+            // El error 547 significa que hay tratamientos asociados.
+            if (ex.Number == 547)
+                throw new InvalidOperationException("No se puede eliminar la cita porque tiene tratamientos asociados.");
+            throw;
         }
     }
 
@@ -81,12 +157,14 @@ public class CitaRepositorio
     /// </summary>
     public bool ExisteChoque(int idMedico, DateTime fechaHora, int duracionMinutos, int idCitaActual)
     {
-        const string sql = @"SELECT COUNT(*) FROM Cita
-                             WHERE IdMedico = @medico
-                               AND Estado <> 'Cancelada'
-                               AND IdCita <> @actual
-                               AND FechaHora > DATEADD(MINUTE, -@duracion, @fecha)
-                               AND FechaHora < DATEADD(MINUTE,  @duracion, @fecha)";
+        // Busca citas activas del mismo médico que coincidan con los 30 minutos reservados.
+        const string sql = @"SELECT COUNT(*)
+        FROM Cita
+        WHERE IdMedico = @medico
+            AND Estado <> @cancelada
+            AND IdCita <> @actual
+            AND FechaHora > DATEADD(MINUTE, -@duracion, @fecha)
+            AND FechaHora < DATEADD(MINUTE, @duracion, @fecha)";
 
         using var conexion = Conexion.Crear();
         using var comando = new SqlCommand(sql, conexion);
@@ -94,6 +172,7 @@ public class CitaRepositorio
         comando.Parameters.AddWithValue("@fecha", fechaHora);
         comando.Parameters.AddWithValue("@duracion", duracionMinutos);
         comando.Parameters.AddWithValue("@actual", idCitaActual);
+        comando.Parameters.AddWithValue("@cancelada", Cita.EstadoCancelada);
         conexion.Open();
         return (int)comando.ExecuteScalar()! > 0;
     }
@@ -116,7 +195,7 @@ public class CitaRepositorio
         using var conexion = Conexion.Crear();
         using var comando = new SqlCommand(sql, conexion);
         if (nombreParametro != null)
-            comando.Parameters.AddWithValue(nombreParametro, valor!);
+            comando.Parameters.AddWithValue(nombreParametro, valor);
         conexion.Open();
 
         using SqlDataReader lector = comando.ExecuteReader();

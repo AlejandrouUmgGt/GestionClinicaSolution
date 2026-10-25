@@ -13,9 +13,17 @@ public class UsuarioRepositorio
     /// </summary>
     public Usuario? Validar(string nombreUsuario, string clave)
     {
-        const string sql = @"SELECT IdUsuario, NombreUsuario, ClaveHash, Rol, Activo
-                             FROM Usuario
-                             WHERE NombreUsuario = @usuario AND Activo = 1";
+        // Consulta un usuario activo para validar sus credenciales.
+        const string sql = @"
+            SELECT
+                IdUsuario,
+                NombreUsuario,
+                ClaveHash,
+                Rol,
+                Activo
+            FROM Usuario
+            WHERE NombreUsuario = @usuario
+                AND Activo = 1";
 
         using var conexion = Conexion.Crear();
         using var comando = new SqlCommand(sql, conexion);
