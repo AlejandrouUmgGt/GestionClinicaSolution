@@ -1,5 +1,4 @@
 using System;
-using LibreriaClases.Enumeraciones;
 
 namespace LibreriaClases.Modelos;
 
@@ -11,7 +10,8 @@ public class Cita
     public Paciente Paciente { get; set; } = null!;
     public DateTime FechaHora { get; set; }
     public string Motivo { get; set; } = "";
-    public EstadoCita Estado { get; set; } = EstadoCita.Programada;
+    // Valores válidos: "Programada", "Atendida" o "Cancelada"
+    public string Estado { get; set; } = "Programada";
 
     public override string ToString() =>
         $"{FechaHora:dd/MM/yyyy HH:mm} - {Paciente.NombreCompleto} con {Medico.NombreCompleto} ({Estado})";

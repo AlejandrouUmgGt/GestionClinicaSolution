@@ -1,14 +1,12 @@
-﻿// =====================================================================
+// =====================================================================
 // PruebasBackend - Programa de consola SOLO para probar LibreriaClases
 // Reemplaza todo el contenido de Program.cs con este archivo.
 // Las pruebas crean datos temporales (paciente, cita, tratamiento) y al final los borran.
 // =====================================================================
+using System.Data;
 using LibreriaClases.Datos;
-using LibreriaClases.Enumeraciones;
 using LibreriaClases.Logica;
 using LibreriaClases.Modelos;
-using System.Data;
-using static System.Collections.Specialized.BitVector32;
 
 Console.OutputEncoding = System.Text.Encoding.UTF8;
 
@@ -64,18 +62,18 @@ try
     Console.WriteLine();
     Console.WriteLine("=== 2. LOGIN Y SESIÓN ===");
     Usuario? admin = usuarioRepo.Validar("admin", "Admin123");
-    Verificar("Login correcto (admin / Admin123)", admin != null && admin.Rol == RolUsuario.Administrador);
+    Verificar("Login correcto (admin / Admin123)", admin != null && admin.Rol == "Administrador");
     Verificar("Clave incorrecta devuelve null", usuarioRepo.Validar("admin", "clave-mala") == null);
     Verificar("Usuario inexistente devuelve null", usuarioRepo.Validar("nadie", "x") == null);
 
     Usuario? medicoUsuario = usuarioRepo.Validar("medico", "Medico123");
-    Verificar("Login correcto (medico / Medico123)", medicoUsuario != null && medicoUsuario.Rol == RolUsuario.Medico);
+    Verificar("Login correcto (medico / Medico123)", medicoUsuario != null && medicoUsuario.Rol == "Medico");
 
     if (admin != null)
         Sesion.Iniciar(admin);
     Verificar("Sesion.HaySesion es verdadero", Sesion.HaySesion);
-    Verificar("Sesion.TieneRol(Administrador) es verdadero", Sesion.TieneRol(RolUsuario.Administrador));
-    Verificar("Sesion.TieneRol(Recepcion) es falso", !Sesion.TieneRol(RolUsuario.Recepcion));
+    Verificar("Sesion.TieneRol(Administrador) es verdadero", Sesion.TieneRol("Administrador"));
+    Verificar("Sesion.TieneRol(Recepcion) es falso", !Sesion.TieneRol("Recepcion"));
     Sesion.Cerrar();
     Verificar("Cerrar sesión deja HaySesion en falso", !Sesion.HaySesion);
 
@@ -184,10 +182,7 @@ try
     {
         int idIndebido = gestor.Agendar(new Cita
         {
-            Medico = medico,
-            Paciente = nuevo,
-            FechaHora = manana.AddMinutes(15),
-            Motivo = "Debe chocar"
+            Medico = medico, Paciente = nuevo, FechaHora = manana.AddMinutes(15), Motivo = "Debe chocar"
         });
         citaRepo.Eliminar(idIndebido);   // si llegó aquí la regla falló; se limpia
         Verificar("Rechaza una cita que se traslapa con otra del mismo médico", false);
@@ -203,10 +198,7 @@ try
     {
         int idOtro = gestor.Agendar(new Cita
         {
-            Medico = otroMedico,
-            Paciente = nuevo,
-            FechaHora = manana,
-            Motivo = "Otro médico, misma hora"
+            Medico = otroMedico, Paciente = nuevo, FechaHora = manana, Motivo = "Otro médico, misma hora"
         });
         citaRepo.Eliminar(idOtro);
         Verificar("Permite la misma hora con otro médico", true);
@@ -222,10 +214,7 @@ try
     {
         int idPasado = gestor.Agendar(new Cita
         {
-            Medico = medico,
-            Paciente = nuevo,
-            FechaHora = DateTime.Now.AddDays(-1),
-            Motivo = "Pasada"
+            Medico = medico, Paciente = nuevo, FechaHora = DateTime.Now.AddDays(-1), Motivo = "Pasada"
         });
         citaRepo.Eliminar(idPasado);
         Verificar("Rechaza una cita en el pasado", false);
@@ -241,10 +230,7 @@ try
     {
         int idSinMotivo = gestor.Agendar(new Cita
         {
-            Medico = otroMedico,
-            Paciente = nuevo,
-            FechaHora = manana.AddDays(1),
-            Motivo = ""
+            Medico = otroMedico, Paciente = nuevo, FechaHora = manana.AddDays(1), Motivo = ""
         });
         citaRepo.Eliminar(idSinMotivo);
         Verificar("Rechaza una cita sin motivo", false);
@@ -256,10 +242,10 @@ try
     }
 
     // Modificar: cambiar el estado a Atendida
-    cita.Estado = EstadoCita.Atendida;
+    cita.Estado = "Atendida";
     gestor.Modificar(cita);
     Cita? citaGuardada = citaRepo.ListarPorPaciente(nuevo.Id).FirstOrDefault();
-    Verificar("Modificar guarda el nuevo estado", citaGuardada != null && citaGuardada.Estado == EstadoCita.Atendida);
+    Verificar("Modificar guarda el nuevo estado", citaGuardada != null && citaGuardada.Estado == "Atendida");
     Verificar("Listar por médico incluye la cita", citaRepo.ListarPorMedico(medico.Id).Any(c => c.Id == cita.Id));
 
     // ---------------------------------------------------------------

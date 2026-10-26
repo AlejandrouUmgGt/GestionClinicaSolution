@@ -1,6 +1,5 @@
 using System;
 using Microsoft.Data.SqlClient;
-using LibreriaClases.Enumeraciones;
 using LibreriaClases.Logica;
 using LibreriaClases.Modelos;
 
@@ -36,7 +35,7 @@ public class UsuarioRepositorio
             Id = (int)lector["IdUsuario"],
             NombreUsuario = (string)lector["NombreUsuario"],
             ClaveHash = hashGuardado,
-            Rol = Enum.Parse<RolUsuario>((string)lector["Rol"]),
+            Rol = (string)lector["Rol"],
             Activo = (bool)lector["Activo"]
         };
     }

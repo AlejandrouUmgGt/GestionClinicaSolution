@@ -1,6 +1,5 @@
 using System;
 using LibreriaClases.Datos;
-using LibreriaClases.Enumeraciones;
 using LibreriaClases.Modelos;
 
 namespace LibreriaClases.Logica;
@@ -13,6 +12,9 @@ public class GestorCitas
 {
     // Cada cita ocupa 30 minutos del médico
     public const int DuracionMinutos = 30;
+
+    // Estados permitidos de una cita. Un arreglo sirve también para llenar un ComboBox en la interfaz.
+    public static readonly string[] EstadosValidos = { "Programada", "Atendida", "Cancelada" };
 
     private readonly CitaRepositorio _repositorio = new CitaRepositorio();
 
@@ -34,7 +36,7 @@ public class GestorCitas
         ValidarDatos(cita);
 
         // Una cita cancelada ya no ocupa horario, así que solo se revisa el choque si sigue activa
-        if (cita.Estado != EstadoCita.Cancelada)
+        if (cita.Estado != "Cancelada")
             ValidarChoque(cita, cita.Id);
 
         _repositorio.Actualizar(cita);
@@ -48,6 +50,8 @@ public class GestorCitas
             throw new InvalidOperationException("Debe seleccionar un paciente.");
         if (string.IsNullOrWhiteSpace(cita.Motivo))
             throw new InvalidOperationException("Debe indicar el motivo de la cita.");
+        if (Array.IndexOf(EstadosValidos, cita.Estado) < 0)
+            throw new InvalidOperationException("El estado de la cita no es válido.");
     }
 
     private void ValidarChoque(Cita cita, int idCitaActual)

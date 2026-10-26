@@ -1,5 +1,4 @@
 using System;
-using LibreriaClases.Enumeraciones;
 using LibreriaClases.Modelos;
 
 namespace LibreriaClases.Logica;
@@ -22,7 +21,7 @@ public static class Sesion
     }
 
     /// <summary>¿El usuario actual tiene alguno de estos roles? Se usa para mostrar u ocultar opciones del menú.</summary>
-    public static bool TieneRol(params RolUsuario[] roles)
+    public static bool TieneRol(params string[] roles)
     {
         if (UsuarioActual == null)
             return false;

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
-using LibreriaClases.Enumeraciones;
 using LibreriaClases.Modelos;
 
 namespace LibreriaClases.Datos;
@@ -107,7 +106,7 @@ public class CitaRepositorio
         comando.Parameters.AddWithValue("@paciente", c.Paciente.Id);
         comando.Parameters.AddWithValue("@fecha", c.FechaHora);
         comando.Parameters.AddWithValue("@motivo", c.Motivo);
-        comando.Parameters.AddWithValue("@estado", c.Estado.ToString());   // se guarda el nombre del enum
+        comando.Parameters.AddWithValue("@estado", c.Estado);
     }
 
     private static List<Cita> Consultar(string sql, string? nombreParametro, object? valor)
@@ -134,7 +133,7 @@ public class CitaRepositorio
             Id = (int)lector["IdCita"],
             FechaHora = (DateTime)lector["FechaHora"],
             Motivo = (string)lector["Motivo"],
-            Estado = Enum.Parse<EstadoCita>((string)lector["Estado"]),
+            Estado = (string)lector["Estado"],
             Medico = new Medico
             {
                 Id = (int)lector["IdMedico"],
