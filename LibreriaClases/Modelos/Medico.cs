@@ -8,8 +8,13 @@ public class Medico : Persona
     public int IdClinica { get; set; }
 
     // POLIMORFISMO: mismo método que Paciente, pero con comportamiento propio
-    public override string ObtenerResumen() =>
-        $"Dr(a). {NombreCompleto} - {Especialidad} (Col. {Colegiado})";
+    public override string ObtenerResumen()
+    {
+        return $"Dr(a). {NombreCompleto} - {Especialidad} (Col. {Colegiado})";
+    }
 
-    public override string ObtenerRol() => "Médico";
+    public override string ObtenerRol()
+    {
+        return "Médico";
+    }
 }

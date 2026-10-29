@@ -7,16 +7,28 @@ namespace LibreriaClases.Datos;
 
 public class MedicoRepositorio
 {
-    private const string Columnas =
-        "IdMedico, Nombres, Apellidos, Dpi, Telefono, FechaNacimiento, Colegiado, Especialidad, IdClinica";
-
     /// <summary>Lista médicos. Si "texto" trae algo, filtra por nombre, apellido, colegiado o especialidad.</summary>
     public List<Medico> Listar(string texto = "")
     {
         var lista = new List<Medico>();
-        string sql = $@"SELECT {Columnas} FROM Medico
-                        WHERE Nombres LIKE @t OR Apellidos LIKE @t OR Colegiado LIKE @t OR Especialidad LIKE @t
-                        ORDER BY Apellidos, Nombres";
+        // Busca médicos por los datos indicados.
+        const string sql = @"
+            SELECT
+                IdMedico,
+                Nombres,
+                Apellidos,
+                Dpi,
+                Telefono,
+                FechaNacimiento,
+                Colegiado,
+                Especialidad,
+                IdClinica
+            FROM Medico
+            WHERE Nombres LIKE @t
+                OR Apellidos LIKE @t
+                OR Colegiado LIKE @t
+                OR Especialidad LIKE @t
+            ORDER BY Apellidos, Nombres";
 
         using var conexion = Conexion.Crear();
         using var comando = new SqlCommand(sql, conexion);
@@ -31,7 +43,20 @@ public class MedicoRepositorio
 
     public Medico? ObtenerPorId(int id)
     {
-        string sql = $"SELECT {Columnas} FROM Medico WHERE IdMedico = @id";
+        // Busca un médico por su identificador.
+        const string sql = @"
+            SELECT
+                IdMedico,
+                Nombres,
+                Apellidos,
+                Dpi,
+                Telefono,
+                FechaNacimiento,
+                Colegiado,
+                Especialidad,
+                IdClinica
+            FROM Medico
+            WHERE IdMedico = @id";
 
         using var conexion = Conexion.Crear();
         using var comando = new SqlCommand(sql, conexion);
@@ -39,15 +64,39 @@ public class MedicoRepositorio
         conexion.Open();
 
         using SqlDataReader lector = comando.ExecuteReader();
-        return lector.Read() ? Leer(lector) : null;
+        if (lector.Read())
+            return Leer(lector);
+        else
+            return null;
     }
 
     /// <summary>Inserta el médico y devuelve el Id que generó la base de datos.</summary>
     public int Insertar(Medico m)
     {
-        const string sql = @"INSERT INTO Medico (Nombres, Apellidos, Dpi, Telefono, FechaNacimiento, Colegiado, Especialidad, IdClinica)
-                             VALUES (@nombres, @apellidos, @dpi, @telefono, @nacimiento, @colegiado, @especialidad, @clinica);
-                             SELECT CAST(SCOPE_IDENTITY() AS INT);";
+        // Inserta un médico y devuelve su identificador.
+        const string sql = @"INSERT INTO Medico
+            (
+                Nombres,
+                Apellidos,
+                Dpi,
+                Telefono,
+                FechaNacimiento,
+                Colegiado,
+                Especialidad,
+                IdClinica
+            )
+            VALUES
+            (
+                @nombres,
+                @apellidos,
+                @dpi,
+                @telefono,
+                @nacimiento,
+                @colegiado,
+                @especialidad,
+                @clinica
+            );
+            SELECT CAST(SCOPE_IDENTITY() AS INT);";
 
         using var conexion = Conexion.Crear();
         using var comando = new SqlCommand(sql, conexion);
@@ -58,10 +107,18 @@ public class MedicoRepositorio
 
     public void Actualizar(Medico m)
     {
-        const string sql = @"UPDATE Medico SET Nombres = @nombres, Apellidos = @apellidos, Dpi = @dpi, Telefono = @telefono,
-                                    FechaNacimiento = @nacimiento, Colegiado = @colegiado, Especialidad = @especialidad,
-                                    IdClinica = @clinica
-                             WHERE IdMedico = @id";
+        // Actualiza los datos del médico.
+        const string sql = @"UPDATE Medico
+            SET
+                Nombres = @nombres,
+                Apellidos = @apellidos,
+                Dpi = @dpi,
+                Telefono = @telefono,
+                FechaNacimiento = @nacimiento,
+                Colegiado = @colegiado,
+                Especialidad = @especialidad,
+                IdClinica = @clinica
+            WHERE IdMedico = @id";
 
         using var conexion = Conexion.Crear();
         using var comando = new SqlCommand(sql, conexion);
@@ -73,17 +130,23 @@ public class MedicoRepositorio
 
     public void Eliminar(int id)
     {
+        // Elimina al médico si no tiene citas asociadas.
+        const string sql = @"DELETE FROM Medico
+            WHERE IdMedico = @id";
         using var conexion = Conexion.Crear();
-        using var comando = new SqlCommand("DELETE FROM Medico WHERE IdMedico = @id", conexion);
+        using var comando = new SqlCommand(sql, conexion);
         comando.Parameters.AddWithValue("@id", id);
         conexion.Open();
         try
         {
             comando.ExecuteNonQuery();
         }
-        catch (SqlException ex) when (ex.Number == 547)   // 547 = choca con una llave foránea
+        catch (SqlException ex)
         {
-            throw new InvalidOperationException("No se puede eliminar el médico porque tiene citas registradas.");
+            // El error 547 indica que hay registros asociados mediante llave foránea.
+            if (ex.Number == 547)
+                throw new InvalidOperationException("No se puede eliminar el médico porque tiene citas registradas.");
+            throw;
         }
     }
 
