@@ -17,7 +17,7 @@ public abstract class Persona
 
     public string Nombres
     {
-        get { return _nombres; }
+        get => _nombres;
         set
         {
             if (string.IsNullOrWhiteSpace(value))
@@ -28,7 +28,7 @@ public abstract class Persona
 
     public string Apellidos
     {
-        get { return _apellidos; }
+        get => _apellidos;
         set
         {
             if (string.IsNullOrWhiteSpace(value))
@@ -42,7 +42,7 @@ public abstract class Persona
 
     public DateTime FechaNacimiento
     {
-        get { return _fechaNacimiento; }
+        get => _fechaNacimiento;
         set
         {
             if (value.Date > DateTime.Today)
@@ -52,17 +52,11 @@ public abstract class Persona
     }
 
     // Propiedad calculada: no se guarda, se arma con los otros dos campos
-    public string NombreCompleto
-    {
-        get { return $"{Nombres} {Apellidos}"; }
-    }
+    public string NombreCompleto => $"{Nombres} {Apellidos}";
 
     /// <summary>Cada clase hija está OBLIGADA a implementarlo (por eso es abstract).</summary>
     public abstract string ObtenerResumen();
 
     /// <summary>Las hijas PUEDEN cambiarlo (override). Si no lo hacen, usan este.</summary>
-    public virtual string ObtenerRol()
-    {
-        return "Persona";
-    }
+    public virtual string ObtenerRol() => "Persona";
 }

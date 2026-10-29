@@ -7,27 +7,16 @@ namespace LibreriaClases.Datos;
 
 public class PacienteRepositorio
 {
+    private const string Columnas =
+        "IdPaciente, Nombres, Apellidos, Dpi, Telefono, FechaNacimiento, Direccion, TipoSangre";
+
     /// <summary>Lista pacientes. Si "texto" trae algo, filtra por nombre, apellido, DPI o teléfono.</summary>
     public List<Paciente> Listar(string texto = "")
     {
         var lista = new List<Paciente>();
-        // Busca pacientes por los datos indicados.
-        const string sql = @"
-            SELECT
-                IdPaciente,
-                Nombres,
-                Apellidos,
-                Dpi,
-                Telefono,
-                FechaNacimiento,
-                Direccion,
-                TipoSangre
-            FROM Paciente
-            WHERE Nombres LIKE @t
-                OR Apellidos LIKE @t
-                OR Dpi LIKE @t
-                OR Telefono LIKE @t
-            ORDER BY Apellidos, Nombres";
+        string sql = $@"SELECT {Columnas} FROM Paciente
+                        WHERE Nombres LIKE @t OR Apellidos LIKE @t OR Dpi LIKE @t OR Telefono LIKE @t
+                        ORDER BY Apellidos, Nombres";
 
         using var conexion = Conexion.Crear();
         using var comando = new SqlCommand(sql, conexion);
@@ -42,19 +31,7 @@ public class PacienteRepositorio
 
     public Paciente? ObtenerPorId(int id)
     {
-        // Busca un paciente por su identificador.
-        const string sql = @"
-            SELECT
-                IdPaciente,
-                Nombres,
-                Apellidos,
-                Dpi,
-                Telefono,
-                FechaNacimiento,
-                Direccion,
-                TipoSangre
-            FROM Paciente
-            WHERE IdPaciente = @id";
+        string sql = $"SELECT {Columnas} FROM Paciente WHERE IdPaciente = @id";
 
         using var conexion = Conexion.Crear();
         using var comando = new SqlCommand(sql, conexion);
@@ -62,10 +39,7 @@ public class PacienteRepositorio
         conexion.Open();
 
         using SqlDataReader lector = comando.ExecuteReader();
-        if (lector.Read())
-            return Leer(lector);
-        else
-            return null;
+        return lector.Read() ? Leer(lector) : null;
     }
 
     /// <summary>
@@ -74,41 +48,14 @@ public class PacienteRepositorio
     /// </summary>
     public int Insertar(Paciente p)
     {
-        // SET XACT_ABORT ON deshace toda la transacción si falla una instrucción.
-        // BEGIN TRAN inicia la operación conjunta y COMMIT la confirma.
         const string sql = @"SET XACT_ABORT ON;
-            BEGIN TRAN;
-            INSERT INTO Paciente
-            (
-                Nombres,
-                Apellidos,
-                Dpi,
-                Telefono,
-                FechaNacimiento,
-                Direccion,
-                TipoSangre
-            )
-            VALUES
-            (
-                @nombres,
-                @apellidos,
-                @dpi,
-                @telefono,
-                @nacimiento,
-                @direccion,
-                @sangre
-            );
-            DECLARE @nuevoId INT = CAST(SCOPE_IDENTITY() AS INT);
-            INSERT INTO Expediente
-            (
-                IdPaciente
-            )
-            VALUES
-            (
-                @nuevoId
-            );
-            COMMIT;
-            SELECT @nuevoId;";
+                             BEGIN TRAN;
+                             INSERT INTO Paciente (Nombres, Apellidos, Dpi, Telefono, FechaNacimiento, Direccion, TipoSangre)
+                             VALUES (@nombres, @apellidos, @dpi, @telefono, @nacimiento, @direccion, @sangre);
+                             DECLARE @nuevoId INT = CAST(SCOPE_IDENTITY() AS INT);
+                             INSERT INTO Expediente (IdPaciente) VALUES (@nuevoId);
+                             COMMIT;
+                             SELECT @nuevoId;";
 
         using var conexion = Conexion.Crear();
         using var comando = new SqlCommand(sql, conexion);
@@ -119,17 +66,9 @@ public class PacienteRepositorio
 
     public void Actualizar(Paciente p)
     {
-        // Actualiza los datos del paciente.
-        const string sql = @"UPDATE Paciente
-            SET
-                Nombres = @nombres,
-                Apellidos = @apellidos,
-                Dpi = @dpi,
-                Telefono = @telefono,
-                FechaNacimiento = @nacimiento,
-                Direccion = @direccion,
-                TipoSangre = @sangre
-            WHERE IdPaciente = @id";
+        const string sql = @"UPDATE Paciente SET Nombres = @nombres, Apellidos = @apellidos, Dpi = @dpi, Telefono = @telefono,
+                                    FechaNacimiento = @nacimiento, Direccion = @direccion, TipoSangre = @sangre
+                             WHERE IdPaciente = @id";
 
         using var conexion = Conexion.Crear();
         using var comando = new SqlCommand(sql, conexion);
@@ -142,15 +81,11 @@ public class PacienteRepositorio
     /// <summary>Borra el expediente y el paciente. Si el paciente tiene citas, la base lo impide y se deshace todo.</summary>
     public void Eliminar(int id)
     {
-        // SET XACT_ABORT ON revierte los cambios si ocurre un error.
-        // BEGIN TRAN inicia ambos borrados y COMMIT los guarda juntos.
         const string sql = @"SET XACT_ABORT ON;
-            BEGIN TRAN;
-            DELETE FROM Expediente
-            WHERE IdPaciente = @id;
-            DELETE FROM Paciente
-            WHERE IdPaciente = @id;
-            COMMIT;";
+                             BEGIN TRAN;
+                             DELETE FROM Expediente WHERE IdPaciente = @id;
+                             DELETE FROM Paciente WHERE IdPaciente = @id;
+                             COMMIT;";
 
         using var conexion = Conexion.Crear();
         using var comando = new SqlCommand(sql, conexion);
@@ -160,12 +95,9 @@ public class PacienteRepositorio
         {
             comando.ExecuteNonQuery();
         }
-        catch (SqlException ex)
+        catch (SqlException ex) when (ex.Number == 547)
         {
-            // El error 547 indica que hay registros asociados mediante llave foránea.
-            if (ex.Number == 547)
-                throw new InvalidOperationException("No se puede eliminar el paciente porque tiene citas registradas.");
-            throw;
+            throw new InvalidOperationException("No se puede eliminar el paciente porque tiene citas registradas.");
         }
     }
 

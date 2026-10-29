@@ -8,14 +8,7 @@ public class ClinicaRepositorio
     /// <summary>Devuelve los datos de la clínica (el sistema maneja una sola). Null si aún no existe.</summary>
     public Clinica? Obtener()
     {
-        // Obtiene la primera clínica registrada.
-        const string sql = @"
-            SELECT
-                TOP 1 IdClinica,
-                Nombre,
-                Ubicacion
-            FROM Clinica
-            ORDER BY IdClinica";
+        const string sql = "SELECT TOP 1 IdClinica, Nombre, Ubicacion FROM Clinica ORDER BY IdClinica";
 
         using var conexion = Conexion.Crear();
         using var comando = new SqlCommand(sql, conexion);
@@ -36,30 +29,9 @@ public class ClinicaRepositorio
     /// <summary>Si la clínica ya tiene Id la actualiza; si no, la inserta.</summary>
     public void Guardar(Clinica clinica)
     {
-        string sql;
-        if (clinica.Id == 0)
-        {
-            // Inserta la clínica si todavía no existe.
-            sql = @"INSERT INTO Clinica
-                    (
-                        Nombre,
-                        Ubicacion
-                    )
-                    VALUES
-                    (
-                        @nombre,
-                        @ubicacion
-                    )";
-        }
-        else
-        {
-            // Actualiza la clínica existente.
-            sql = @"UPDATE Clinica
-                    SET
-                        Nombre = @nombre,
-                        Ubicacion = @ubicacion
-                    WHERE IdClinica = @id";
-        }
+        string sql = clinica.Id == 0
+            ? "INSERT INTO Clinica (Nombre, Ubicacion) VALUES (@nombre, @ubicacion)"
+            : "UPDATE Clinica SET Nombre = @nombre, Ubicacion = @ubicacion WHERE IdClinica = @id";
 
         using var conexion = Conexion.Crear();
         using var comando = new SqlCommand(sql, conexion);

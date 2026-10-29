@@ -16,24 +16,12 @@ public class ExpedienteRepositorio
     /// </summary>
     public Expediente? ObtenerPorPaciente(int idPaciente)
     {
-        // Obtiene el expediente junto con los datos del paciente.
-        const string sql = @"
-            SELECT
-                e.IdExpediente,
-                e.FechaApertura,
-                e.Antecedentes,
-                e.Alergias,
-                p.IdPaciente,
-                p.Nombres,
-                p.Apellidos,
-                p.Dpi,
-                p.Telefono,
-                p.FechaNacimiento,
-                p.Direccion,
-                p.TipoSangre
-            FROM Expediente e
-            INNER JOIN Paciente p ON p.IdPaciente = e.IdPaciente
-            WHERE e.IdPaciente = @id";
+        const string sql = @"SELECT e.IdExpediente, e.FechaApertura, e.Antecedentes, e.Alergias,
+                                    p.IdPaciente, p.Nombres, p.Apellidos, p.Dpi, p.Telefono,
+                                    p.FechaNacimiento, p.Direccion, p.TipoSangre
+                             FROM Expediente e
+                             INNER JOIN Paciente p ON p.IdPaciente = e.IdPaciente
+                             WHERE e.IdPaciente = @id";
 
         Expediente? expediente = null;
 
@@ -82,12 +70,7 @@ public class ExpedienteRepositorio
     /// <summary>Guarda los antecedentes y alergias (lo único editable del expediente).</summary>
     public void Actualizar(Expediente e)
     {
-        // Actualiza los antecedentes y alergias del expediente.
-        const string sql = @"UPDATE Expediente
-            SET
-                Antecedentes = @antecedentes,
-                Alergias = @alergias
-            WHERE IdExpediente = @id";
+        const string sql = "UPDATE Expediente SET Antecedentes = @antecedentes, Alergias = @alergias WHERE IdExpediente = @id";
 
         using var conexion = Conexion.Crear();
         using var comando = new SqlCommand(sql, conexion);

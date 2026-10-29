@@ -8,10 +8,7 @@ public static class Sesion
 {
     public static Usuario? UsuarioActual { get; private set; }
 
-    public static bool HaySesion
-    {
-        get { return UsuarioActual != null; }
-    }
+    public static bool HaySesion => UsuarioActual != null;
 
     public static void Iniciar(Usuario usuario)
     {
@@ -23,11 +20,11 @@ public static class Sesion
         UsuarioActual = null;
     }
 
-    /// <summary>¿El usuario actual tiene este rol? Se usa para mostrar u ocultar opciones del menú.</summary>
-    public static bool TieneRol(string rol)
+    /// <summary>¿El usuario actual tiene alguno de estos roles? Se usa para mostrar u ocultar opciones del menú.</summary>
+    public static bool TieneRol(params string[] roles)
     {
         if (UsuarioActual == null)
             return false;
-        return UsuarioActual.Rol == rol;
+        return Array.IndexOf(roles, UsuarioActual.Rol) >= 0;
     }
 }

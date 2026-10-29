@@ -7,13 +7,8 @@ public class Paciente : Persona
     public string TipoSangre { get; set; } = "";
 
     // POLIMORFISMO: mismo método que Medico, resultado distinto
-    public override string ObtenerResumen()
-    {
-        return $"{NombreCompleto} - Tel: {Telefono} - Sangre: {TipoSangre}";
-    }
+    public override string ObtenerResumen() =>
+        $"{NombreCompleto} - Tel: {Telefono} - Sangre: {TipoSangre}";
 
-    public override string ObtenerRol()
-    {
-        return "Paciente";
-    }
+    public override string ObtenerRol() => "Paciente";
 }
