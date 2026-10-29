@@ -7,6 +7,7 @@ Proyecto de Programación II de la Universidad Mariano Gálvez, sede Naranjo. Es
 ```text
 GestionClinicaSolution/
 ├── GestionClinicaSolution.slnx
+├── ClinicaDB.sql       Script para crear y cargar la base de datos
 ├── LibreriaClases/
 │   ├── Datos/         Acceso a SQL Server mediante repositorios
 │   ├── Interfaces/    Contratos de capacidades y repositorios
@@ -88,3 +89,5 @@ dotnet run --project PruebasBackend/PruebasBackend.csproj
 ```
 
 La consola muestra cada verificación como `[OK]` o `[FALLO]` y presenta el total al finalizar. Para que las pruebas de base de datos terminen correctamente, SQL Server LocalDB debe estar disponible y contener los datos esperados por las pruebas.
+
+Antes de ejecutar las pruebas por primera vez, ejecuta `ClinicaDB.sql` en SQL Server Management Studio conectado a `(localdb)\MSSQLLocalDB`. El script crea `ClinicaDB`, reconstruye sus tablas y vuelve a insertar los datos de ejemplo.
