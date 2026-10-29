@@ -1,19 +1,24 @@
 using System;
-using LibreriaClases.Datos;
+using LibreriaClases.Interfaces;
 using LibreriaClases.Modelos;
 
 namespace LibreriaClases.Logica;
 
 /// <summary>
 /// Reglas de negocio de las citas. La interfaz llama a este gestor en vez de ir directo al repositorio,
-/// así las reglas se cumplen siempre. DEPENDENCIA: usa CitaRepositorio.
+/// así las reglas se cumplen siempre. DEPENDENCIA: depende de la interfaz ICitaRepositorio, no de la clase concreta.
 /// </summary>
 public class GestorCitas
 {
     // Cada cita ocupa 30 minutos del médico
     public const int DuracionMinutos = 30;
 
-    private readonly CitaRepositorio _repositorio = new CitaRepositorio();
+    private readonly ICitaRepositorio _repositorio;
+
+    public GestorCitas(ICitaRepositorio repositorio)
+    {
+        _repositorio = repositorio;
+    }
 
     /// <summary>Agenda una cita nueva. Lanza InvalidOperationException con el motivo si no cumple las reglas.</summary>
     public int Agendar(Cita cita)
@@ -25,6 +30,20 @@ public class GestorCitas
 
         ValidarChoque(cita, 0);
         return _repositorio.Insertar(cita);
+    }
+
+    // SOBRECARGA (polimorfismo estático): mismo nombre, distintos parámetros; el compilador decide cuál usar.
+    public int Agendar(Medico medico, Paciente paciente, DateTime fechaHora, string motivo)
+    {
+        var cita = new Cita
+        {
+            Medico = medico,
+            Paciente = paciente,
+            FechaHora = fechaHora,
+            Motivo = motivo,
+            Estado = Cita.EstadoProgramada
+        };
+        return Agendar(cita);
     }
 
     /// <summary>Modifica una cita existente (cambiar hora, médico, motivo o estado).</summary>

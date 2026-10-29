@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using LibreriaClases.Modelos;
+using LibreriaClases.Interfaces;
 
 namespace LibreriaClases.Datos;
 
-public class CitaRepositorio
+public class CitaRepositorio : ICitaRepositorio
 {
     // Consulta base: une Cita con Medico y Paciente para traer los nombres en una sola ida a la base
     private const string ConsultaBase = @"

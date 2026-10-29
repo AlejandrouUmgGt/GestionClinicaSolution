@@ -6,6 +6,7 @@
 using System.Data;
 using LibreriaClases.Datos;
 using LibreriaClases.Logica;
+using LibreriaClases.Interfaces;
 using LibreriaClases.Modelos;
 
 Console.OutputEncoding = System.Text.Encoding.UTF8;
@@ -49,7 +50,7 @@ var citaRepo = new CitaRepositorio();
 var tratamientoRepo = new TratamientoRepositorio();
 var expedienteRepo = new ExpedienteRepositorio();
 var reporteRepo = new ReporteRepositorio();
-var gestor = new GestorCitas();
+var gestor = new GestorCitas(citaRepo);
 
 // Ids de los datos temporales, para borrarlos al final aunque algo falle
 int idTratamiento = 0;
@@ -176,6 +177,18 @@ try
     cita.Id = gestor.Agendar(cita);
     idCita = cita.Id;
     Verificar("Agendar una cita válida devuelve un Id mayor que 0", cita.Id > 0);
+
+    var resumibles = new List<IResumible>();
+    resumibles.Add(medico);
+    resumibles.Add(nuevo);
+    resumibles.Add(cita);
+    foreach (IResumible unResumible in resumibles)
+        Console.WriteLine("  [Resumen] " + unResumible.ObtenerResumen());
+    Verificar("Médico, paciente y cita se usan como IResumible", resumibles.Count == 3);
+
+    int idSobrecarga = gestor.Agendar(otroMedico, nuevo, manana.AddDays(2), "Cita por sobrecarga");
+    citaRepo.Eliminar(idSobrecarga);
+    Verificar("Agendar con 4 parámetros (sobrecarga) crea la cita", idSobrecarga > 0);
 
     // Choque: mismo médico, 15 minutos después (cada cita dura 30)
     try

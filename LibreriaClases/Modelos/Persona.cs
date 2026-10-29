@@ -1,4 +1,5 @@
 using System;
+using LibreriaClases.Interfaces;
 
 namespace LibreriaClases.Modelos;
 
@@ -7,7 +8,7 @@ namespace LibreriaClases.Modelos;
 /// Es abstracta: no se puede hacer "new Persona()", solo crear Medico o Paciente.
 /// ENCAPSULAMIENTO: los campos son privados y se validan en las propiedades.
 /// </summary>
-public abstract class Persona
+public abstract class Persona : IResumible
 {
     private string _nombres = "";
     private string _apellidos = "";

@@ -8,7 +8,13 @@ namespace LibreriaClases.Datos;
 public class PacienteRepositorio
 {
     /// <summary>Lista pacientes. Si "texto" trae algo, filtra por nombre, apellido, DPI o teléfono.</summary>
-    public List<Paciente> Listar(string texto = "")
+    // SOBRECARGA (polimorfismo estático): mismo nombre, distintos parámetros; el compilador decide cuál usar.
+    public List<Paciente> Listar()
+    {
+        return Listar("");
+    }
+
+    public List<Paciente> Listar(string texto)
     {
         var lista = new List<Paciente>();
         // Busca pacientes por los datos indicados.
