@@ -14,12 +14,21 @@ GestionClinicaSolution/
 │   ├── Logica/        Reglas de negocio, sesión y seguridad
 │   ├── Modelos/       Clases que representan los datos del sistema
 │   └── LibreriaClases.csproj
-└── PruebasBackend/
-    ├── Program.cs    Pruebas de consola para el backend
-    └── PruebasBackend.csproj
+├── PruebasBackend/
+│   ├── Program.cs    Pruebas de consola para el backend
+│   └── PruebasBackend.csproj
+└── GestionClinica.UI/
+    ├── Estilo/       Tema visual centralizado
+    ├── Controles/    Vistas de acceso, consultas y operaciones
+    ├── Forms/        Formularios modales de edición
+    ├── FrmPrincipal.cs
+    ├── Program.cs
+    └── GestionClinica.UI.csproj
 ```
 
 `LibreriaClases` contiene el backend que concentra modelos, acceso a datos y lógica de negocio. `PruebasBackend` es una aplicación de consola para probar ese backend; no es una interfaz gráfica de usuario.
+
+`GestionClinica.UI` es la aplicación Windows Forms de escritorio. Referencia `LibreriaClases` y conserva `PruebasBackend` como proyecto independiente para probar el backend.
 
 ## LibreriaClases
 
@@ -65,6 +74,24 @@ Los repositorios ejecutan consultas parametrizadas con `Microsoft.Data.SqlClient
 
 - **`LibreriaClases.csproj`**: configuración del proyecto de biblioteca, su versión de .NET y sus dependencias.
 
+## GestionClinica.UI
+
+- **`Program.cs`**: inicializa Windows Forms, verifica la conexión y abre la ventana principal.
+- **`FrmPrincipal.cs`**: organiza la navegación, la sesión activa y las opciones visibles según el rol.
+- **`Estilo/Tema.cs`**: centraliza colores y fuentes y aplica el estilo a los controles.
+- **`Controles/UcLogin.cs`**: valida las credenciales mediante `UsuarioRepositorio`.
+- **`Controles/UcInicio.cs`**: muestra el usuario y totales de médicos, pacientes y citas del día.
+- **`Controles/UcClinica.cs`**: consulta y guarda la clínica y muestra sus médicos asociados.
+- **`Controles/UcMedicos.cs`** y **`Controles/UcPacientes.cs`**: buscan y mantienen sus registros con formularios modales.
+- **`Controles/UcCitas.cs`**: filtra citas por médico y gestiona cambios mediante `GestorCitas`.
+- **`Controles/UcTratamientos.cs`**: filtra y mantiene tratamientos relacionados con citas.
+- **`Controles/UcExpediente.cs`**: edita antecedentes y alergias y muestra el historial médico.
+- **`Controles/UcReportes.cs`**: presenta reportes, historial, directorio y ejemplos de polimorfismo e interfaces.
+- **`Forms/FrmMedico.cs`**, **`Forms/FrmPaciente.cs`**, **`Forms/FrmCita.cs`** y **`Forms/FrmTratamiento.cs`**: capturan datos en ventanas modales.
+- **`GestionClinica.UI.csproj`**: configura Windows Forms para `net10.0-windows` y referencia `LibreriaClases`.
+
+La documentación con requerimientos, diagramas Mermaid y conceptos de POO está en [`Documentacion/InformeRequerimientosYDiagramas.md`](Documentacion/InformeRequerimientosYDiagramas.md).
+
 ## PruebasBackend
 
 - **`PruebasBackend/Program.cs`**: ejecuta verificaciones de conexión, login, seguridad, lectura de médicos y pacientes, polimorfismo, validaciones, inserción de paciente y expediente, reglas de citas y operaciones de tratamientos. Crea datos temporales y trata de limpiarlos al terminar.
@@ -81,11 +108,17 @@ Los repositorios ejecutan consultas parametrizadas con `Microsoft.Data.SqlClient
 
 Se requiere .NET 10 y una instancia de SQL Server LocalDB con la base de datos configurada para el proyecto.
 
-Desde la carpeta `GestionClinicaSolution`, se puede compilar y luego ejecutar la consola:
+En Windows, desde la carpeta `GestionClinicaSolution`, se puede compilar y ejecutar la consola backend:
 
 ```bash
 dotnet build GestionClinicaSolution.slnx
 dotnet run --project PruebasBackend/PruebasBackend.csproj
+```
+
+Para iniciar la aplicación de escritorio en Windows:
+
+```bash
+dotnet run --project GestionClinica.UI/GestionClinica.UI.csproj
 ```
 
 La consola muestra cada verificación como `[OK]` o `[FALLO]` y presenta el total al finalizar. Para que las pruebas de base de datos terminen correctamente, SQL Server LocalDB debe estar disponible y contener los datos esperados por las pruebas.
