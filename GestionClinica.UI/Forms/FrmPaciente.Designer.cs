@@ -42,6 +42,8 @@
             this.txtDireccion = new System.Windows.Forms.TextBox();
             this.lblSangre = new System.Windows.Forms.Label();
             this.cmbSangre = new System.Windows.Forms.ComboBox();
+            this.lblMedico = new System.Windows.Forms.Label();
+            this.cmbMedico = new System.Windows.Forms.ComboBox();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -184,6 +186,26 @@
             this.cmbSangre.TabIndex = 13;
             this.cmbSangre.Name = "cmbSangre";
             // 
+            // lblMedico
+            //
+            this.lblMedico.Location = new System.Drawing.Point(25, 347);
+            this.lblMedico.Size = new System.Drawing.Size(155, 27);
+            this.lblMedico.Text = "Médico asignado";
+            this.lblMedico.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblMedico.TabIndex = 14;
+            this.lblMedico.Name = "lblMedico";
+            //
+            // cmbMedico
+            //
+            this.cmbMedico.BackColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.cmbMedico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbMedico.ForeColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.cmbMedico.FormattingEnabled = true;
+            this.cmbMedico.Location = new System.Drawing.Point(185, 347);
+            this.cmbMedico.Size = new System.Drawing.Size(290, 28);
+            this.cmbMedico.TabIndex = 15;
+            this.cmbMedico.Name = "cmbMedico";
+            //
             // btnGuardar
             // 
             this.btnGuardar.BackColor = System.Drawing.Color.FromArgb(46, 134, 222);
@@ -191,11 +213,11 @@
             this.btnGuardar.FlatAppearance.BorderSize = 0;
             this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGuardar.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
-            this.btnGuardar.Location = new System.Drawing.Point(185, 357);
+            this.btnGuardar.Location = new System.Drawing.Point(185, 403);
             this.btnGuardar.Size = new System.Drawing.Size(110, 36);
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = false;
-            this.btnGuardar.TabIndex = 14;
+            this.btnGuardar.TabIndex = 16;
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
@@ -206,12 +228,12 @@
             this.btnCancelar.FlatAppearance.BorderSize = 0;
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelar.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
-            this.btnCancelar.Location = new System.Drawing.Point(305, 357);
+            this.btnCancelar.Location = new System.Drawing.Point(305, 403);
             this.btnCancelar.Size = new System.Drawing.Size(110, 36);
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = false;
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.TabIndex = 15;
+            this.btnCancelar.TabIndex = 17;
             this.btnCancelar.Name = "btnCancelar";
             // 
             // FrmPaciente
@@ -230,6 +252,8 @@
             this.Controls.Add(this.txtDireccion);
             this.Controls.Add(this.lblSangre);
             this.Controls.Add(this.cmbSangre);
+            this.Controls.Add(this.lblMedico);
+            this.Controls.Add(this.cmbMedico);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnCancelar);
             this.AcceptButton = this.btnGuardar;
@@ -237,7 +261,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(11, 31, 58);
             this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(500, 410);
+            this.ClientSize = new System.Drawing.Size(500, 456);
             this.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -266,6 +290,8 @@
         private System.Windows.Forms.TextBox txtDireccion;
         private System.Windows.Forms.Label lblSangre;
         private System.Windows.Forms.ComboBox cmbSangre;
+        private System.Windows.Forms.Label lblMedico;
+        private System.Windows.Forms.ComboBox cmbMedico;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnCancelar;
     }
