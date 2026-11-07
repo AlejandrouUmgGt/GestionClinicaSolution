@@ -17,6 +17,7 @@ public partial class FrmCita : Form
         InitializeComponent();
         _cita = cita;
         _gestor = gestor;
+        cmbMedicos.SelectedIndexChanged += cmbMedicos_SelectedIndexChanged;
     }
 
     private void FrmCita_Load(object? sender, EventArgs e)
@@ -27,10 +28,8 @@ public partial class FrmCita : Form
         {
             _medicos = new MedicoRepositorio().Listar();
             _pacientes = new PacienteRepositorio().Listar();
-            cmbMedicos.DataSource = _medicos;
             cmbMedicos.DisplayMember = "NombreCompleto";
-            cmbPacientes.DataSource = _pacientes;
-            cmbPacientes.DisplayMember = "NombreCompleto";
+            cmbMedicos.DataSource = _medicos;
             if (_cita != null)
             {
                 SeleccionarMedico(_cita.Medico.Id);
@@ -56,6 +55,25 @@ public partial class FrmCita : Form
         }
     }
 
+    // Al cambiar de médico solo se muestran los pacientes que le corresponden.
+    private void cmbMedicos_SelectedIndexChanged(object? sender, EventArgs e)
+    {
+        var asignados = new List<Paciente>();
+        if (cmbMedicos.SelectedItem is Medico medico)
+        {
+            foreach (Paciente paciente in _pacientes)
+            {
+                if (paciente.IdMedico == medico.Id)
+                    asignados.Add(paciente);
+            }
+        }
+
+        cmbPacientes.DataSource = null;
+        cmbPacientes.DisplayMember = "NombreCompleto";
+        cmbPacientes.DataSource = asignados;
+        cmbPacientes.SelectedIndex = -1;
+    }
+
     private void SeleccionarMedico(int id)
     {
         foreach (Medico medico in _medicos)
@@ -70,7 +88,7 @@ public partial class FrmCita : Form
 
     private void SeleccionarPaciente(int id)
     {
-        foreach (Paciente paciente in _pacientes)
+        foreach (Paciente paciente in (List<Paciente>)cmbPacientes.DataSource!)
         {
             if (paciente.Id == id)
             {
