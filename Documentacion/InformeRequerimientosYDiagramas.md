@@ -28,7 +28,9 @@
 - La aplicación de escritorio se desarrolla con Windows Forms sobre .NET 10 (`net10.0-windows`).
 - Los datos se almacenan en SQL Server LocalDB en la base `ClinicaDB`.
 - Las consultas usan parámetros SQL y el acceso a datos se concentra en repositorios.
-- Los controles comparten colores y fuentes definidos en `GestionClinica.UI/Estilo/Tema.cs`.
+- Cada ventana y vista se diseña en el diseñador gráfico de Visual Studio: su aspecto está en un archivo `.Designer.cs` y su lógica en un archivo `.cs` de la misma clase parcial.
+- Los controles comparten la misma paleta de colores y la misma fuente (Segoe UI), escritas directamente en cada `.Designer.cs`. `GestionClinica.UI/Estilo/Tema.cs` conserva los colores que se usan desde código.
+- Las pantallas no consultan la base de datos mientras se editan en el diseñador (la carga de datos se hace en el evento `Load` y se omite con `DesignMode`).
 - Las operaciones de lectura o escritura deben responder en un tiempo razonable para el tamaño de una clínica pequeña; no se definió una meta numérica de rendimiento.
 - Los errores del backend se muestran al usuario en cuadros de mensaje para facilitar su corrección.
 
@@ -123,6 +125,10 @@ classDiagram
         +Crear() SqlConnection
         +Probar(out string) bool
     }
+    class Tema {
+        +Exito Color
+        +Peligro Color
+    }
     class FrmPrincipal
     class UcLogin
     class UcMedicos
@@ -154,12 +160,15 @@ classDiagram
     UcMedicos ..> MedicoRepositorio
     UcPacientes ..> PacienteRepositorio
     UcCitas ..> GestorCitas
+    UcCitas ..> Tema
     UcTratamientos ..> TratamientoRepositorio
     UcExpediente ..> ExpedienteRepositorio
     UcReportes ..> ReporteRepositorio
     FrmPrincipal ..> UcLogin
     FrmPrincipal ..> UcReportes
 ```
+
+Cada clase de la interfaz (`FrmPrincipal`, `Uc*` y `Frm*`) está dividida en dos archivos mediante `partial class`: el `.Designer.cs` (controles y diseño) y el `.cs` (lógica). El diagrama las muestra como una sola clase.
 
 ## Diagrama entidad-relación
 
@@ -245,6 +254,7 @@ erDiagram
 | Composición | El expediente organiza sus listas de citas y tratamientos y genera el historial. | `Modelos/Expediente.cs`, `AgregarCita`, `AgregarTratamiento`, `ObtenerHistorial` |
 | Asociación | Una cita relaciona un médico y un paciente. | `Modelos/Cita.cs`, propiedades `Medico` y `Paciente` |
 | Dependencia | Los repositorios obtienen conexiones desde una clase centralizada; las pantallas usan repositorios. | `Datos/Conexion.cs`, `GestionClinica.UI/Controles/*.cs` |
+| Clases parciales y herencia de la interfaz | Cada ventana hereda de `Form` o `UserControl` y se reparte en dos archivos de una misma clase: diseño y lógica. | `Controles/UcCitas.cs` y `Controles/UcCitas.Designer.cs`; `Forms/FrmCita.cs` y `Forms/FrmCita.Designer.cs` |
 
 ## Preguntas probables para la defensa
 
@@ -265,3 +275,9 @@ erDiagram
 
 6. **¿Por qué se parametrizan las consultas SQL?**  
    Los valores se envían separados del texto SQL, lo que reduce errores de formato y evita que entradas del usuario se interpreten como parte de la consulta.
+
+7. **¿Por qué cada pantalla tiene un archivo `.Designer.cs` y otro `.cs`?**  
+   Es una clase parcial (`partial class`). El diseñador de Visual Studio escribe en el `.Designer.cs` los controles, sus posiciones, colores y eventos dentro de `InitializeComponent()`. La lógica va en el `.cs`, que no se pierde cuando el diseñador regenera su archivo.
+
+8. **¿Por qué los datos se cargan en el evento `Load` y no en el constructor?**  
+   Para que el diseñador de Visual Studio pueda abrir la pantalla sin conectarse a la base de datos. Además, `if (DesignMode) return;` evita cualquier consulta mientras se edita el diseño.

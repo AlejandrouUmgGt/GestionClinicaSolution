@@ -18,10 +18,10 @@ GestionClinicaSolution/
 │   ├── Program.cs    Pruebas de consola para el backend
 │   └── PruebasBackend.csproj
 └── GestionClinica.UI/
-    ├── Estilo/       Tema visual centralizado
-    ├── Controles/    Vistas de acceso, consultas y operaciones
-    ├── Forms/        Formularios modales de edición
-    ├── FrmPrincipal.cs
+    ├── Estilo/       Colores usados desde código (Tema.cs)
+    ├── Controles/    Vistas de acceso, consultas y operaciones (.cs + .Designer.cs)
+    ├── Forms/        Formularios modales de edición (.cs + .Designer.cs)
+    ├── FrmPrincipal.cs / FrmPrincipal.Designer.cs
     ├── Program.cs
     └── GestionClinica.UI.csproj
 ```
@@ -76,19 +76,54 @@ Los repositorios ejecutan consultas parametrizadas con `Microsoft.Data.SqlClient
 
 ## GestionClinica.UI
 
+Cada ventana y cada vista se compone de **dos archivos de una misma clase parcial** (`partial class`):
+
+- **`Nombre.Designer.cs`**: contiene `InitializeComponent()`, con los controles, sus posiciones, colores, fuentes y eventos. Lo genera y edita el diseñador gráfico de Visual Studio.
+- **`Nombre.cs`**: contiene la lógica (eventos de los botones, carga de datos, validaciones) y llama a los repositorios y al gestor.
+
+Los colores y fuentes están escritos directamente en cada `.Designer.cs`, con la paleta de la clínica (`#0B1F3A` fondo, `#12294D` paneles, `#2E86DE` acento, `#EAF0FA` texto).
+
+### Ventana principal y acceso
+
 - **`Program.cs`**: inicializa Windows Forms, verifica la conexión y abre la ventana principal.
-- **`FrmPrincipal.cs`**: organiza la navegación, la sesión activa y las opciones visibles según el rol.
-- **`Estilo/Tema.cs`**: centraliza colores y fuentes y aplica el estilo a los controles.
+- **`FrmPrincipal.cs`** y **`FrmPrincipal.Designer.cs`**: organizan la navegación, la sesión activa y las opciones visibles según el rol. Muestran cada vista dentro de un panel contenedor.
 - **`Controles/UcLogin.cs`**: valida las credenciales mediante `UsuarioRepositorio`.
 - **`Controles/UcInicio.cs`**: muestra el usuario y totales de médicos, pacientes y citas del día.
-- **`Controles/UcClinica.cs`**: consulta y guarda la clínica y muestra sus médicos asociados.
-- **`Controles/UcMedicos.cs`** y **`Controles/UcPacientes.cs`**: buscan y mantienen sus registros con formularios modales.
-- **`Controles/UcCitas.cs`**: filtra citas por médico y gestiona cambios mediante `GestorCitas`.
-- **`Controles/UcTratamientos.cs`**: filtra y mantiene tratamientos relacionados con citas.
-- **`Controles/UcExpediente.cs`**: edita antecedentes y alergias y muestra el historial médico.
-- **`Controles/UcReportes.cs`**: presenta reportes, historial, directorio y ejemplos de polimorfismo e interfaces.
-- **`Forms/FrmMedico.cs`**, **`Forms/FrmPaciente.cs`**, **`Forms/FrmCita.cs`** y **`Forms/FrmTratamiento.cs`**: capturan datos en ventanas modales.
+
+### Vistas de mantenimiento y consulta (`Controles/`)
+
+- **`UcClinica`**: consulta y guarda la clínica y muestra sus médicos asociados.
+- **`UcMedicos`** y **`UcPacientes`**: buscan y mantienen sus registros con formularios modales. `UcMedicos` recibe un indicador de solo consulta para Recepción.
+- **`UcCitas`**: filtra citas por médico y gestiona cambios mediante `GestorCitas`.
+- **`UcTratamientos`**: filtra y mantiene tratamientos relacionados con citas.
+- **`UcExpediente`**: edita antecedentes y alergias y muestra el historial médico.
+- **`UcReportes`**: presenta reportes, historial, directorio y ejemplos de polimorfismo e interfaces.
+
+### Formularios modales (`Forms/`)
+
+- **`FrmMedico`**, **`FrmPaciente`**, **`FrmCita`** y **`FrmTratamiento`**: capturan datos en ventanas modales.
+
+### Estilo
+
+- **`Estilo/Tema.cs`**: guarda la paleta de colores. Los controles ya llevan sus colores en su `.Designer.cs`; esta clase solo se usa desde código, por ejemplo para colorear el estado de una cita (`Exito` y `Peligro`).
+
+### Proyecto
+
 - **`GestionClinica.UI.csproj`**: configura Windows Forms para `net10.0-windows` y referencia `LibreriaClases`.
+
+### Editar la interfaz en el diseñador
+
+1. Abre el archivo `Nombre.cs` (o `Nombre.Designer.cs`) con doble clic en el Explorador de soluciones; Visual Studio muestra la pestaña `[Diseño]`.
+2. Mueve y cambia el tamaño de los controles con el ratón; el resto de propiedades (`BackColor`, `Font`, `Text`, `Dock`, `Anchor`) están en la ventana Propiedades.
+3. Para crear un evento nuevo, haz doble clic en el control o usa el rayo de la ventana Propiedades. Visual Studio agrega la conexión en el `.Designer.cs` y el método vacío en el `.cs`.
+4. No escribas código a mano dentro de `InitializeComponent()`: el diseñador lo reescribe.
+
+Notas del diseño:
+
+- Los datos se cargan en el evento `Load` con `if (DesignMode) return;`, así el diseñador no consulta la base mientras se edita.
+- Los paneles acoplados (`Dock`) dependen de su orden en el Z-order: el control con `Fill` debe quedar al fondo y los `Top` y `Bottom` por encima. Si un grid queda tapado, usa clic derecho → Enviar al fondo o Traer al frente.
+- Las vistas y formularios con parámetros en el constructor (`UcLogin`, `UcInicio`, `UcMedicos`, `FrmMedico`, `FrmPaciente`, `FrmCita`, `FrmTratamiento`) se editan normalmente, pero no se pueden arrastrar desde el cuadro de herramientas hacia otro formulario.
+- Las columnas de los grids de `UcMedicos`, `UcPacientes`, `UcCitas`, `UcTratamientos` y del directorio de `UcReportes` se editan en el diseñador (Editar columnas). Los grids de reportes por médico, paciente y tratamientos se llenan desde un `DataTable` y generan sus columnas solos.
 
 La documentación con requerimientos, diagramas Mermaid y conceptos de POO está en [`Documentacion/InformeRequerimientosYDiagramas.md`](Documentacion/InformeRequerimientosYDiagramas.md).
 
@@ -99,10 +134,11 @@ La documentación con requerimientos, diagramas Mermaid y conceptos de POO está
 
 ## Flujo de una cita
 
-1. La consola o una futura interfaz llama a `GestorCitas`.
-2. El gestor valida los datos y revisa las reglas del negocio.
-3. Para guardar o comprobar disponibilidad, usa `ICitaRepositorio`.
-4. `CitaRepositorio` ejecuta la consulta correspondiente en SQL Server y devuelve el resultado al gestor.
+1. El usuario abre `UcCitas`, o la consola de pruebas llama directamente a `GestorCitas`.
+2. `FrmCita` captura los datos y los entrega al gestor.
+3. El gestor valida los datos y revisa las reglas del negocio.
+4. Para guardar o comprobar disponibilidad, usa `ICitaRepositorio`.
+5. `CitaRepositorio` ejecuta la consulta correspondiente en SQL Server y devuelve el resultado al gestor.
 
 ## Ejecutar las pruebas
 
@@ -124,3 +160,5 @@ dotnet run --project GestionClinica.UI/GestionClinica.UI.csproj
 La consola muestra cada verificación como `[OK]` o `[FALLO]` y presenta el total al finalizar. Para que las pruebas de base de datos terminen correctamente, SQL Server LocalDB debe estar disponible y contener los datos esperados por las pruebas.
 
 Antes de ejecutar las pruebas por primera vez, ejecuta `ClinicaDB.sql` en SQL Server Management Studio conectado a `(localdb)\MSSQLLocalDB`. El script crea `ClinicaDB`, reconstruye sus tablas y vuelve a insertar los datos de ejemplo.
+
+Usuarios de prueba cargados por el script: `admin` / `Admin123`, `medico` / `Medico123` y `recepcion` / `Recepcion123`.
