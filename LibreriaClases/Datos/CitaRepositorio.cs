@@ -58,6 +58,7 @@ public class CitaRepositorio : ICitaRepositorio
         INNER JOIN Medico m ON m.IdMedico = c.IdMedico
         INNER JOIN Paciente p ON p.IdPaciente = c.IdPaciente
         WHERE c.IdMedico = @id
+            AND (@soloAsignados = 0 OR p.IdMedico = @id)
         ORDER BY c.FechaHora DESC";
         return Consultar(sql, "@id", idMedico);
     }
@@ -210,6 +211,8 @@ public class CitaRepositorio : ICitaRepositorio
         using var comando = new SqlCommand(sql, conexion);
         if (nombreParametro != null)
             comando.Parameters.AddWithValue(nombreParametro, valor);
+        if (sql.Contains("@soloAsignados"))
+            comando.Parameters.AddWithValue("@soloAsignados", Sesion.TieneRol(Usuario.RolMedico) ? 1 : 0);
         conexion.Open();
 
         using SqlDataReader lector = comando.ExecuteReader();
