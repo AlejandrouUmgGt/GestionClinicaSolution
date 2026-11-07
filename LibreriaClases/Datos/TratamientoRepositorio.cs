@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using LibreriaClases.Modelos;
+using LibreriaClases.Logica;
 
 namespace LibreriaClases.Datos;
 
@@ -36,11 +37,20 @@ public class TratamientoRepositorio
     public List<Tratamiento> Listar()
     {
         // Consulta todos los registros, ordenados del más reciente al más antiguo.
+        if (Sesion.TieneRol(Usuario.RolMedico))
+        {
+            var lista = new List<Tratamiento>();
+            foreach (Paciente paciente in new PacienteRepositorio().Listar())
+                lista.AddRange(ListarPorPaciente(paciente.Id));
+            return lista;
+        }
         return Consultar(ConsultaBase, null, null);
     }
 
     public List<Tratamiento> ListarPorPaciente(int idPaciente)
     {
+        if (Sesion.TieneRol(Usuario.RolMedico) && new PacienteRepositorio().ObtenerPorId(idPaciente) == null)
+            return new List<Tratamiento>();
         // Consulta los tratamientos de un paciente.
         const string sql = @"
         SELECT
@@ -72,6 +82,8 @@ public class TratamientoRepositorio
 
     public int Insertar(Tratamiento t)
     {
+        if (Sesion.TieneRol(Usuario.RolMedico))
+            throw new InvalidOperationException("Los médicos solo pueden consultar tratamientos.");
         // Inserta un tratamiento y devuelve el identificador.
         const string sql = @"INSERT INTO Tratamiento
         (
@@ -102,6 +114,8 @@ public class TratamientoRepositorio
 
     public void Actualizar(Tratamiento t)
     {
+        if (Sesion.TieneRol(Usuario.RolMedico))
+            throw new InvalidOperationException("Los médicos solo pueden consultar tratamientos.");
         // Actualiza los datos de el tratamiento.
         const string sql = @"UPDATE Tratamiento
         SET
@@ -123,6 +137,8 @@ public class TratamientoRepositorio
 
     public void Eliminar(int id)
     {
+        if (Sesion.TieneRol(Usuario.RolMedico))
+            throw new InvalidOperationException("Los médicos solo pueden consultar tratamientos.");
         // Borra el tratamiento por su identificador.
         const string sql = @"DELETE FROM Tratamiento
         WHERE IdTratamiento = @id";

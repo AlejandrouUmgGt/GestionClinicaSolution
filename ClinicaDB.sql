@@ -30,12 +30,12 @@ IF OBJECT_ID(N'dbo.Paciente', N'U') IS NOT NULL
     DROP TABLE dbo.Paciente;
 GO
 
-IF OBJECT_ID(N'dbo.Medico', N'U') IS NOT NULL
-    DROP TABLE dbo.Medico;
-GO
-
 IF OBJECT_ID(N'dbo.Usuario', N'U') IS NOT NULL
     DROP TABLE dbo.Usuario;
+GO
+
+IF OBJECT_ID(N'dbo.Medico', N'U') IS NOT NULL
+    DROP TABLE dbo.Medico;
 GO
 
 IF OBJECT_ID(N'dbo.Clinica', N'U') IS NOT NULL
@@ -58,6 +58,7 @@ CREATE TABLE dbo.Usuario
     IdUsuario INT IDENTITY(1,1) NOT NULL,
     NombreUsuario NVARCHAR(50) NOT NULL,
     Clave NVARCHAR(50) NOT NULL,
+    IdMedico INT NULL,
     Rol NVARCHAR(20) NOT NULL,
     Activo BIT NOT NULL CONSTRAINT DF_Usuario_Activo DEFAULT (1),
     CONSTRAINT PK_Usuario PRIMARY KEY (IdUsuario),
@@ -86,6 +87,10 @@ CREATE TABLE dbo.Medico
 );
 GO
 
+ALTER TABLE dbo.Usuario
+ADD CONSTRAINT FK_Usuario_Medico FOREIGN KEY (IdMedico) REFERENCES dbo.Medico (IdMedico);
+GO
+
 /* Paciente contiene los datos personales y médicos básicos del paciente. */
 CREATE TABLE dbo.Paciente
 (
@@ -97,6 +102,8 @@ CREATE TABLE dbo.Paciente
     FechaNacimiento DATE NOT NULL,
     Direccion NVARCHAR(200) NOT NULL,
     TipoSangre NVARCHAR(5) NOT NULL,
+    IdMedico INT NULL,
+    CONSTRAINT FK_Paciente_Medico FOREIGN KEY (IdMedico) REFERENCES dbo.Medico (IdMedico),
     CONSTRAINT PK_Paciente PRIMARY KEY (IdPaciente),
     CONSTRAINT UQ_Paciente_Dpi UNIQUE (Dpi)
 );
@@ -176,15 +183,35 @@ VALUES
     ('Luis Fernando', 'Zúñiga', '1000000000003', '55551003', '1985-02-05', 'COL-1003', 'Cardiología', 1);
 GO
 
+/* Datos ficticios de demostración para campos no proporcionados (DPI, fecha,
+   teléfono y colegiado); reemplazar antes de usar fuera del aula. */
+INSERT INTO dbo.Medico
+    (Nombres, Apellidos, Dpi, Telefono, FechaNacimiento, Colegiado, Especialidad, IdClinica)
+VALUES
+    ('Diego Alejandro', 'Vásques Yol', '9999999900001', '00000000', '2000-01-01', 'DEMO-16100', 'Medicina General', 1),
+    ('William Eliazar', 'Mateo Devian', '9999999900002', '00000000', '2000-01-01', 'DEMO-25804', 'Medicina General', 1),
+    ('Emy Estefany', 'González Enríquez', '9999999900003', '00000000', '2000-01-01', 'DEMO-13766', 'Medicina General', 1),
+    ('Joel Adrián', 'Galiego López', '9999999900004', '00000000', '2000-01-01', 'DEMO-784', 'Medicina General', 1);
+GO
+
+/* Cada integrante tiene su cuenta, vinculada a su médico. */
+INSERT INTO dbo.Usuario (NombreUsuario, Clave, IdMedico, Rol, Activo)
+VALUES
+    ('diego', 'Diego123', 4, 'Medico', 1),
+    ('william', 'William123', 5, 'Medico', 1),
+    ('emy', 'Emy123', 6, 'Medico', 1),
+    ('joel', 'Joel123', 7, 'Medico', 1);
+GO
+
 /* Pacientes de ejemplo para consultas y relaciones con expedientes. */
 INSERT INTO dbo.Paciente
-    (Nombres, Apellidos, Dpi, Telefono, FechaNacimiento, Direccion, TipoSangre)
+    (Nombres, Apellidos, Dpi, Telefono, FechaNacimiento, Direccion, TipoSangre, IdMedico)
 VALUES
-    ('María', 'López', '2000000000001', '55552001', '1992-03-14', 'Naranjo', 'O+'),
-    ('José', 'García', '2000000000002', '55552002', '1988-07-21', 'Salamá', 'A+'),
-    ('Elena', 'Pérez', '2000000000003', '55552003', '2001-11-09', 'Naranjo', 'B+'),
-    ('Andrés', 'Ramírez', '2000000000004', '55552004', '1975-05-30', 'Sanarate', 'O-'),
-    ('Sofía', 'Morales', '2000000000005', '55552005', '1998-12-02', 'Naranjo', 'AB+');
+    ('María', 'López', '2000000000001', '55552001', '1992-03-14', 'Naranjo', 'O+', 4),
+    ('José', 'García', '2000000000002', '55552002', '1988-07-21', 'Salamá', 'A+', 5),
+    ('Elena', 'Pérez', '2000000000003', '55552003', '2001-11-09', 'Naranjo', 'B+', 6),
+    ('Andrés', 'Ramírez', '2000000000004', '55552004', '1975-05-30', 'Sanarate', 'O-', 7),
+    ('Sofía', 'Morales', '2000000000005', '55552005', '1998-12-02', 'Naranjo', 'AB+', 4);
 GO
 
 /* Cada paciente de ejemplo recibe un expediente con los valores por defecto. */

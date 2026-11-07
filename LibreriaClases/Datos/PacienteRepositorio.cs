@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using LibreriaClases.Modelos;
+using LibreriaClases.Logica;
 
 namespace LibreriaClases.Datos;
 
@@ -16,6 +17,7 @@ public class PacienteRepositorio
 
     public List<Paciente> Listar(string texto)
     {
+        int medico = IdMedicoActual();
         var lista = new List<Paciente>();
         // Busca pacientes por los datos indicados.
         const string sql = @"
@@ -27,17 +29,20 @@ public class PacienteRepositorio
                 Telefono,
                 FechaNacimiento,
                 Direccion,
-                TipoSangre
+                TipoSangre,
+                IdMedico
             FROM Paciente
-            WHERE Nombres LIKE @t
+            WHERE (Nombres LIKE @t
                 OR Apellidos LIKE @t
                 OR Dpi LIKE @t
-                OR Telefono LIKE @t
+                OR Telefono LIKE @t)
+                AND (@medico = 0 OR IdMedico = @medico)
             ORDER BY Apellidos, Nombres";
 
         using var conexion = Conexion.Crear();
         using var comando = new SqlCommand(sql, conexion);
         comando.Parameters.AddWithValue("@t", "%" + texto + "%");
+        comando.Parameters.AddWithValue("@medico", medico);
         conexion.Open();
 
         using SqlDataReader lector = comando.ExecuteReader();
@@ -48,6 +53,7 @@ public class PacienteRepositorio
 
     public Paciente? ObtenerPorId(int id)
     {
+        int medico = IdMedicoActual();
         // Busca un paciente por su identificador.
         const string sql = @"
             SELECT
@@ -58,13 +64,16 @@ public class PacienteRepositorio
                 Telefono,
                 FechaNacimiento,
                 Direccion,
-                TipoSangre
+                TipoSangre,
+                IdMedico
             FROM Paciente
-            WHERE IdPaciente = @id";
+            WHERE IdPaciente = @id
+                AND (@medico = 0 OR IdMedico = @medico)";
 
         using var conexion = Conexion.Crear();
         using var comando = new SqlCommand(sql, conexion);
         comando.Parameters.AddWithValue("@id", id);
+        comando.Parameters.AddWithValue("@medico", medico);
         conexion.Open();
 
         using SqlDataReader lector = comando.ExecuteReader();
@@ -80,6 +89,7 @@ public class PacienteRepositorio
     /// </summary>
     public int Insertar(Paciente p)
     {
+        SoloAdministracionYRecepcion();
         // SET XACT_ABORT ON deshace toda la transacción si falla una instrucción.
         // BEGIN TRAN inicia la operación conjunta y COMMIT la confirma.
         const string sql = @"SET XACT_ABORT ON;
@@ -92,7 +102,8 @@ public class PacienteRepositorio
                 Telefono,
                 FechaNacimiento,
                 Direccion,
-                TipoSangre
+                TipoSangre,
+                IdMedico
             )
             VALUES
             (
@@ -102,7 +113,8 @@ public class PacienteRepositorio
                 @telefono,
                 @nacimiento,
                 @direccion,
-                @sangre
+                @sangre,
+                @medico
             );
             DECLARE @nuevoId INT = CAST(SCOPE_IDENTITY() AS INT);
             INSERT INTO Expediente
@@ -125,6 +137,7 @@ public class PacienteRepositorio
 
     public void Actualizar(Paciente p)
     {
+        SoloAdministracionYRecepcion();
         // Actualiza los datos del paciente.
         const string sql = @"UPDATE Paciente
             SET
@@ -134,7 +147,8 @@ public class PacienteRepositorio
                 Telefono = @telefono,
                 FechaNacimiento = @nacimiento,
                 Direccion = @direccion,
-                TipoSangre = @sangre
+                TipoSangre = @sangre,
+                IdMedico = @medico
             WHERE IdPaciente = @id";
 
         using var conexion = Conexion.Crear();
@@ -148,6 +162,7 @@ public class PacienteRepositorio
     /// <summary>Borra el expediente y el paciente. Si el paciente tiene citas, la base lo impide y se deshace todo.</summary>
     public void Eliminar(int id)
     {
+        SoloAdministracionYRecepcion();
         // SET XACT_ABORT ON revierte los cambios si ocurre un error.
         // BEGIN TRAN inicia ambos borrados y COMMIT los guarda juntos.
         const string sql = @"SET XACT_ABORT ON;
@@ -175,6 +190,22 @@ public class PacienteRepositorio
         }
     }
 
+    private static int IdMedicoActual()
+    {
+        if (!Sesion.TieneRol(Usuario.RolMedico))
+            return 0;
+        int id = Sesion.UsuarioActual!.IdMedico;
+        if (id == 0)
+            throw new InvalidOperationException("El médico no tiene una cuenta vinculada.");
+        return id;
+    }
+
+    private static void SoloAdministracionYRecepcion()
+    {
+        if (Sesion.TieneRol(Usuario.RolMedico))
+            throw new InvalidOperationException("Los médicos solo pueden consultar pacientes.");
+    }
+
     private static void AgregarParametros(SqlCommand comando, Paciente p)
     {
         comando.Parameters.AddWithValue("@nombres", p.Nombres);
@@ -184,6 +215,7 @@ public class PacienteRepositorio
         comando.Parameters.AddWithValue("@nacimiento", p.FechaNacimiento);
         comando.Parameters.AddWithValue("@direccion", p.Direccion);
         comando.Parameters.AddWithValue("@sangre", p.TipoSangre);
+        comando.Parameters.AddWithValue("@medico", p.IdMedico == 0 ? DBNull.Value : p.IdMedico);
     }
 
     private static Paciente Leer(SqlDataReader lector)
@@ -197,7 +229,8 @@ public class PacienteRepositorio
             Telefono = (string)lector["Telefono"],
             FechaNacimiento = (DateTime)lector["FechaNacimiento"],
             Direccion = (string)lector["Direccion"],
-            TipoSangre = (string)lector["TipoSangre"]
+            TipoSangre = (string)lector["TipoSangre"],
+            IdMedico = lector["IdMedico"] == DBNull.Value ? 0 : (int)lector["IdMedico"]
         };
     }
 }

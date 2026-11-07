@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Data.SqlClient;
 using LibreriaClases.Modelos;
+using LibreriaClases.Logica;
 
 namespace LibreriaClases.Datos;
 
@@ -16,6 +17,8 @@ public class ExpedienteRepositorio
     /// </summary>
     public Expediente? ObtenerPorPaciente(int idPaciente)
     {
+        if (Sesion.TieneRol(Usuario.RolMedico) && new PacienteRepositorio().ObtenerPorId(idPaciente) == null)
+            return null;
         // Obtiene el expediente junto con los datos del paciente.
         const string sql = @"
             SELECT
@@ -82,6 +85,8 @@ public class ExpedienteRepositorio
     /// <summary>Guarda los antecedentes y alergias (lo único editable del expediente).</summary>
     public void Actualizar(Expediente e)
     {
+        if (Sesion.TieneRol(Usuario.RolMedico))
+            throw new InvalidOperationException("Los médicos solo pueden consultar expedientes.");
         // Actualiza los antecedentes y alergias del expediente.
         const string sql = @"UPDATE Expediente
             SET
