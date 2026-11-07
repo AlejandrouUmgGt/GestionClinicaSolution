@@ -11,6 +11,7 @@ public partial class FrmPaciente : Form
     public FrmPaciente(Paciente? paciente)
     {
         InitializeComponent();
+        Load += FrmPaciente_Load;
         _paciente = paciente;
         if (paciente == null)
             Text = "Nuevo paciente";
@@ -18,6 +19,35 @@ public partial class FrmPaciente : Form
             Text = "Editar paciente";
         dtpNacimiento.MaxDate = DateTime.Today;
         CargarDatos();
+    }
+
+    private void FrmPaciente_Load(object? sender, EventArgs e)
+    {
+        if (DesignMode)
+            return;
+        try
+        {
+            List<Medico> medicos = new MedicoRepositorio().Listar();
+            cmbMedico.DataSource = medicos;
+            cmbMedico.DisplayMember = "NombreCompleto";
+            cmbMedico.SelectedIndex = -1;
+
+            if (_paciente != null)
+            {
+                foreach (Medico medico in medicos)
+                {
+                    if (medico.Id == _paciente.IdMedico)
+                    {
+                        cmbMedico.SelectedItem = medico;
+                        break;
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message, "Error al cargar médicos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
     }
 
     private void CargarDatos()
@@ -57,6 +87,11 @@ public partial class FrmPaciente : Form
             MessageBox.Show("Seleccione el tipo de sangre.");
             return;
         }
+        if (cmbMedico.SelectedItem == null)
+        {
+            MessageBox.Show("Seleccione el médico asignado.");
+            return;
+        }
         try
         {
             Paciente paciente;
@@ -71,6 +106,7 @@ public partial class FrmPaciente : Form
             paciente.FechaNacimiento = dtpNacimiento.Value;
             paciente.Direccion = txtDireccion.Text.Trim();
             paciente.TipoSangre = cmbSangre.SelectedItem.ToString() ?? "";
+            paciente.IdMedico = ((Medico)cmbMedico.SelectedItem).Id;
 
             PacienteRepositorio repositorio = new PacienteRepositorio();
             if (paciente.Id == 0)
