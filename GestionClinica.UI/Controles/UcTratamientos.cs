@@ -1,86 +1,33 @@
 // UcTratamientos administra tratamientos; asocia cada registro con su cita.
-using GestionClinica.UI.Estilo;
 using GestionClinica.UI.Forms;
 using LibreriaClases.Datos;
 using LibreriaClases.Modelos;
 
 namespace GestionClinica.UI.Controles;
 
-public class UcTratamientos : UserControl
+public partial class UcTratamientos : UserControl
 {
-    private readonly DataGridView _grid = new DataGridView();
-    private readonly ComboBox _cmbPacientes = new ComboBox();
-    private readonly CheckBox _chkTodos = new CheckBox();
     private readonly TratamientoRepositorio _repositorio = new TratamientoRepositorio();
 
     public UcTratamientos()
     {
-        Dock = DockStyle.Fill;
-        CrearTitulo();
-        CrearFiltros();
-        CrearGrid();
-        CrearBotones();
+        InitializeComponent();
+    }
+
+    private void UcTratamientos_Load(object? sender, EventArgs e)
+    {
+        if (DesignMode)
+            return;
         CargarPacientes();
         CargarTratamientos();
-        Tema.EstilizarControl(this);
-    }
-
-    private void CrearTitulo()
-    {
-        Label titulo = new Label { Text = "Tratamientos", Dock = DockStyle.Top, Height = 50 };
-        titulo.Name = "tituloGrande";
-        Controls.Add(titulo);
-    }
-
-    private void CrearFiltros()
-    {
-        FlowLayoutPanel filtros = new FlowLayoutPanel { Dock = DockStyle.Top, Height = 48 };
-        _chkTodos.Text = "Todos";
-        _chkTodos.Checked = true;
-        _chkTodos.CheckedChanged += chkTodos_CheckedChanged;
-        _cmbPacientes.Width = 280;
-        _cmbPacientes.SelectedIndexChanged += cmbPacientes_SelectedIndexChanged;
-        filtros.Controls.Add(_chkTodos);
-        filtros.Controls.Add(_cmbPacientes);
-        Controls.Add(filtros);
-    }
-
-    private void CrearGrid()
-    {
-        _grid.Dock = DockStyle.Fill;
-        _grid.Columns.Add("Inicio", "Inicio");
-        _grid.Columns.Add("Fin", "Fin");
-        _grid.Columns.Add("Paciente", "Paciente");
-        _grid.Columns.Add("Medico", "Médico");
-        _grid.Columns.Add("Tratamiento", "Tratamiento");
-        _grid.Columns.Add("Estado", "Estado");
-        Controls.Add(_grid);
-    }
-
-    private void CrearBotones()
-    {
-        FlowLayoutPanel botones = new FlowLayoutPanel { Dock = DockStyle.Bottom, Height = 55 };
-        botones.Controls.Add(CrearBoton("Nuevo", btnNuevo_Click));
-        botones.Controls.Add(CrearBoton("Editar", btnEditar_Click));
-        botones.Controls.Add(CrearBoton("Eliminar", btnEliminar_Click));
-        botones.Controls.Add(CrearBoton("Marcar realizado", btnRealizado_Click));
-        botones.Controls.Add(CrearBoton("Actualizar", btnActualizar_Click));
-        Controls.Add(botones);
-    }
-
-    private Button CrearBoton(string texto, EventHandler evento)
-    {
-        Button boton = new Button { Text = texto };
-        boton.Click += evento;
-        return boton;
     }
 
     private void CargarPacientes()
     {
         try
         {
-            _cmbPacientes.DataSource = new PacienteRepositorio().Listar();
-            _cmbPacientes.DisplayMember = "NombreCompleto";
+            cmbPacientes.DataSource = new PacienteRepositorio().Listar();
+            cmbPacientes.DisplayMember = "NombreCompleto";
         }
         catch (Exception ex)
         {
@@ -93,15 +40,15 @@ public class UcTratamientos : UserControl
         try
         {
             List<Tratamiento> tratamientos;
-            if (_chkTodos.Checked || _cmbPacientes.SelectedItem == null)
+            if (chkTodos.Checked || cmbPacientes.SelectedItem == null)
                 tratamientos = _repositorio.Listar();
             else
             {
-                Paciente paciente = (Paciente)_cmbPacientes.SelectedItem;
+                Paciente paciente = (Paciente)cmbPacientes.SelectedItem;
                 tratamientos = _repositorio.ListarPorPaciente(paciente.Id);
             }
 
-            _grid.Rows.Clear();
+            dgvTratamientos.Rows.Clear();
             foreach (Tratamiento tratamiento in tratamientos)
             {
                 string fin;
@@ -121,9 +68,9 @@ public class UcTratamientos : UserControl
                     pacienteNombre = tratamiento.Cita.Paciente.NombreCompleto;
                     medicoNombre = tratamiento.Cita.Medico.NombreCompleto;
                 }
-                int indice = _grid.Rows.Add(tratamiento.FechaInicio.ToString("dd/MM/yyyy"), fin,
+                int indice = dgvTratamientos.Rows.Add(tratamiento.FechaInicio.ToString("dd/MM/yyyy"), fin,
                     pacienteNombre, medicoNombre, tratamiento.Descripcion, estado);
-                _grid.Rows[indice].Tag = tratamiento.Id;
+                dgvTratamientos.Rows[indice].Tag = tratamiento.Id;
             }
         }
         catch (Exception ex)
@@ -134,9 +81,9 @@ public class UcTratamientos : UserControl
 
     private Tratamiento? ObtenerSeleccionado()
     {
-        if (_grid.SelectedRows.Count == 0)
+        if (dgvTratamientos.SelectedRows.Count == 0)
             return null;
-        int id = Convert.ToInt32(_grid.SelectedRows[0].Tag);
+        int id = Convert.ToInt32(dgvTratamientos.SelectedRows[0].Tag);
         List<Tratamiento> tratamientos = _repositorio.Listar();
         foreach (Tratamiento tratamiento in tratamientos)
         {
