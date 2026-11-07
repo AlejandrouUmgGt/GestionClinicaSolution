@@ -20,7 +20,7 @@
 | RF-12 | Consultar tratamientos realizados. | Administrador, Médico, Recepción | `Controles/UcReportes.cs`, `ReporteRepositorio.TratamientosRealizados` | Pendiente: PDF no proporcionado |
 | RF-13 | Consultar el historial médico de un paciente. | Administrador, Médico, Recepción | `Controles/UcReportes.cs`, `ExpedienteRepositorio` | Pendiente: PDF no proporcionado |
 | RF-14 | Consultar un directorio común de médicos y pacientes y sus resúmenes. | Administrador, Médico, Recepción | `Controles/UcReportes.cs`, `Persona.ObtenerResumen`, `IResumible` | Pendiente: PDF no proporcionado |
-| RF-15 | Guardar contraseñas como hash SHA-256 y comparar hashes al validar el acceso. | Todos | `Seguridad.CalcularHash`, `UsuarioRepositorio.Validar` | Pendiente: PDF no proporcionado |
+| RF-15 | Guardar la clave del usuario y compararla directamente al validar el acceso. | Todos | `UsuarioRepositorio.Validar` | Pendiente: PDF no proporcionado |
 | RF-16 | Usar consultas parametrizadas y restricciones de base de datos para evitar datos relacionados inválidos. | Sistema | Archivos `LibreriaClases/Datos/*.cs`, `ClinicaDB.sql` | Pendiente: PDF no proporcionado |
 
 ## Requerimientos no funcionales
@@ -111,7 +111,7 @@ classDiagram
     class Usuario {
         +Id int
         +NombreUsuario string
-        +ClaveHash string
+        +Clave string
         +Rol string
         +Activo bool
     }
@@ -182,7 +182,7 @@ erDiagram
     USUARIO {
         int IdUsuario PK
         nvarchar NombreUsuario UK
-        char ClaveHash
+        nvarchar Clave
         nvarchar Rol
         bit Activo
     }
