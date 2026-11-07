@@ -1,6 +1,5 @@
 using System;
 using Microsoft.Data.SqlClient;
-using LibreriaClases.Logica;
 using LibreriaClases.Modelos;
 
 namespace LibreriaClases.Datos;
@@ -8,8 +7,8 @@ namespace LibreriaClases.Datos;
 public class UsuarioRepositorio
 {
     /// <summary>
-    /// Valida el login: busca al usuario activo y compara el HASH de la clave escrita
-    /// con el hash guardado. Devuelve null si el usuario o la clave no coinciden.
+    /// Valida el login: busca al usuario activo y compara la clave escrita
+    /// con la guardada. Devuelve null si el usuario o la clave no coinciden.
     /// </summary>
     public Usuario? Validar(string nombreUsuario, string clave)
     {
@@ -18,7 +17,7 @@ public class UsuarioRepositorio
             SELECT
                 IdUsuario,
                 NombreUsuario,
-                ClaveHash,
+                Clave,
                 Rol,
                 Activo
             FROM Usuario
@@ -34,15 +33,15 @@ public class UsuarioRepositorio
         if (!lector.Read())
             return null;   // no existe o está inactivo
 
-        string hashGuardado = (string)lector["ClaveHash"];
-        if (hashGuardado != Seguridad.CalcularHash(clave))
+        string claveGuardada = (string)lector["Clave"];
+        if (claveGuardada != clave)
             return null;   // clave incorrecta
 
         return new Usuario
         {
             Id = (int)lector["IdUsuario"],
             NombreUsuario = (string)lector["NombreUsuario"],
-            ClaveHash = hashGuardado,
+            Clave = claveGuardada,
             Rol = (string)lector["Rol"],
             Activo = (bool)lector["Activo"]
         };
