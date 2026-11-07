@@ -18,6 +18,7 @@ public class UsuarioRepositorio
                 IdUsuario,
                 NombreUsuario,
                 Clave,
+                IdMedico,
                 Rol,
                 Activo
             FROM Usuario
@@ -42,6 +43,7 @@ public class UsuarioRepositorio
             Id = (int)lector["IdUsuario"],
             NombreUsuario = (string)lector["NombreUsuario"],
             Clave = claveGuardada,
+            IdMedico = lector["IdMedico"] == DBNull.Value ? 0 : (int)lector["IdMedico"],
             Rol = (string)lector["Rol"],
             Activo = (bool)lector["Activo"]
         };

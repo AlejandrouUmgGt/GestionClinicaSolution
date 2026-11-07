@@ -40,7 +40,7 @@ public partial class FrmPrincipal : Form
         btnCitas.Visible = true;
         btnTratamientos.Visible = administrador || medico;
         btnExpediente.Visible = administrador || medico;
-        btnReportes.Visible = true;
+        btnReportes.Visible = administrador || recepcion;
         lblInfoBase.Visible = true;
         lblMovimientos.Visible = true;
         lblConsultas.Visible = true;
