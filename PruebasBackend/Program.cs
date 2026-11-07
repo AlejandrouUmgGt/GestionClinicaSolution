@@ -67,8 +67,8 @@ try
     Verificar("Clave incorrecta devuelve null", usuarioRepo.Validar("admin", "clave-mala") == null);
     Verificar("Usuario inexistente devuelve null", usuarioRepo.Validar("nadie", "x") == null);
 
-    Usuario? medicoUsuario = usuarioRepo.Validar("medico", "Medico123");
-    Verificar("Login correcto (medico / Medico123)", medicoUsuario != null && medicoUsuario.Rol == "Medico");
+    Usuario? medicoUsuario = usuarioRepo.Validar("diego", "Diego123");
+    Verificar("Login correcto (diego / Diego123)", medicoUsuario != null && medicoUsuario.Rol == "Medico");
 
     if (admin != null)
         Sesion.Iniciar(admin);
@@ -88,9 +88,9 @@ try
 
     List<Medico> medicos = medicoRepo.Listar();
     List<Paciente> pacientes = pacienteRepo.Listar();
-    Verificar("Hay al menos 3 médicos de ejemplo", medicos.Count >= 3);
+    Verificar("Hay 4 médicos del grupo", medicos.Count == 4);
     Verificar("Hay al menos 5 pacientes de ejemplo", pacientes.Count >= 5);
-    Verificar("Buscar 'Pediatr' devuelve 1 médico", medicoRepo.Listar("Pediatr").Count == 1);
+    Verificar("Buscar 'Diego' devuelve 1 médico", medicoRepo.Listar("Diego").Count == 1);
     Verificar("ObtenerPorId trae al primer médico", medicoRepo.ObtenerPorId(medicos[0].Id) != null);
     Verificar("ObtenerPorId con un Id inexistente devuelve null", medicoRepo.ObtenerPorId(999999) == null);
 
