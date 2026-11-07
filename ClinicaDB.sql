@@ -52,12 +52,12 @@ CREATE TABLE dbo.Clinica
 );
 GO
 
-/* Usuario almacena el hash de la clave y restringe los roles permitidos. */
+/* Usuario guarda la clave tal cual y restringe los roles permitidos. */
 CREATE TABLE dbo.Usuario
 (
     IdUsuario INT IDENTITY(1,1) NOT NULL,
     NombreUsuario NVARCHAR(50) NOT NULL,
-    ClaveHash CHAR(64) NOT NULL,
+    Clave NVARCHAR(50) NOT NULL,
     Rol NVARCHAR(20) NOT NULL,
     Activo BIT NOT NULL CONSTRAINT DF_Usuario_Activo DEFAULT (1),
     CONSTRAINT PK_Usuario PRIMARY KEY (IdUsuario),
@@ -153,13 +153,12 @@ CREATE TABLE dbo.Tratamiento
 );
 GO
 
-/* Datos iniciales para iniciar sesión en las pruebas. Las claves se guardan
-   como SHA-256 hexadecimal en mayúsculas, igual que Seguridad.CalcularHash. */
-INSERT INTO dbo.Usuario (NombreUsuario, ClaveHash, Rol, Activo)
+/* Datos iniciales para iniciar sesión en las pruebas. */
+INSERT INTO dbo.Usuario (NombreUsuario, Clave, Rol, Activo)
 VALUES
-    ('admin', CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'Admin123'), 2), 'Administrador', 1),
-    ('medico', CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'Medico123'), 2), 'Medico', 1),
-    ('recepcion', CONVERT(CHAR(64), HASHBYTES('SHA2_256', 'Recepcion123'), 2), 'Recepcion', 1);
+    ('admin', 'Admin123', 'Administrador', 1),
+    ('medico', 'Medico123', 'Medico', 1),
+    ('recepcion', 'Recepcion123', 'Recepcion', 1);
 GO
 
 /* Una clínica para los médicos de ejemplo. */
