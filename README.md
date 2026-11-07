@@ -161,13 +161,3 @@ La consola muestra cada verificación como `[OK]` o `[FALLO]` y presenta el tota
 Antes de ejecutar las pruebas por primera vez, ejecuta `ClinicaDB.sql` en SQL Server Management Studio conectado a `(localdb)\MSSQLLocalDB`. El script crea `ClinicaDB`, reconstruye sus tablas y vuelve a insertar los datos de ejemplo.
 
 Usuarios de prueba cargados por el script: `admin` / `Admin123`, `medico` / `Medico123` y `recepcion` / `Recepcion123`.
-
-## Médicos del grupo y pacientes asignados
-
-Cuentas de demostración (rol Medico): `diego / Diego123`, `william / William123`, `emy / Emy123` y `joel / Joel123`.
-
-`Usuario.IdMedico` vincula la cuenta con su médico y `Paciente.IdMedico` indica quién tiene asignado al paciente. Al iniciar sesión como médico, se filtran los pacientes y las consultas relacionadas con ellos. Los médicos pueden consultar pacientes, citas, tratamientos y expedientes, sin editarlos. El menú Reportes queda oculto para médicos. Administración y Recepción conservan los accesos existentes.
-
-Asignación inicial: Diego (María López y Sofía Morales), William (José García), Emy (Elena Pérez) y Joel Adrián (Andrés Ramírez). Para reasignar desde SQL Server, por ejemplo: `UPDATE dbo.Paciente SET IdMedico = 5 WHERE IdPaciente = 1;` (IdMedico 5 = William, con la carga inicial).
-
-Los DPI, fechas de nacimiento, teléfonos y colegiados de los integrantes son valores **ficticios** porque la tabla Medico los requiere; sustituirlos por datos autorizados. El script borra y reconstruye las tablas, así que se debe respaldar la base antes de ejecutarlo. Las claves en texto plano se mantienen únicamente por la decisión tomada para el ejercicio local.

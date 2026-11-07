@@ -5,7 +5,6 @@ public class Paciente : Persona
 {
     public string Direccion { get; set; } = "";
     public string TipoSangre { get; set; } = "";
-    public int IdMedico { get; set; }
 
     // POLIMORFISMO: mismo método que Medico, resultado distinto
     public override string ObtenerResumen()

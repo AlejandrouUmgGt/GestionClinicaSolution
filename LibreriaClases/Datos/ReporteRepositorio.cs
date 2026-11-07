@@ -1,7 +1,5 @@
 using System.Data;
 using Microsoft.Data.SqlClient;
-using LibreriaClases.Logica;
-using LibreriaClases.Modelos;
 
 namespace LibreriaClases.Datos;
 
@@ -74,8 +72,6 @@ public class ReporteRepositorio
 
     private static DataTable Llenar(string sql, string? nombreParametro, object? valor)
     {
-        if (Sesion.TieneRol(Usuario.RolMedico))
-            throw new System.InvalidOperationException("Los médicos no tienen acceso a los reportes generales.");
         var tabla = new DataTable();
 
         using var conexion = Conexion.Crear();

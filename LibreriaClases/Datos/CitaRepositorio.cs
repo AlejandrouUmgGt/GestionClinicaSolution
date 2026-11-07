@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using LibreriaClases.Modelos;
 using LibreriaClases.Interfaces;
-using LibreriaClases.Logica;
 
 namespace LibreriaClases.Datos;
 
@@ -31,15 +30,11 @@ public class CitaRepositorio : ICitaRepositorio
     public List<Cita> Listar()
     {
         // Consulta todos los registros, ordenados del más reciente al más antiguo.
-        if (Sesion.TieneRol(Usuario.RolMedico))
-            return ListarPorMedico(Sesion.UsuarioActual!.IdMedico);
         return Consultar(ConsultaBase, null, null);
     }
 
     public List<Cita> ListarPorMedico(int idMedico)
     {
-        if (Sesion.TieneRol(Usuario.RolMedico) && idMedico != Sesion.UsuarioActual!.IdMedico)
-            return new List<Cita>();
         // Consulta las citas correspondientes al médico.
         const string sql = @"
         SELECT
@@ -58,15 +53,12 @@ public class CitaRepositorio : ICitaRepositorio
         INNER JOIN Medico m ON m.IdMedico = c.IdMedico
         INNER JOIN Paciente p ON p.IdPaciente = c.IdPaciente
         WHERE c.IdMedico = @id
-            AND (@soloAsignados = 0 OR p.IdMedico = @id)
         ORDER BY c.FechaHora DESC";
         return Consultar(sql, "@id", idMedico);
     }
 
     public List<Cita> ListarPorPaciente(int idPaciente)
     {
-        if (Sesion.TieneRol(Usuario.RolMedico) && new PacienteRepositorio().ObtenerPorId(idPaciente) == null)
-            return new List<Cita>();
         // Consulta las citas correspondientes al paciente.
         const string sql = @"
         SELECT
@@ -91,8 +83,6 @@ public class CitaRepositorio : ICitaRepositorio
 
     public int Insertar(Cita c)
     {
-        if (Sesion.TieneRol(Usuario.RolMedico))
-            throw new InvalidOperationException("Los médicos solo pueden consultar citas.");
         // Inserta una cita y devuelve el identificador.
         const string sql = @"INSERT INTO Cita
         (
@@ -121,8 +111,6 @@ public class CitaRepositorio : ICitaRepositorio
 
     public void Actualizar(Cita c)
     {
-        if (Sesion.TieneRol(Usuario.RolMedico))
-            throw new InvalidOperationException("Los médicos solo pueden consultar citas.");
         // Actualiza los datos de la cita.
         const string sql = @"UPDATE Cita
         SET
@@ -143,8 +131,6 @@ public class CitaRepositorio : ICitaRepositorio
 
     public void Eliminar(int id)
     {
-        if (Sesion.TieneRol(Usuario.RolMedico))
-            throw new InvalidOperationException("Los médicos solo pueden consultar citas.");
         // Borra la cita por su identificador.
         const string sql = @"DELETE FROM Cita
         WHERE IdCita = @id";
@@ -211,8 +197,6 @@ public class CitaRepositorio : ICitaRepositorio
         using var comando = new SqlCommand(sql, conexion);
         if (nombreParametro != null)
             comando.Parameters.AddWithValue(nombreParametro, valor);
-        if (sql.Contains("@soloAsignados"))
-            comando.Parameters.AddWithValue("@soloAsignados", Sesion.TieneRol(Usuario.RolMedico) ? 1 : 0);
         conexion.Open();
 
         using SqlDataReader lector = comando.ExecuteReader();

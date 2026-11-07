@@ -1,7 +1,6 @@
 // UcExpediente muestra el historial compuesto del paciente y permite editar su información.
 using LibreriaClases.Datos;
 using LibreriaClases.Modelos;
-using LibreriaClases.Logica;
 
 namespace GestionClinica.UI.Controles;
 
@@ -13,12 +12,6 @@ public partial class UcExpediente : UserControl
     public UcExpediente()
     {
         InitializeComponent();
-        if (Sesion.TieneRol(Usuario.RolMedico))
-        {
-            btnGuardar.Visible = false;
-            txtAntecedentes.ReadOnly = true;
-            txtAlergias.ReadOnly = true;
-        }
     }
 
     private void UcExpediente_Load(object? sender, EventArgs e)

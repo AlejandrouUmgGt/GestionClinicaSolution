@@ -14,7 +14,6 @@ public class Usuario
     public int Id { get; set; }
     public string NombreUsuario { get; set; } = "";
     public string Clave { get; set; } = "";
-    public int IdMedico { get; set; }
     // Valores válidos: "Administrador", "Medico" o "Recepcion"
     public string Rol { get; set; } = "";
     public bool Activo { get; set; } = true;
