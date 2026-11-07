@@ -15,10 +15,7 @@ public partial class UcTratamientos : UserControl
         InitializeComponent();
         if (Sesion.TieneRol(Usuario.RolMedico))
         {
-            btnNuevo.Visible = false;
-            btnEditar.Visible = false;
             btnEliminar.Visible = false;
-            btnRealizado.Visible = false;
         }
     }
 

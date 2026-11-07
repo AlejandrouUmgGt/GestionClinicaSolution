@@ -13,12 +13,6 @@ public partial class UcExpediente : UserControl
     public UcExpediente()
     {
         InitializeComponent();
-        if (Sesion.TieneRol(Usuario.RolMedico))
-        {
-            btnGuardar.Visible = false;
-            txtAntecedentes.ReadOnly = true;
-            txtAlergias.ReadOnly = true;
-        }
     }
 
     private void UcExpediente_Load(object? sender, EventArgs e)

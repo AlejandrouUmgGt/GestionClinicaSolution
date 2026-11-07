@@ -166,7 +166,7 @@ Usuarios generales de prueba: `admin` / `Admin123` y `recepcion` / `Recepcion123
 
 Cuentas de demostración (rol Medico): `diego / Diego123`, `william / William123`, `emy / Emy123` y `joel / Joel123`.
 
-`Usuario.IdMedico` vincula la cuenta con su médico y `Paciente.IdMedico` indica quién tiene asignado al paciente. Al iniciar sesión como médico, se filtran los pacientes y las consultas relacionadas con ellos. Los médicos pueden consultar pacientes, citas, tratamientos y expedientes, sin editarlos. El menú Reportes queda oculto para médicos. Administración y Recepción conservan los accesos existentes.
+`Usuario.IdMedico` vincula la cuenta con su médico y `Paciente.IdMedico` indica quién tiene asignado al paciente. Al iniciar sesión como médico, se filtran los pacientes y las consultas relacionadas con ellos. Los médicos pueden consultar sus pacientes y citas asignadas, agregar o actualizar tratamientos de esas citas y modificar antecedentes y alergias de sus expedientes. No pueden eliminar tratamientos ni cambiar citas o datos personales de pacientes. El menú Reportes queda oculto para médicos. Administración y Recepción conservan los accesos existentes.
 
 Asignación inicial: Diego (María López y Sofía Morales), William (José García), Emy (Elena Pérez) y Joel Adrián (Andrés Ramírez). Para reasignar desde SQL Server, por ejemplo: `UPDATE dbo.Paciente SET IdMedico = 2 WHERE IdPaciente = 1;` (IdMedico 2 = William, con la carga inicial).
 
