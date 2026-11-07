@@ -82,8 +82,7 @@ public class TratamientoRepositorio
 
     public int Insertar(Tratamiento t)
     {
-        if (Sesion.TieneRol(Usuario.RolMedico))
-            throw new InvalidOperationException("Los médicos solo pueden consultar tratamientos.");
+        ValidarCitaAsignada(t.IdCita);
         // Inserta un tratamiento y devuelve el identificador.
         const string sql = @"INSERT INTO Tratamiento
         (
@@ -115,7 +114,10 @@ public class TratamientoRepositorio
     public void Actualizar(Tratamiento t)
     {
         if (Sesion.TieneRol(Usuario.RolMedico))
-            throw new InvalidOperationException("Los médicos solo pueden consultar tratamientos.");
+        {
+            ValidarTratamientoAsignado(t.Id);
+            ValidarCitaAsignada(t.IdCita);
+        }
         // Actualiza los datos de el tratamiento.
         const string sql = @"UPDATE Tratamiento
         SET
@@ -147,6 +149,49 @@ public class TratamientoRepositorio
         comando.Parameters.AddWithValue("@id", id);
         conexion.Open();
         comando.ExecuteNonQuery();
+    }
+
+    // Verifica la asignación en SQL Server, sin confiar en los datos del formulario.
+    private static void ValidarCitaAsignada(int idCita)
+    {
+        if (!Sesion.TieneRol(Usuario.RolMedico))
+            return;
+
+        const string sql = @"SELECT COUNT(*)
+            FROM Cita c
+            INNER JOIN Paciente p ON p.IdPaciente = c.IdPaciente
+            WHERE c.IdCita = @cita
+                AND c.IdMedico = @medico
+                AND p.IdMedico = @medico";
+
+        using var conexion = Conexion.Crear();
+        using var comando = new SqlCommand(sql, conexion);
+        comando.Parameters.AddWithValue("@cita", idCita);
+        comando.Parameters.AddWithValue("@medico", Sesion.UsuarioActual!.IdMedico);
+        conexion.Open();
+
+        if ((int)comando.ExecuteScalar()! == 0)
+            throw new InvalidOperationException("Solo puede agregar tratamientos a citas de sus pacientes asignados.");
+    }
+
+    private static void ValidarTratamientoAsignado(int idTratamiento)
+    {
+        const string sql = @"SELECT COUNT(*)
+            FROM Tratamiento t
+            INNER JOIN Cita c ON c.IdCita = t.IdCita
+            INNER JOIN Paciente p ON p.IdPaciente = c.IdPaciente
+            WHERE t.IdTratamiento = @tratamiento
+                AND c.IdMedico = @medico
+                AND p.IdMedico = @medico";
+
+        using var conexion = Conexion.Crear();
+        using var comando = new SqlCommand(sql, conexion);
+        comando.Parameters.AddWithValue("@tratamiento", idTratamiento);
+        comando.Parameters.AddWithValue("@medico", Sesion.UsuarioActual!.IdMedico);
+        conexion.Open();
+
+        if ((int)comando.ExecuteScalar()! == 0)
+            throw new InvalidOperationException("No puede modificar tratamientos de otros médicos.");
     }
 
     private static void AgregarParametros(SqlCommand comando, Tratamiento t)
