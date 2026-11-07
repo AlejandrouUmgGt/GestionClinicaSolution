@@ -171,3 +171,7 @@ Cuentas de demostración (rol Medico): `diego / Diego123`, `william / William123
 Asignación inicial: Diego (María López y Sofía Morales), William (José García), Emy (Elena Pérez) y Joel Adrián (Andrés Ramírez). Para reasignar desde SQL Server, por ejemplo: `UPDATE dbo.Paciente SET IdMedico = 2 WHERE IdPaciente = 1;` (IdMedico 2 = William, con la carga inicial).
 
 Los DPI, fechas de nacimiento, teléfonos y colegiados de los integrantes son valores **ficticios** porque la tabla Medico los requiere; sustituirlos por datos autorizados. El script borra y reconstruye las tablas, así que se debe respaldar la base antes de ejecutarlo. Las claves en texto plano se mantienen únicamente por la decisión tomada para el ejercicio local.
+
+### Asignación desde el formulario de pacientes
+
+Al crear o editar un paciente, el formulario `GestionClinica.UI/Forms/FrmPaciente.cs` muestra el desplegable **Médico asignado**. La lista se carga desde `MedicoRepositorio.Listar()` en el evento `Load` y muestra el nombre completo del médico. El médico es obligatorio y su `Id` se guarda en `Paciente.IdMedico` usando `PacienteRepositorio`. Al editar, se selecciona el médico previamente asignado. Solo Administración y Recepción pueden modificar pacientes; la cuenta médica sigue limitada a consultar los suyos. No requiere volver a ejecutar el script SQL.
