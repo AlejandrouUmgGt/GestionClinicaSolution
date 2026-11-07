@@ -43,10 +43,10 @@ Estas clases representan las entidades y relaciones principales del sistema. No 
 
 - **`Modelos/Persona.cs`**: clase abstracta con datos comunes a médicos y pacientes. Valida nombres, apellidos y fecha de nacimiento; declara el método abstracto `ObtenerResumen()` y ofrece `ObtenerRol()`.
 - **`Modelos/Medico.cs`**: especializa `Persona` con colegiado, especialidad e identificador de clínica. Define su resumen y rol.
-- **`Modelos/Paciente.cs`**: especializa `Persona` con dirección y tipo de sangre. Define su resumen y rol.
+- **`Modelos/Paciente.cs`**: especializa `Persona` con dirección, tipo de sangre y `IdMedico` para indicar quién tiene asignado al paciente. Define su resumen y rol.
 - **`Modelos/Cita.cs`**: representa una cita, relacionando médico, paciente, fecha, motivo y estado. Incluye constantes de estado, `ObtenerResumen()` y `ToString()`.
 - **`Modelos/Clinica.cs`**: representa la clínica, su nombre, ubicación y la lista de médicos asociados; permite agregar médicos.
-- **`Modelos/Usuario.cs`**: representa una cuenta de acceso, con nombre de usuario, clave, rol y estado activo. Declara las constantes de roles.
+- **`Modelos/Usuario.cs`**: representa una cuenta de acceso, con nombre de usuario, clave, `IdMedico` opcional, rol y estado activo. Declara las constantes de roles.
 - **`Modelos/Expediente.cs`**: representa el expediente de un paciente, sus antecedentes, alergias, citas y tratamientos; permite agregar elementos y obtener el historial.
 - **`Modelos/Tratamiento.cs`**: representa un tratamiento relacionado con una cita, incluyendo descripción, indicaciones, fechas y si fue realizado.
 
@@ -124,7 +124,7 @@ Notas del diseño:
 - Las vistas y formularios con parámetros en el constructor (`UcLogin`, `UcInicio`, `UcMedicos`, `FrmMedico`, `FrmPaciente`, `FrmCita`, `FrmTratamiento`) se editan normalmente, pero no se pueden arrastrar desde el cuadro de herramientas hacia otro formulario.
 - Las columnas de los grids de `UcMedicos`, `UcPacientes`, `UcCitas`, `UcTratamientos` y del directorio de `UcReportes` se editan en el diseñador (Editar columnas). Los grids de reportes por médico, paciente y tratamientos se llenan desde un `DataTable` y generan sus columnas solos.
 
-La documentación con requerimientos, diagramas Mermaid y conceptos de POO está en [`Documentacion/InformeRequerimientosYDiagramas.md`](Documentacion/InformeRequerimientosYDiagramas.md).
+La documentación con requerimientos, diagramas Mermaid y conceptos de POO está en [`Documentacion/InformeRequerimientosYDiagramas.md`](Documentacion/InformeRequerimientosYDiagramas.md). El guion dividido por integrante, con archivos y preguntas para la defensa, está en [`Documentacion/GuionExposicionPorIntegrante.md`](Documentacion/GuionExposicionPorIntegrante.md).
 
 ## PruebasBackend
 
@@ -133,11 +133,13 @@ La documentación con requerimientos, diagramas Mermaid y conceptos de POO está
 
 ## Flujo de una cita
 
-1. El usuario abre `UcCitas`, o la consola de pruebas llama directamente a `GestorCitas`.
-2. `FrmCita` captura los datos y los entrega al gestor.
-3. El gestor valida los datos y revisa las reglas del negocio.
-4. Para guardar o comprobar disponibilidad, usa `ICitaRepositorio`.
-5. `CitaRepositorio` ejecuta la consulta correspondiente en SQL Server y devuelve el resultado al gestor.
+1. Administración o Recepción abre `UcCitas` y el formulario `FrmCita`. Los médicos pueden consultar sus citas, pero no agendarlas desde su cuenta.
+2. Al seleccionar un médico, `FrmCita` filtra el ComboBox de pacientes por `Paciente.IdMedico`.
+3. `GestorCitas` valida motivo, fecha y estado, y comprueba que no se traslape la cita (30 minutos).
+4. `CitaRepositorio` verifica en SQL Server que el paciente realmente esté asignado al médico, antes de insertar o actualizar.
+5. La cita queda vinculada con `IdMedico` e `IdPaciente`, para su consulta posterior.
+
+**Nota:** `Paciente.IdMedico` representa la asignación vigente. Si se reasigna un paciente, las citas anteriores conservan su médico; revisar el historial y los permisos según el caso.
 
 ## Ejecutar las pruebas
 
@@ -179,3 +181,13 @@ Al crear o editar un paciente, el formulario `GestionClinica.UI/Forms/FrmPacient
 ### Pacientes disponibles al agendar citas
 
 En `FrmCita.cs`, al seleccionar un médico, el desplegable Paciente solo muestra los registros cuyo `Paciente.IdMedico` coincide con ese médico. Si se cambia el médico, la selección anterior del paciente se limpia. Al editar una cita se intenta seleccionar el paciente previamente guardado solo si sigue asignado. Además, `CitaRepositorio` valida directamente contra SQL Server la asignación al insertar o actualizar; no basta con manipular los controles. `PruebasBackend` verifica también el rechazo de citas entre médicos y pacientes no asignados.
+
+## Preparación de la exposición
+
+**Orden sugerido (14–16 minutos):** Diego explica `ClinicaDB.sql`, conexiones y la consola `PruebasBackend`; William explica modelos, interfaces, `GestorCitas` y validaciones de repositorios; Emy muestra `UcLogin`, `UcPacientes` y `FrmPaciente` con el selector de médico; Joel Adrián muestra `FrmPrincipal`, `FrmCita`, `UcTratamientos` y `UcExpediente`.
+
+**Secuencia recomendada:** iniciar sesión como administrador; registrar o editar un paciente con médico asignado; intentar crear una cita y verificar que solo muestra los pacientes de ese médico; registrar un tratamiento; iniciar sesión como el médico asignado y comprobar que puede consultar sus pacientes, editar antecedentes o alergias y agregar o modificar tratamientos, pero no eliminar tratamientos. Cerrar sesión y probar con otro médico para comprobar la separación.
+
+**Conceptos que deben poder explicar:** herencia (`Persona`, `Medico`, `Paciente`), polimorfismo (`ObtenerResumen`), abstracción, encapsulamiento, interfaces (`ICitaRepositorio`, `IResumible`), dependencia e inyección, asociaciones, composición del expediente, consultas SQL parametrizadas y evento `Load`.
+
+**Límites de la demostración:** los campos personales de los médicos del grupo que no se proporcionaron son ficticios; las claves están en texto plano solo para el ejercicio de clase. No se deben usar datos reales de pacientes ni estas credenciales fuera de una demo. `ClinicaDB.sql` borra y recrea tablas: respaldar antes de ejecutarlo. Compilar y ejecutar las pruebas con SQL Server LocalDB en Windows antes de exponer; aquí no se ha verificado su ejecución.
