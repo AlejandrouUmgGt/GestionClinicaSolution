@@ -12,6 +12,7 @@
 - `LibreriaClases/Datos/Conexion.cs`: cómo se conecta SQL Server LocalDB y cómo se comprueba la conexión.
 - `LibreriaClases/Datos/UsuarioRepositorio.cs`: consulta del usuario y validación del inicio de sesión.
 - `LibreriaClases/Datos/PacienteRepositorio.cs`: consultas parametrizadas, lectura, inserción y filtrado por médico.
+- `LibreriaClases/Datos/ExpedienteRepositorio.cs`: consulta del expediente y actualización de antecedentes o alergias con comprobación del médico asignado.
 - `PruebasBackend/Program.cs`: verificaciones automáticas y resultados `[OK]` / `[FALLO]`.
 
 ### Guion sugerido
@@ -36,7 +37,8 @@ Abrir `ClinicaDB.sql`, mostrar la tabla `Paciente`, explicar `IdMedico`, despué
 - `LibreriaClases/Modelos/Medico.cs` y `LibreriaClases/Modelos/Paciente.cs`: herencia de Persona, `override`, datos particulares.
 - `LibreriaClases/Interfaces/IResumible.cs` e `Interfaces/ICitaRepositorio.cs`: contratos.
 - `LibreriaClases/Logica/GestorCitas.cs`: agendar, modificar y evitar choques de horario.
-- `LibreriaClases/Datos/CitaRepositorio.cs`: almacenamiento y consulta de citas.
+- `LibreriaClases/Datos/CitaRepositorio.cs`: almacenamiento y consulta de citas; rechazo si el paciente no está asignado al médico.
+- `LibreriaClases/Datos/TratamientoRepositorio.cs`: inserción, edición y comprobación de que el médico solo trabaje con sus pacientes.
 - `LibreriaClases/Logica/Sesion.cs`: usuario conectado y comprobación de roles.
 
 ### Guion sugerido
@@ -57,19 +59,19 @@ Abrir `ClinicaDB.sql`, mostrar la tabla `Paciente`, explicar `IdMedico`, despué
 - `GestionClinica.UI/Controles/UcLogin.cs` y `UcLogin.Designer.cs`: interfaz del inicio de sesión y eventos.
 - `GestionClinica.UI/Controles/UcInicio.cs` y `UcInicio.Designer.cs`: pantalla inicial.
 - `GestionClinica.UI/Controles/UcPacientes.cs` y `UcPacientes.Designer.cs`: tabla de pacientes, botones y búsqueda.
-- `GestionClinica.UI/Forms/FrmPaciente.cs` y `FrmPaciente.Designer.cs`: formulario de registro y edición.
+- `GestionClinica.UI/Forms/FrmPaciente.cs` y `FrmPaciente.Designer.cs`: formulario de registro y edición, selector de **Médico asignado** y evento `Load`.
 - `GestionClinica.UI/Estilo/Tema.cs`: colores compartidos usados desde código.
 
 ### Guion sugerido
 > Nuestra interfaz fue construida con Windows Forms. El objetivo fue que el sistema tuviera pantallas ordenadas y fáciles de utilizar. En los archivos Designer.cs se colocan controles como botones, etiquetas y tablas; los archivos .cs contienen los eventos y la lógica de cada pantalla.
 >
-> Por ejemplo, UcLogin permite ingresar al sistema, UcInicio presenta información general y UcPacientes muestra los pacientes disponibles. Cuando inicia sesión un médico, la pantalla oculta los botones para crear, editar y eliminar pacientes, y el backend solamente devuelve sus pacientes asignados. Mostraré cómo se ve el acceso y cómo se presenta la lista de pacientes.
+> Por ejemplo, UcLogin permite ingresar al sistema, UcInicio presenta información general y UcPacientes muestra los pacientes disponibles. Cuando inicia sesión un médico, la pantalla oculta los botones para crear, editar y eliminar pacientes, y el backend solamente devuelve sus pacientes asignados. En el formulario FrmPaciente se selecciona el médico responsable desde un ComboBox que se llena al cargar la pantalla. Mostraré el acceso y cómo se asigna un paciente desde la interfaz.
 
 ### Preguntas para estudiar
 - ¿Qué es Windows Forms?
 - ¿Qué diferencia hay entre `.cs` y `.Designer.cs`?
 - ¿Qué sucede al pulsar Buscar o Actualizar?
-- ¿Por qué se usa el evento `Load`?
+- ¿Por qué se usa el evento `Load`? Porque permite llenar las listas cuando se carga el formulario; `DesignMode` evita acceder a la base en el diseñador.
 
 ## Joel Adrián Galiego López — 9390-25-784
 **Parte:** Diseño de navegación, formularios de citas y expediente, demostración final. **Tiempo: 3–4 minutos.**
@@ -77,20 +79,21 @@ Abrir `ClinicaDB.sql`, mostrar la tabla `Paciente`, explicar `IdMedico`, despué
 ### Archivos principales
 - `GestionClinica.UI/FrmPrincipal.cs` y `FrmPrincipal.Designer.cs`: menú, navegación y opciones visibles por rol.
 - `GestionClinica.UI/Controles/UcCitas.cs` y `UcCitas.Designer.cs`: listado y acciones sobre citas.
-- `GestionClinica.UI/Forms/FrmCita.cs` y `FrmCita.Designer.cs`: formulario de agendamiento de citas.
+- `GestionClinica.UI/Forms/FrmCita.cs` y `FrmCita.Designer.cs`: formulario de agendamiento de citas que filtra pacientes al cambiar de médico.
 - `GestionClinica.UI/Controles/UcExpediente.cs` y `UcExpediente.Designer.cs`: antecedentes, alergias e historial.
-- `GestionClinica.UI/Controles/UcTratamientos.cs` y `UcTratamientos.Designer.cs`: pantalla de tratamientos.
+- `GestionClinica.UI/Controles/UcTratamientos.cs` y `UcTratamientos.Designer.cs`: pantalla donde médicos pueden agregar y editar tratamientos de sus pacientes.
 
 ### Guion sugerido
 > Mi parte es la navegación y el diseño de las pantallas para citas, tratamientos y expedientes. La ventana FrmPrincipal muestra el menú y cambia las opciones visibles según el rol del usuario. Al elegir una opción, se carga el control correspondiente dentro de la ventana principal.
 >
-> UcCitas presenta las citas y FrmCita contiene los controles para capturar una cita. UcExpediente permite consultar antecedentes, alergias e historial. Para los usuarios médicos las operaciones quedan en modo de consulta. Como demostración final, iniciaré sesión con Diego y después con William para comprobar que cada uno ve diferentes pacientes asignados.
+> UcCitas presenta las citas y FrmCita contiene los controles para capturar una cita. UcExpediente permite consultar antecedentes, alergias e historial. Al seleccionar un médico en FrmCita, la lista de pacientes se filtra a los que tiene asignados. El médico no puede agendar citas, pero sí puede registrar y editar tratamientos y actualizar antecedentes y alergias de sus propios pacientes. Como demostración final, iniciaré sesión con Diego y después con William para comprobar que cada uno ve pacientes diferentes.
 
 ### Preguntas para estudiar
 - ¿Qué hace `FrmPrincipal.AplicarRol`?
 - ¿Para qué sirve un `UserControl`?
 - ¿Cómo se abre un formulario modal?
 - ¿Por qué se ocultan botones según el rol? ¿Por qué también hay que restringir desde el backend?
+- ¿Qué hace `cmbMedicos_SelectedIndexChanged`? Actualiza la lista de pacientes según el médico seleccionado.
 
 ## Orden de la demostración en clase
 
@@ -110,10 +113,34 @@ Abrir `ClinicaDB.sql`, mostrar la tabla `Paciente`, explicar `IdMedico`, despué
 
 Las claves son exclusivamente para el entorno local de clase y están guardadas en texto plano por la decisión del proyecto. No deben utilizarse así en producción.
 
+## Ejemplo de demostración completa (sin datos reales)
+
+1. **Diego:** abre SQL Server y muestra las relaciones `Usuario.IdMedico` y `Paciente.IdMedico`; ejecuta `PruebasBackend` y explica resultados, sin asegurar que todos estén OK antes de comprobarlos.
+2. **William:** explica `GestorCitas`, `CitaRepositorio.ValidarAsignacion` y los conceptos de herencia, interfaces y sobrecarga.
+3. **Emy:** con la cuenta `admin`, abre `FrmPaciente`, edita un paciente y muestra el selector **Médico asignado**. No es necesario guardar cambios durante la demostración.
+4. **Joel Adrián:** crea una cita de ejemplo para un médico y muestra cómo la lista de pacientes se filtra; entra como el médico asignado para mostrar el expediente, los antecedentes y tratamientos. Repite con otro médico y comprueba que no accede al primer paciente.
+
+**Antes de demostrar escrituras,** realizar un respaldo de la base de datos o utilizar registros de prueba y comprobar que las pruebas locales funcionan.
+
+## Respuestas rápidas que todos deben estudiar
+
+| Pregunta | Respuesta corta |
+|---|---|
+| ¿Qué es `Load`? | El evento que ocurre al cargarse una pantalla; se usa para llenar sus datos. |
+| ¿Qué hace `DesignMode`? | Evita consultas de SQL mientras se diseña el formulario en Visual Studio. |
+| ¿Qué es una llave foránea? | Un campo que relaciona una tabla con la clave principal de otra. |
+| ¿Qué es herencia? | Una clase hija reutiliza y extiende una clase padre, como Medico y Paciente con Persona. |
+| ¿Qué es polimorfismo? | El mismo método puede comportarse distinto según la clase, como `ObtenerResumen()`. |
+| ¿Para qué sirve `ICitaRepositorio`? | Es un contrato que establece operaciones que necesita `GestorCitas`. |
+| ¿Por qué no basta el filtro visual? | El repositorio también debe validar la asignación del paciente antes de escribir. |
+| ¿Qué modifica un médico? | Tratamientos y antecedentes/alergias de pacientes asignados; no elimina tratamientos. |
+| ¿Cómo evitan citas traslapadas? | El gestor consulta si existe una cita activa del mismo médico en un intervalo de 30 minutos. |
+| ¿Son seguras las claves de la demo? | No; en un sistema real habría que usar hashes seguros y sal. |
+
 ## Advertencias antes de exponer
 
 - `ClinicaDB.sql` **elimina y recrea las tablas**: respaldar la información antes de ejecutarlo.
-- Actualizar la base con el script nuevo; no basta con sincronizar Git.
+- No ejecutar otra vez el script si la base ya está preparada y contiene datos que deben conservarse. Los cambios de esta documentación no modifican SQL.
 - Ejecutar `dotnet build GestionClinicaSolution.slnx` y `dotnet run --project PruebasBackend/PruebasBackend.csproj` en Windows con LocalDB.
-- Iniciar sesión con dos médicos distintos y comprobar que cada uno tiene los pacientes indicados.
+- Iniciar sesión con dos médicos distintos y comprobar sus pacientes, tratamientos y expedientes; probar la creación de citas solo desde Administración o Recepción.
 - Los datos de DPI, fecha de nacimiento, teléfono y colegiado de los integrantes son ficticios y solo sirven para la demostración.

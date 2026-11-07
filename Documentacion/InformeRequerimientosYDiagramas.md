@@ -11,15 +11,15 @@
 | RF-03 | Mostrar navegación según el rol autenticado. | Administrador, Médico, Recepción | `FrmPrincipal.AplicarRol` | Pendiente: PDF no proporcionado |
 | RF-04 | Consultar y guardar los datos de la clínica; mostrar médicos asociados. | Administrador | `Controles/UcClinica.cs`, `ClinicaRepositorio` | Pendiente: PDF no proporcionado |
 | RF-05 | Buscar, crear, editar y eliminar médicos. Recepción cuenta con consulta solamente. | Administrador; Recepción (consulta) | `Controles/UcMedicos.cs`, `Forms/FrmMedico.cs`, `MedicoRepositorio` | Pendiente: PDF no proporcionado |
-| RF-06 | Buscar, crear, editar y eliminar pacientes. | Administrador, Médico, Recepción | `Controles/UcPacientes.cs`, `Forms/FrmPaciente.cs`, `PacienteRepositorio` | Pendiente: PDF no proporcionado |
-| RF-07 | Consultar, agendar, editar, cancelar, marcar atendidas y eliminar citas. | Administrador, Médico, Recepción | `Controles/UcCitas.cs`, `Forms/FrmCita.cs`, `GestorCitas` | Pendiente: PDF no proporcionado |
-| RF-08 | Validar que una cita no esté en el pasado, tenga médico, paciente, motivo y estado válidos, y no choque con otra cita activa del médico dentro de 30 minutos. | Administrador, Médico, Recepción | `GestorCitas.Agendar`, `GestorCitas.Modificar`, `CitaRepositorio.ExisteChoque` | Pendiente: PDF no proporcionado |
-| RF-09 | Crear, editar, eliminar y marcar tratamientos como realizados (el médico no puede eliminar y solo trabaja sobre sus pacientes asignados). | Administrador, Médico | `Controles/UcTratamientos.cs`, `Forms/FrmTratamiento.cs`, `TratamientoRepositorio` | Pendiente: PDF no proporcionado |
-| RF-10 | Consultar el expediente, editar antecedentes y alergias y leer su historial (el médico solo trabaja sobre expedientes de pacientes asignados). | Administrador, Médico | `Controles/UcExpediente.cs`, `ExpedienteRepositorio`, `Expediente.ObtenerHistorial` | Pendiente: PDF no proporcionado |
-| RF-11 | Consultar citas filtradas por médico y por paciente. | Administrador, Médico, Recepción | `Controles/UcReportes.cs`, `ReporteRepositorio.CitasPorMedico`, `ReporteRepositorio.CitasPorPaciente` | Pendiente: PDF no proporcionado |
-| RF-12 | Consultar tratamientos realizados. | Administrador, Médico, Recepción | `Controles/UcReportes.cs`, `ReporteRepositorio.TratamientosRealizados` | Pendiente: PDF no proporcionado |
-| RF-13 | Consultar el historial médico de un paciente. | Administrador, Médico, Recepción | `Controles/UcReportes.cs`, `ExpedienteRepositorio` | Pendiente: PDF no proporcionado |
-| RF-14 | Consultar un directorio común de médicos y pacientes y sus resúmenes. | Administrador, Médico, Recepción | `Controles/UcReportes.cs`, `Persona.ObtenerResumen`, `IResumible` | Pendiente: PDF no proporcionado |
+| RF-06 | Administrar pacientes (crear, editar, eliminar), asignarles un médico y consultar sus datos. El médico solo consulta los pacientes que tiene asignados. | Administrador, Recepción (mantenimiento); Médico (consulta asignada) | `UcPacientes.cs`, `FrmPaciente.cs`, `PacienteRepositorio` | Pendiente: PDF no proporcionado |
+| RF-07 | Consultar, agendar, editar, cancelar, atender y eliminar citas; el médico solo consulta sus citas. En el formulario solo aparecen pacientes asignados al médico seleccionado. | Administrador, Recepción (gestión); Médico (consulta asignada) | `UcCitas.cs`, `FrmCita.cs`, `GestorCitas`, `CitaRepositorio` | Pendiente: PDF no proporcionado |
+| RF-08 | Validar datos, fecha futura y choque de horario de 30 minutos, y comprobar en SQL Server que el paciente esté asignado al médico de la cita. | Administrador, Recepción | `GestorCitas.Agendar`, `GestorCitas.Modificar`, `CitaRepositorio.ExisteChoque`, `CitaRepositorio.ValidarAsignacion` | Pendiente: PDF no proporcionado |
+| RF-09 | Administrar tratamientos: Administración puede crear, editar, marcar realizados y eliminar; el médico puede crear, editar y marcar realizados solo en las citas de sus pacientes asignados, pero no eliminar. | Administrador, Médico | `UcTratamientos.cs`, `FrmTratamiento.cs`, `TratamientoRepositorio` | Pendiente: PDF no proporcionado |
+| RF-10 | Consultar expedientes e historiales y editar antecedentes y alergias. El médico solo puede hacerlo con pacientes asignados; el repositorio comprueba la asignación al actualizar. | Administrador, Médico | `UcExpediente.cs`, `ExpedienteRepositorio`, `Expediente.ObtenerHistorial` | Pendiente: PDF no proporcionado |
+| RF-11 | Consultar citas filtradas por médico y por paciente. | Administrador, Recepción | `Controles/UcReportes.cs`, `ReporteRepositorio.CitasPorMedico`, `ReporteRepositorio.CitasPorPaciente` | Pendiente: PDF no proporcionado |
+| RF-12 | Consultar tratamientos realizados. | Administrador, Recepción | `Controles/UcReportes.cs`, `ReporteRepositorio.TratamientosRealizados` | Pendiente: PDF no proporcionado |
+| RF-13 | Consultar el historial médico de un paciente. | Administrador, Recepción | `Controles/UcReportes.cs`, `ExpedienteRepositorio` | Pendiente: PDF no proporcionado |
+| RF-14 | Consultar un directorio común de médicos y pacientes y sus resúmenes. | Administrador, Recepción | `Controles/UcReportes.cs`, `Persona.ObtenerResumen`, `IResumible` | Pendiente: PDF no proporcionado |
 | RF-15 | Guardar la clave del usuario y compararla directamente al validar el acceso. | Todos | `UsuarioRepositorio.Validar` | Pendiente: PDF no proporcionado |
 | RF-16 | Usar consultas parametrizadas y restricciones de base de datos para evitar datos relacionados inválidos. | Sistema | Archivos `LibreriaClases/Datos/*.cs`, `ClinicaDB.sql` | Pendiente: PDF no proporcionado |
 
@@ -70,6 +70,7 @@ classDiagram
     class Paciente {
         +Direccion string
         +TipoSangre string
+        +IdMedico int
         +ObtenerResumen() string
         +ObtenerRol() string
     }
@@ -112,6 +113,7 @@ classDiagram
         +Id int
         +NombreUsuario string
         +Clave string
+        +IdMedico int
         +Rol string
         +Activo bool
     }
@@ -146,6 +148,8 @@ classDiagram
     Clinica o-- Medico : agrega médicos
     Cita --> Medico : asocia
     Cita --> Paciente : asocia
+    Usuario --> Medico : cuenta vinculada
+    Paciente --> Medico : médico asignado
     Expediente *-- Cita : historial
     Expediente *-- Tratamiento : historial
     GestorCitas ..> ICitaRepositorio : inyección de dependencia
@@ -183,6 +187,7 @@ erDiagram
         int IdUsuario PK
         nvarchar NombreUsuario UK
         nvarchar Clave
+        int IdMedico FK
         nvarchar Rol
         bit Activo
     }
@@ -206,6 +211,7 @@ erDiagram
         date FechaNacimiento
         nvarchar Direccion
         nvarchar TipoSangre
+        int IdMedico FK
     }
     EXPEDIENTE {
         int IdExpediente PK
@@ -233,11 +239,37 @@ erDiagram
     }
 
     CLINICA ||--o{ MEDICO : tiene
+    MEDICO o|--o{ USUARIO : tiene_cuenta
+    MEDICO o|--o{ PACIENTE : tiene_asignado
     PACIENTE ||--|| EXPEDIENTE : posee
     MEDICO ||--o{ CITA : atiende
     PACIENTE ||--o{ CITA : agenda
     CITA ||--o{ TRATAMIENTO : origina
 ```
+
+## Reglas actuales por rol
+
+| Función | Administración | Recepción | Médico |
+|---|---|---|---|
+| Mantenimiento de médicos | Sí | Consultar | No |
+| Crear, editar, eliminar pacientes y asignar médico | Sí | Sí | No |
+| Consultar pacientes | Todos | Todos | Solo asignados |
+| Agendar o modificar citas | Sí | Sí | No |
+| Consultar citas | Todas | Todas | Solo las propias asignadas |
+| Crear o actualizar tratamientos | Sí | Según acceso mostrado en menú (no disponible) | Sí, solo asignados |
+| Eliminar tratamientos | Sí | No | No |
+| Editar antecedentes y alergias | Sí | No | Sí, solo asignados |
+| Reportes generales | Sí | Sí | No |
+
+El menú se controla en `FrmPrincipal.AplicarRol`; los repositorios incorporan comprobaciones para que los permisos no dependan solamente de ocultar botones. La asignación de paciente se guarda en `Paciente.IdMedico`, y la cuenta médica tiene el identificador en `Usuario.IdMedico`.
+
+## Recorrido de una cita
+
+1. Administración o Recepción escoge médico en `FrmCita`.
+2. El formulario filtra la lista de pacientes a los asignados.
+3. `GestorCitas` valida fecha, motivo, estado y traslapes de 30 minutos.
+4. `CitaRepositorio` comprueba la asignación en SQL Server y guarda los datos mediante parámetros.
+5. Los médicos consultan sus citas y pueden documentar tratamientos y antecedentes de pacientes asignados.
 
 ## Conceptos de POO
 
@@ -281,3 +313,19 @@ erDiagram
 
 8. **¿Por qué los datos se cargan en el evento `Load` y no en el constructor?**  
    Para que el diseñador de Visual Studio pueda abrir la pantalla sin conectarse a la base de datos. Además, `if (DesignMode) return;` evita cualquier consulta mientras se edita el diseño.
+
+## Preguntas adicionales para la defensa
+
+9. **¿Para qué sirve `Paciente.IdMedico`?** Para guardar qué médico tiene asignado el paciente; el ComboBox de citas filtra por ese valor.
+
+10. **¿Por qué validar otra vez en `CitaRepositorio`?** Porque ocultar opciones en la interfaz no garantiza que los datos sean correctos. El repositorio consulta SQL antes de guardar.
+
+11. **¿Qué puede modificar un médico?** Tratamientos y antecedentes/alergias de pacientes asignados. No puede modificar la ficha personal del paciente ni eliminar tratamientos.
+
+12. **¿Qué significa `Load`?** Es un evento de Windows Forms que se dispara al cargarse un formulario o `UserControl`. Se utiliza para llenar las listas y tablas cuando los controles ya están inicializados. `DesignMode` evita abrir la conexión mientras se edita visualmente.
+
+13. **¿Por qué el paciente se asigna al crear o editar?** Para que las citas, consultas y expedientes puedan limitarse al médico que le corresponde.
+
+14. **¿Las contraseñas en texto plano son seguras?** No. Se adoptó esa simplificación para una demostración local; un sistema real debe almacenar hashes de contraseña con un algoritmo apropiado y sal, nunca claves visibles.
+
+**Pendiente:** cotejar los requerimientos RF con el PDF original del curso, si se proporciona. Las descripciones reflejan el código actual, no una certificación de cumplimiento del documento del docente.
