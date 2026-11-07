@@ -18,6 +18,16 @@ public partial class UcCitas : UserControl
         InitializeComponent();
         ICitaRepositorio repositorio = new CitaRepositorio();
         _gestor = new GestorCitas(repositorio);
+        if (Sesion.TieneRol(Usuario.RolMedico))
+        {
+            chkTodos.Visible = false;
+            cmbMedicos.Visible = false;
+            btnNuevo.Visible = false;
+            btnEditar.Visible = false;
+            btnEliminar.Visible = false;
+            btnAtendida.Visible = false;
+            btnCancelar.Visible = false;
+        }
     }
 
     private void UcCitas_Load(object? sender, EventArgs e)
@@ -46,7 +56,9 @@ public partial class UcCitas : UserControl
         try
         {
             List<Cita> citas;
-            if (chkTodos.Checked || cmbMedicos.SelectedItem == null)
+            if (Sesion.TieneRol(Usuario.RolMedico))
+                citas = _repositorio.ListarPorMedico(Sesion.UsuarioActual!.IdMedico);
+            else if (chkTodos.Checked || cmbMedicos.SelectedItem == null)
                 citas = _repositorio.Listar();
             else
             {
