@@ -164,23 +164,12 @@ GO
 INSERT INTO dbo.Usuario (NombreUsuario, Clave, Rol, Activo)
 VALUES
     ('admin', 'Admin123', 'Administrador', 1),
-    ('medico', 'Medico123', 'Medico', 1),
     ('recepcion', 'Recepcion123', 'Recepcion', 1);
 GO
 
-/* Una clínica para los médicos de ejemplo. */
+/* Una clínica para los médicos del grupo. */
 INSERT INTO dbo.Clinica (Nombre, Ubicacion)
 VALUES ('Clínica UMG Naranjo', 'Naranjo, Guatemala');
-GO
-
-/* El primer médico al ordenar por apellidos tiene citas asociadas.
-   Solo el segundo médico contiene Pediatr en los campos usados para buscar. */
-INSERT INTO dbo.Medico
-    (Nombres, Apellidos, Dpi, Telefono, FechaNacimiento, Colegiado, Especialidad, IdClinica)
-VALUES
-    ('Ana María', 'Alvarado', '1000000000001', '55551001', '1980-04-12', 'COL-1001', 'Medicina General', 1),
-    ('Carlos', 'Méndez', '1000000000002', '55551002', '1978-08-23', 'COL-1002', 'Pediatria', 1),
-    ('Luis Fernando', 'Zúñiga', '1000000000003', '55551003', '1985-02-05', 'COL-1003', 'Cardiología', 1);
 GO
 
 /* Datos ficticios de demostración para campos no proporcionados (DPI, fecha,
@@ -197,21 +186,21 @@ GO
 /* Cada integrante tiene su cuenta, vinculada a su médico. */
 INSERT INTO dbo.Usuario (NombreUsuario, Clave, IdMedico, Rol, Activo)
 VALUES
-    ('diego', 'Diego123', 4, 'Medico', 1),
-    ('william', 'William123', 5, 'Medico', 1),
-    ('emy', 'Emy123', 6, 'Medico', 1),
-    ('joel', 'Joel123', 7, 'Medico', 1);
+    ('diego', 'Diego123', 1, 'Medico', 1),
+    ('william', 'William123', 2, 'Medico', 1),
+    ('emy', 'Emy123', 3, 'Medico', 1),
+    ('joel', 'Joel123', 4, 'Medico', 1);
 GO
 
 /* Pacientes de ejemplo para consultas y relaciones con expedientes. */
 INSERT INTO dbo.Paciente
     (Nombres, Apellidos, Dpi, Telefono, FechaNacimiento, Direccion, TipoSangre, IdMedico)
 VALUES
-    ('María', 'López', '2000000000001', '55552001', '1992-03-14', 'Naranjo', 'O+', 4),
-    ('José', 'García', '2000000000002', '55552002', '1988-07-21', 'Salamá', 'A+', 5),
-    ('Elena', 'Pérez', '2000000000003', '55552003', '2001-11-09', 'Naranjo', 'B+', 6),
-    ('Andrés', 'Ramírez', '2000000000004', '55552004', '1975-05-30', 'Sanarate', 'O-', 7),
-    ('Sofía', 'Morales', '2000000000005', '55552005', '1998-12-02', 'Naranjo', 'AB+', 4);
+    ('María', 'López', '2000000000001', '55552001', '1992-03-14', 'Naranjo', 'O+', 1),
+    ('José', 'García', '2000000000002', '55552002', '1988-07-21', 'Salamá', 'A+', 2),
+    ('Elena', 'Pérez', '2000000000003', '55552003', '2001-11-09', 'Naranjo', 'B+', 3),
+    ('Andrés', 'Ramírez', '2000000000004', '55552004', '1975-05-30', 'Sanarate', 'O-', 4),
+    ('Sofía', 'Morales', '2000000000005', '55552005', '1998-12-02', 'Naranjo', 'AB+', 1);
 GO
 
 /* Cada paciente de ejemplo recibe un expediente con los valores por defecto. */
@@ -219,7 +208,8 @@ INSERT INTO dbo.Expediente (IdPaciente)
 VALUES (1), (2), (3), (4), (5);
 GO
 
-/* Las citas de ejemplo están en fechas pasadas para no interferir con las
+/* Las citas de demostración relacionan médicos con sus pacientes asignados.
+   Están en fechas pasadas para no interferir con las
    pruebas, que agendan citas durante los próximos tres días. */
 INSERT INTO dbo.Cita (IdMedico, IdPaciente, FechaHora, Motivo, Estado)
 VALUES
