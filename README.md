@@ -11,7 +11,7 @@ GestionClinicaSolution/
 ├── LibreriaClases/
 │   ├── Datos/         Acceso a SQL Server mediante repositorios
 │   ├── Interfaces/    Contratos de capacidades y repositorios
-│   ├── Logica/        Reglas de negocio, sesión y seguridad
+│   ├── Logica/        Reglas de negocio y sesión
 │   ├── Modelos/       Clases que representan los datos del sistema
 │   └── LibreriaClases.csproj
 ├── PruebasBackend/
@@ -46,7 +46,7 @@ Estas clases representan las entidades y relaciones principales del sistema. No 
 - **`Modelos/Paciente.cs`**: especializa `Persona` con dirección y tipo de sangre. Define su resumen y rol.
 - **`Modelos/Cita.cs`**: representa una cita, relacionando médico, paciente, fecha, motivo y estado. Incluye constantes de estado, `ObtenerResumen()` y `ToString()`.
 - **`Modelos/Clinica.cs`**: representa la clínica, su nombre, ubicación y la lista de médicos asociados; permite agregar médicos.
-- **`Modelos/Usuario.cs`**: representa una cuenta de acceso, con nombre de usuario, hash de clave, rol y estado activo. Declara las constantes de roles.
+- **`Modelos/Usuario.cs`**: representa una cuenta de acceso, con nombre de usuario, clave, rol y estado activo. Declara las constantes de roles.
 - **`Modelos/Expediente.cs`**: representa el expediente de un paciente, sus antecedentes, alergias, citas y tratamientos; permite agregar elementos y obtener el historial.
 - **`Modelos/Tratamiento.cs`**: representa un tratamiento relacionado con una cita, incluyendo descripción, indicaciones, fechas y si fue realizado.
 
@@ -54,7 +54,6 @@ Estas clases representan las entidades y relaciones principales del sistema. No 
 
 - **`Logica/GestorCitas.cs`**: aplica las reglas de negocio al agendar o modificar citas. Valida los datos, evita fechas pasadas y choques de horario. Recibe `ICitaRepositorio` por constructor y ofrece dos formas de agendar mediante sobrecarga.
 - **`Logica/Sesion.cs`**: mantiene la sesión activa y permite iniciarla, cerrarla y comprobar roles.
-- **`Logica/Seguridad.cs`**: calcula el hash de una clave usando las funciones criptográficas de .NET.
 
 ### Datos
 
@@ -129,7 +128,7 @@ La documentación con requerimientos, diagramas Mermaid y conceptos de POO está
 
 ## PruebasBackend
 
-- **`PruebasBackend/Program.cs`**: ejecuta verificaciones de conexión, login, seguridad, lectura de médicos y pacientes, polimorfismo, validaciones, inserción de paciente y expediente, reglas de citas y operaciones de tratamientos. Crea datos temporales y trata de limpiarlos al terminar.
+- **`PruebasBackend/Program.cs`**: ejecuta verificaciones de conexión, login, lectura de médicos y pacientes, polimorfismo, validaciones, inserción de paciente y expediente, reglas de citas y operaciones de tratamientos. Crea datos temporales y trata de limpiarlos al terminar.
 - **`PruebasBackend/PruebasBackend.csproj`**: configuración de la aplicación de consola y referencia a `LibreriaClases`.
 
 ## Flujo de una cita
