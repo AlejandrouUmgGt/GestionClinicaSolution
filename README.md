@@ -175,7 +175,3 @@ Los DPI, fechas de nacimiento, teléfonos y colegiados de los integrantes son va
 ### Asignación desde el formulario de pacientes
 
 Al crear o editar un paciente, el formulario `GestionClinica.UI/Forms/FrmPaciente.cs` muestra el desplegable **Médico asignado**. La lista se carga desde `MedicoRepositorio.Listar()` en el evento `Load` y muestra el nombre completo del médico. El médico es obligatorio y su `Id` se guarda en `Paciente.IdMedico` usando `PacienteRepositorio`. Al editar, se selecciona el médico previamente asignado. Solo Administración y Recepción pueden modificar pacientes; la cuenta médica sigue limitada a consultar los suyos. No requiere volver a ejecutar el script SQL.
-
-### Pacientes disponibles al agendar citas
-
-En `FrmCita.cs`, al seleccionar un médico, el desplegable Paciente solo muestra los registros cuyo `Paciente.IdMedico` coincide con ese médico. Si se cambia el médico, la selección anterior del paciente se limpia. Al editar una cita se intenta seleccionar el paciente previamente guardado solo si sigue asignado. Además, `CitaRepositorio` valida directamente contra SQL Server la asignación al insertar o actualizar; no basta con manipular los controles. `PruebasBackend` verifica también el rechazo de citas entre médicos y pacientes no asignados.

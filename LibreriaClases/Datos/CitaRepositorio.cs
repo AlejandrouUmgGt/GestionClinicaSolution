@@ -93,7 +93,6 @@ public class CitaRepositorio : ICitaRepositorio
     {
         if (Sesion.TieneRol(Usuario.RolMedico))
             throw new InvalidOperationException("Los médicos solo pueden consultar citas.");
-        ValidarAsignacion(c);
         // Inserta una cita y devuelve el identificador.
         const string sql = @"INSERT INTO Cita
         (
@@ -124,7 +123,6 @@ public class CitaRepositorio : ICitaRepositorio
     {
         if (Sesion.TieneRol(Usuario.RolMedico))
             throw new InvalidOperationException("Los médicos solo pueden consultar citas.");
-        ValidarAsignacion(c);
         // Actualiza los datos de la cita.
         const string sql = @"UPDATE Cita
         SET
@@ -192,24 +190,6 @@ public class CitaRepositorio : ICitaRepositorio
         comando.Parameters.AddWithValue("@cancelada", Cita.EstadoCancelada);
         conexion.Open();
         return (int)comando.ExecuteScalar()! > 0;
-    }
-
-    // Comprueba en la base que el paciente esté asignado al médico de la cita.
-    private static void ValidarAsignacion(Cita cita)
-    {
-        const string sql = @"SELECT COUNT(*)
-            FROM Paciente
-            WHERE IdPaciente = @paciente
-                AND IdMedico = @medico";
-
-        using var conexion = Conexion.Crear();
-        using var comando = new SqlCommand(sql, conexion);
-        comando.Parameters.AddWithValue("@paciente", cita.Paciente.Id);
-        comando.Parameters.AddWithValue("@medico", cita.Medico.Id);
-        conexion.Open();
-
-        if ((int)comando.ExecuteScalar()! == 0)
-            throw new InvalidOperationException("El paciente no está asignado al médico seleccionado.");
     }
 
     // ---------- métodos privados de apoyo ----------

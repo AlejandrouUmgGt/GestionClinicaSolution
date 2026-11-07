@@ -144,8 +144,7 @@ try
         Telefono = "00000000",
         FechaNacimiento = new DateTime(1990, 1, 1),
         Direccion = "Dirección de prueba",
-        TipoSangre = "O+",
-        IdMedico = medicos[0].Id
+        TipoSangre = "O+"
     };
     nuevo.Id = pacienteRepo.Insertar(nuevo);
     idPaciente = nuevo.Id;
@@ -178,10 +177,7 @@ try
         Console.WriteLine("  [Resumen] " + unResumible.ObtenerResumen());
     Verificar("Médico, paciente y cita se usan como IResumible", resumibles.Count == 3);
 
-    Paciente? pacienteOtroMedico = pacientes.Find(p => p.IdMedico == otroMedico.Id);
-    if (pacienteOtroMedico == null)
-        throw new InvalidOperationException("Falta un paciente asignado al segundo médico.");
-    int idSobrecarga = gestor.Agendar(otroMedico, pacienteOtroMedico, manana.AddDays(2), "Cita por sobrecarga");
+    int idSobrecarga = gestor.Agendar(otroMedico, nuevo, manana.AddDays(2), "Cita por sobrecarga");
     citaRepo.Eliminar(idSobrecarga);
     Verificar("Agendar con 4 parámetros (sobrecarga) crea la cita", idSobrecarga > 0);
 
@@ -206,7 +202,7 @@ try
     {
         int idOtro = gestor.Agendar(new Cita
         {
-            Medico = otroMedico, Paciente = pacienteOtroMedico, FechaHora = manana, Motivo = "Otro médico, misma hora"
+            Medico = otroMedico, Paciente = nuevo, FechaHora = manana, Motivo = "Otro médico, misma hora"
         });
         citaRepo.Eliminar(idOtro);
         Verificar("Permite la misma hora con otro médico", true);
@@ -215,18 +211,6 @@ try
     {
         Console.WriteLine("  Mensaje: " + ex.Message);
         Verificar("Permite la misma hora con otro médico", false);
-    }
-
-    // Un paciente no puede agendarse con un médico distinto al asignado.
-    try
-    {
-        int idIncorrecto = gestor.Agendar(otroMedico, nuevo, manana.AddDays(2), "Médico no asignado");
-        citaRepo.Eliminar(idIncorrecto);
-        Verificar("Rechaza citas con un médico no asignado", false);
-    }
-    catch (InvalidOperationException)
-    {
-        Verificar("Rechaza citas con un médico no asignado", true);
     }
 
     // Cita en el pasado
