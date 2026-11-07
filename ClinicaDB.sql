@@ -216,10 +216,10 @@ VALUES
     (1, 1, DATEADD(HOUR, 9,  CAST(DATEADD(DAY, -35, CAST(GETDATE() AS DATE)) AS DATETIME2(0))), 'Consulta general', 'Atendida'),
     (2, 2, DATEADD(HOUR, 11, CAST(DATEADD(DAY, -30, CAST(GETDATE() AS DATE)) AS DATETIME2(0))), 'Control pediátrico', 'Atendida'),
     (3, 3, DATEADD(HOUR, 14, CAST(DATEADD(DAY, -25, CAST(GETDATE() AS DATE)) AS DATETIME2(0))), 'Evaluación cardiológica', 'Atendida'),
-    (1, 4, DATEADD(HOUR, 10, CAST(DATEADD(DAY, -20, CAST(GETDATE() AS DATE)) AS DATETIME2(0))), 'Consulta de seguimiento', 'Atendida'),
-    (2, 5, DATEADD(HOUR, 15, CAST(DATEADD(DAY, -15, CAST(GETDATE() AS DATE)) AS DATETIME2(0))), 'Revisión de rutina', 'Programada'),
-    (3, 1, DATEADD(HOUR, 8,  CAST(DATEADD(DAY, -10, CAST(GETDATE() AS DATE)) AS DATETIME2(0))), 'Consulta de control', 'Cancelada'),
-    (1, 2, DATEADD(HOUR, 13, CAST(DATEADD(DAY, -5, CAST(GETDATE() AS DATE)) AS DATETIME2(0))), 'Evaluación general', 'Programada');
+    (4, 4, DATEADD(HOUR, 10, CAST(DATEADD(DAY, -20, CAST(GETDATE() AS DATE)) AS DATETIME2(0))), 'Consulta de seguimiento', 'Atendida'),
+    (1, 5, DATEADD(HOUR, 15, CAST(DATEADD(DAY, -15, CAST(GETDATE() AS DATE)) AS DATETIME2(0))), 'Revisión de rutina', 'Programada'),
+    (1, 1, DATEADD(HOUR, 8,  CAST(DATEADD(DAY, -10, CAST(GETDATE() AS DATE)) AS DATETIME2(0))), 'Consulta de control', 'Cancelada'),
+    (2, 2, DATEADD(HOUR, 13, CAST(DATEADD(DAY, -5, CAST(GETDATE() AS DATE)) AS DATETIME2(0))), 'Evaluación general', 'Programada');
 GO
 
 /* Tres tratamientos realizados están ligados a citas atendidas.
