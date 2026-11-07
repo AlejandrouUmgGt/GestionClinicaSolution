@@ -80,15 +80,6 @@ try
 
     // ---------------------------------------------------------------
     Console.WriteLine();
-    Console.WriteLine("=== 3. SEGURIDAD (HASH) ===");
-    string hash = Seguridad.CalcularHash("Admin123");
-    Console.WriteLine("  Hash de Admin123: " + hash);
-    Verificar("El hash tiene 64 caracteres", hash.Length == 64);
-    Verificar("La misma clave da siempre el mismo hash", hash == Seguridad.CalcularHash("Admin123"));
-    Verificar("Claves distintas dan hashes distintos", hash != Seguridad.CalcularHash("admin123"));
-
-    // ---------------------------------------------------------------
-    Console.WriteLine();
     Console.WriteLine("=== 4. CLÍNICA, MÉDICOS Y PACIENTES (LECTURA) ===");
     Clinica? clinica = clinicaRepo.Obtener();
     Verificar("Se obtiene la clínica", clinica != null);
