@@ -2,6 +2,7 @@
 using GestionClinica.UI.Forms;
 using LibreriaClases.Datos;
 using LibreriaClases.Modelos;
+using LibreriaClases.Logica;
 
 namespace GestionClinica.UI.Controles;
 
@@ -12,6 +13,12 @@ public partial class UcPacientes : UserControl
     public UcPacientes()
     {
         InitializeComponent();
+        if (Sesion.TieneRol(Usuario.RolMedico))
+        {
+            btnNuevo.Visible = false;
+            btnEditar.Visible = false;
+            btnEliminar.Visible = false;
+        }
     }
 
     private void UcPacientes_Load(object? sender, EventArgs e)
