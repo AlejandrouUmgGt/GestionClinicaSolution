@@ -85,21 +85,31 @@ public class ExpedienteRepositorio
     /// <summary>Guarda los antecedentes y alergias (lo único editable del expediente).</summary>
     public void Actualizar(Expediente e)
     {
-        if (Sesion.TieneRol(Usuario.RolMedico))
-            throw new InvalidOperationException("Los médicos solo pueden consultar expedientes.");
         // Actualiza los antecedentes y alergias del expediente.
         const string sql = @"UPDATE Expediente
             SET
                 Antecedentes = @antecedentes,
                 Alergias = @alergias
-            WHERE IdExpediente = @id";
+            WHERE IdExpediente = @id
+                AND (@medico = 0 OR EXISTS
+                (
+                    SELECT 1
+                    FROM Paciente p
+                    WHERE p.IdPaciente = Expediente.IdPaciente
+                        AND p.IdMedico = @medico
+                ))";
 
         using var conexion = Conexion.Crear();
         using var comando = new SqlCommand(sql, conexion);
         comando.Parameters.AddWithValue("@antecedentes", e.Antecedentes);
         comando.Parameters.AddWithValue("@alergias", e.Alergias);
         comando.Parameters.AddWithValue("@id", e.Id);
+        int idMedico = 0;
+        if (Sesion.TieneRol(Usuario.RolMedico))
+            idMedico = Sesion.UsuarioActual!.IdMedico;
+        comando.Parameters.AddWithValue("@medico", idMedico);
         conexion.Open();
-        comando.ExecuteNonQuery();
+        if (comando.ExecuteNonQuery() == 0)
+            throw new InvalidOperationException("No se puede actualizar un expediente que no está asignado al médico.");
     }
 }
