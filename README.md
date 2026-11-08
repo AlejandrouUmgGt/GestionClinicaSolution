@@ -2,6 +2,14 @@
 
 Proyecto de Programación II de la Universidad Mariano Gálvez, sede Naranjo. Está desarrollado en C# con .NET 10 y SQL Server LocalDB.
 
+## Versión de diseño 14 (actualización visual local)
+
+El proyecto sigue desarrollado en **C# con .NET 10, Windows Forms y SQL Server LocalDB**. Para su diseño se tomaron como referencia visual los archivos `.h` compartidos por el equipo, pero **no se incorporó código C++/CLI del supermercado**.
+
+La versión visual entregada en la conversación se llama `Redisenio_Clinica_CSharp_V14_Designer.zip`. Contiene modificaciones en **15 archivos `.cs` y 14 `.Designer.cs`** (además de las instrucciones) para armonizar colores, tipografía, botones, tablas y algunas dimensiones. Su objetivo es **cambiar la presentación, sin alterar reglas de negocio, consultas SQL, eventos ni permisos**.
+
+**Estado:** el ZIP de diseño fue entregado por separado, **no está incluido automáticamente en el repositorio de GitHub** y no se ha comprobado aquí su ejecución en Windows. Esta documentación describe el paquete local y el código base, pero no certifica que el estilo esté aplicado en cada equipo. Consulta la [Guía de diseño V14](Documentacion/GuiaDisenoV14.md).
+
 ## Estructura de la solución
 
 ```text
@@ -18,7 +26,7 @@ GestionClinicaSolution/
 │   ├── Program.cs    Pruebas de consola para el backend
 │   └── PruebasBackend.csproj
 └── GestionClinica.UI/
-    ├── Estilo/       Colores usados desde código (Tema.cs)
+    ├── Estilo/       Paleta y estilo desde código (Tema.cs)
     ├── Controles/    Vistas de acceso, consultas y operaciones (.cs + .Designer.cs)
     ├── Forms/        Formularios modales de edición (.cs + .Designer.cs)
     ├── FrmPrincipal.cs / FrmPrincipal.Designer.cs
@@ -80,7 +88,7 @@ Cada ventana y cada vista se compone de **dos archivos de una misma clase parcia
 - **`Nombre.Designer.cs`**: contiene `InitializeComponent()`, con los controles, sus posiciones, colores, fuentes y eventos. Lo genera y edita el diseñador gráfico de Visual Studio.
 - **`Nombre.cs`**: contiene la lógica (eventos de los botones, carga de datos, validaciones) y llama a los repositorios y al gestor.
 
-Los colores y fuentes están escritos directamente en cada `.Designer.cs`, con la paleta de la clínica (`#0B1F3A` fondo, `#12294D` paneles, `#2E86DE` acento, `#EAF0FA` texto).
+En el **código base de GitHub**, los colores y fuentes están en los archivos `.Designer.cs`. En el **paquete V14 local**, esos archivos también se actualizan, mientras que los `.cs` llaman a `Tema.Aplicar(this)` después de `InitializeComponent()` para completar el estilo durante la ejecución. Por eso el diseñador y el resultado con F5 pueden diferir. Para detalles, consulta la [guía](Documentacion/GuiaDisenoV14.md).
 
 ### Ventana principal y acceso
 
@@ -104,7 +112,7 @@ Los colores y fuentes están escritos directamente en cada `.Designer.cs`, con l
 
 ### Estilo
 
-- **`Estilo/Tema.cs`**: guarda la paleta de colores. Los controles ya llevan sus colores en su `.Designer.cs`; esta clase solo se usa desde código, por ejemplo para colorear el estado de una cita (`Exito` y `Peligro`).
+- **`Estilo/Tema.cs`**: en el código base guarda la paleta compartida. El paquete visual V14 amplía la clase con `Aplicar(Control)`, que recorre los controles para cambiar su apariencia al ejecutarse; no modifica las validaciones ni consultas del backend.
 
 ### Proyecto
 
@@ -140,6 +148,17 @@ La documentación con requerimientos, diagramas Mermaid y conceptos de POO está
 5. La cita queda vinculada con `IdMedico` e `IdPaciente`, para su consulta posterior.
 
 **Nota:** `Paciente.IdMedico` representa la asignación vigente. Si se reasigna un paciente, las citas anteriores conservan su médico; revisar el historial y los permisos según el caso.
+
+## Instalar y revisar el diseño V14
+
+1. Guarda el trabajo actual y comprueba la rama con `git branch --show-current` y los cambios con `git status`.
+2. Haz una copia de seguridad. Cierra las pestañas `[Diseño]` abiertas en Visual Studio.
+3. Extrae **`Redisenio_Clinica_CSharp_V14_Designer.zip` en la raíz de la solución**, junto a `GestionClinicaSolution.slnx`. Confirma el reemplazo de los archivos `.cs` y `.Designer.cs`.
+4. Abre de nuevo `FrmPrincipal.cs` usando **Ver diseñador**. Comprueba que se está usando la **misma carpeta** donde extrajiste el ZIP.
+5. Compila y ejecuta con **F5**. Revisa inicio de sesión, navegación, médicos, pacientes, citas, tratamientos, expedientes y reportes.
+6. Si sigue viéndose igual, revisa `git diff --name-only` y `git diff -- GestionClinica.UI/FrmPrincipal.Designer.cs`; la documentación sola **no cambia la interfaz**.
+
+**Nota sobre la rama:** no se detectó una rama remota con el nombre literal `14` en el repositorio revisado; puede tratarse de una versión o de una rama local. No se ha cambiado la rama de tu equipo ni se ha hecho `push` del paquete gráfico. El aviso del diseñador sobre **escalado de pantalla al 125 %** puede afectar las dimensiones, pero no demuestra por sí mismo un error. Consulta la [Guía de diseño V14](Documentacion/GuiaDisenoV14.md).
 
 ## Ejecutar las pruebas
 
