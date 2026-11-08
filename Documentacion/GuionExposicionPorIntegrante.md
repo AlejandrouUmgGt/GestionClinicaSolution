@@ -4,6 +4,14 @@
 **Duración sugerida:** 14 a 16 minutos.  
 **Importante:** esta es una distribución de temas para estudiar y presentar, no una afirmación sobre quién escribió originalmente cada archivo.
 
+## Novedades visuales de la versión 14
+
+Se mantuvo **C# Windows Forms**. Los archivos `.h` compartidos se usaron exclusivamente como referencia estética: fondo azul marino, paneles oscuros, títulos celestes, campos legibles, botones de colores y tablas uniformes.
+
+**Idea para explicar en clase:** en `.Designer.cs` se crean los controles y se fijan posiciones, tamaños, colores y enlaces a eventos; en `.cs` está el comportamiento. En el paquete visual V14, `Tema.Aplicar(this)` termina de establecer el estilo cuando se ejecuta la pantalla. Es importante indicar que el paquete **se entregó por separado y no está integrado automáticamente en GitHub**.
+
+La demostración de estos cambios se puede distribuir entre Emy (login, pacientes, campos y tablas) y Joel Adrián (menú lateral, navegación y pantallas de citas/expediente) **sin aumentar los 14–16 minutos** sugeridos.
+
 ## Diego Alejandro Vásques Yol — 9390-25-16100
 **Parte:** Base de datos, conexión, repositorios y consola de pruebas. **Tiempo: 4–5 minutos.**
 
@@ -60,10 +68,10 @@ Abrir `ClinicaDB.sql`, mostrar la tabla `Paciente`, explicar `IdMedico`, despué
 - `GestionClinica.UI/Controles/UcInicio.cs` y `UcInicio.Designer.cs`: pantalla inicial.
 - `GestionClinica.UI/Controles/UcPacientes.cs` y `UcPacientes.Designer.cs`: tabla de pacientes, botones y búsqueda.
 - `GestionClinica.UI/Forms/FrmPaciente.cs` y `FrmPaciente.Designer.cs`: formulario de registro y edición, selector de **Médico asignado** y evento `Load`.
-- `GestionClinica.UI/Estilo/Tema.cs`: colores compartidos usados desde código.
+- `GestionClinica.UI/Estilo/Tema.cs`: paleta compartida; en el paquete V14 incluye `Aplicar(Control)` para uniformar los controles al ejecutar.
 
 ### Guion sugerido
-> Nuestra interfaz fue construida con Windows Forms. El objetivo fue que el sistema tuviera pantallas ordenadas y fáciles de utilizar. En los archivos Designer.cs se colocan controles como botones, etiquetas y tablas; los archivos .cs contienen los eventos y la lógica de cada pantalla.
+> Nuestra interfaz fue construida con Windows Forms. El objetivo fue que el sistema tuviera pantallas ordenadas y fáciles de utilizar, usando un tema azul oscuro, títulos celestes y tablas legibles. En los archivos Designer.cs se colocan controles como botones, etiquetas y tablas; los archivos .cs contienen los eventos y la lógica de cada pantalla. En la versión visual V14, Tema también aplica colores y fuentes al ejecutar.
 >
 > Por ejemplo, UcLogin permite ingresar al sistema, UcInicio presenta información general y UcPacientes muestra los pacientes disponibles. Cuando inicia sesión un médico, la pantalla oculta los botones para crear, editar y eliminar pacientes, y el backend solamente devuelve sus pacientes asignados. En el formulario FrmPaciente se selecciona el médico responsable desde un ComboBox que se llena al cargar la pantalla. Mostraré el acceso y cómo se asigna un paciente desde la interfaz.
 
@@ -84,7 +92,7 @@ Abrir `ClinicaDB.sql`, mostrar la tabla `Paciente`, explicar `IdMedico`, despué
 - `GestionClinica.UI/Controles/UcTratamientos.cs` y `UcTratamientos.Designer.cs`: pantalla donde médicos pueden agregar y editar tratamientos de sus pacientes.
 
 ### Guion sugerido
-> Mi parte es la navegación y el diseño de las pantallas para citas, tratamientos y expedientes. La ventana FrmPrincipal muestra el menú y cambia las opciones visibles según el rol del usuario. Al elegir una opción, se carga el control correspondiente dentro de la ventana principal.
+> Mi parte es la navegación y el diseño de las pantallas para citas, tratamientos y expedientes. La ventana FrmPrincipal organiza un menú lateral y una barra superior en azul oscuro y cambia las opciones visibles según el rol del usuario. Al elegir una opción, se carga el control correspondiente dentro de la ventana principal.
 >
 > UcCitas presenta las citas y FrmCita contiene los controles para capturar una cita. UcExpediente permite consultar antecedentes, alergias e historial. Al seleccionar un médico en FrmCita, la lista de pacientes se filtra a los que tiene asignados. El médico no puede agendar citas, pero sí puede registrar y editar tratamientos y actualizar antecedentes y alergias de sus propios pacientes. Como demostración final, iniciaré sesión con Diego y después con William para comprobar que cada uno ve pacientes diferentes.
 
@@ -127,6 +135,9 @@ Las claves son exclusivamente para el entorno local de clase y están guardadas 
 | Pregunta | Respuesta corta |
 |---|---|
 | ¿Qué es `Load`? | El evento que ocurre al cargarse una pantalla; se usa para llenar sus datos. |
+| ¿Qué guarda `.Designer.cs`? | Los controles, la distribución, los colores y las conexiones de eventos de la clase parcial. |
+| ¿Qué hace `Tema.Aplicar(this)` en V14? | Unifica los colores y fuentes de los controles cuando se ejecuta. |
+| ¿Por qué `[Diseño]` y F5 pueden diferir? | Porque ciertas propiedades se cambian mediante código en ejecución. |
 | ¿Qué hace `DesignMode`? | Evita consultas de SQL mientras se diseña el formulario en Visual Studio. |
 | ¿Qué es una llave foránea? | Un campo que relaciona una tabla con la clave principal de otra. |
 | ¿Qué es herencia? | Una clase hija reutiliza y extiende una clase padre, como Medico y Paciente con Persona. |
@@ -136,6 +147,14 @@ Las claves son exclusivamente para el entorno local de clase y están guardadas 
 | ¿Qué modifica un médico? | Tratamientos y antecedentes/alergias de pacientes asignados; no elimina tratamientos. |
 | ¿Cómo evitan citas traslapadas? | El gestor consulta si existe una cita activa del mismo médico en un intervalo de 30 minutos. |
 | ¿Son seguras las claves de la demo? | No; en un sistema real habría que usar hashes seguros y sal. |
+
+## Verificación visual previa
+
+- Comprobar que el paquete `Redisenio_Clinica_CSharp_V14_Designer.zip` se extrajo en la carpeta **raíz correcta** y se reemplazaron los `.cs` y `.Designer.cs`.
+- Abrir `FrmPrincipal.cs` con **Ver diseñador** y después ejecutar con **F5** para comparar ambas vistas.
+- Verificar distribución, márgenes y textos en ventana maximizada; el aviso de escalado de Visual Studio al **125 %** puede afectar tamaños.
+- Repetir la demostración con Administrador, Recepción y Médico: los cambios de estilo no alteran permisos.
+- No afirmar que se compiló el paquete o se hizo `push` hasta comprobarlo en el equipo correspondiente.
 
 ## Advertencias antes de exponer
 
