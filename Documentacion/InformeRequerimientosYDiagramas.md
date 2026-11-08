@@ -29,10 +29,51 @@
 - Los datos se almacenan en SQL Server LocalDB en la base `ClinicaDB`.
 - Las consultas usan parámetros SQL y el acceso a datos se concentra en repositorios.
 - Cada ventana y vista se diseña en el diseñador gráfico de Visual Studio: su aspecto está en un archivo `.Designer.cs` y su lógica en un archivo `.cs` de la misma clase parcial.
-- Los controles comparten la misma paleta de colores y la misma fuente (Segoe UI), escritas directamente en cada `.Designer.cs`. `GestionClinica.UI/Estilo/Tema.cs` conserva los colores que se usan desde código.
+- En el código base, los controles usan Segoe UI y los colores definidos en sus `.Designer.cs`. El paquete visual V14 propone actualizar esas propiedades y aplicar la paleta mediante `Tema.Aplicar(this)` al ejecutar. Esto **no agrega ni altera requerimientos funcionales**.
 - Las pantallas no consultan la base de datos mientras se editan en el diseñador (la carga de datos se hace en el evento `Load` y se omite con `DesignMode`).
 - Las operaciones de lectura o escritura deben responder en un tiempo razonable para el tamaño de una clínica pequeña; no se definió una meta numérica de rendimiento.
 - Los errores del backend se muestran al usuario en cuadros de mensaje para facilitar su corrección.
+
+## Diseño de interfaz — actualización visual V14
+
+Este rediseño toma de los archivos `login.h`, `main.h`, `Reportes.h`, `Usuarios.h` e `Inventario.h` **solo el estilo**, no el lenguaje ni la lógica. El sistema continúa en **C# Windows Forms**.
+
+### Paleta y controles
+
+| Elemento | Color / apariencia | Aplicación |
+|---|---|---|
+| Fondo | `#0A1428` | Ventanas y vistas |
+| Paneles | `#14203C` | Contenedores y grupos |
+| Títulos | `#29B6F6` | Encabezados y acentos |
+| Campos de entrada | `#1E325A` | `TextBox` y `ComboBox` |
+| Texto principal | `#EAF0FA` | Sobre fondos oscuros |
+| Agregar o Guardar | `#4CAF50` | Acciones positivas |
+| Buscar, Editar, Actualizar | `#2196F3` | Acciones comunes |
+| Eliminar | `#F44336` | Acciones destructivas |
+| Cancelar o Cerrar | `#4E5B77` | Acciones de salida |
+
+Se usa fuente **Segoe UI**, botones planos, encabezados oscuros en `DataGridView` y una barra superior con navegación lateral. El paquete modifica colores, fuentes y algunas dimensiones; **no reconstruye de cero todos los formularios**.
+
+### Cómo se aplica en Windows Forms
+
+- **`*.Designer.cs`**: contiene `InitializeComponent()`, controles, diseño, propiedades, tamaños y enlace de eventos. El diseñador de Visual Studio representa principalmente estos valores.
+- **`*.cs`**: conserva los manejadores de eventos y el acceso a los repositorios. En el paquete V14 llama a `Tema.Aplicar(this)` después de `InitializeComponent()`.
+- **`Estilo/Tema.cs`**: en la versión local V14 ofrece la paleta y el método `Aplicar(Control)`, que recorre controles y ajusta su apariencia **al ejecutarse**. No consulta ni escribe la base de datos.
+
+**Diseñador versus F5:** las propiedades aplicadas por `Tema.Aplicar(this)` durante la ejecución no necesariamente se reflejan en `[Diseño]`. Para ver cambios en el diseñador también hay que modificar las propiedades del `.Designer.cs`. El paquete V14 incluye ambos tipos de archivo.
+
+**Pantallas previstas:** `FrmPrincipal`; `UcLogin` y `UcInicio`; las vistas `UcClinica`, `UcMedicos`, `UcPacientes`, `UcCitas`, `UcTratamientos`, `UcExpediente` y `UcReportes`; los formularios `FrmMedico`, `FrmPaciente`, `FrmCita` y `FrmTratamiento`. Los permisos siguen aplicándose por rol y en el backend.
+
+### Verificación para la defensa
+
+1. Abrir la solución y **Ver diseñador** de `FrmPrincipal.cs`.
+2. Ejecutar la aplicación con **F5** y comparar las pantallas con el diseñador.
+3. Revisar el escalado de Windows (por ejemplo **125 %**), tamaños, márgenes, `Dock`, `Anchor` y columnas; comprobar la ventana normal y maximizada.
+4. Probar Administrador, Recepción y Médico. El cambio visual **no concede permisos**.
+5. Confirmar el selector de **Médico asignado**, el filtrado de pacientes al crear una cita y el acceso a tratamientos/antecedentes de los pacientes asignados.
+6. Compilar y ejecutar `PruebasBackend` en Windows con SQL Server LocalDB. El paquete no fue compilado aquí.
+
+**Estado del repositorio:** la actualización visual se entregó como ZIP local separado; esta documentación no prueba que sus archivos hayan sido integrados a `master`. Consulta la [Guía de diseño V14](GuiaDisenoV14.md).
 
 ## Diagrama de clases
 
@@ -313,6 +354,14 @@ El menú se controla en `FrmPrincipal.AplicarRol`; los repositorios incorporan c
 
 8. **¿Por qué los datos se cargan en el evento `Load` y no en el constructor?**  
    Para que el diseñador de Visual Studio pueda abrir la pantalla sin conectarse a la base de datos. Además, `if (DesignMode) return;` evita cualquier consulta mientras se edita el diseño.
+
+### Preguntas sobre la interfaz visual
+
+- **¿Se cambió el lenguaje de programación?** No. Solo se tomó un ejemplo de estilo; el proyecto sigue en C# Windows Forms.
+- **¿Qué diferencia hay entre `.cs` y `.Designer.cs`?** Ambos pertenecen a la misma clase parcial. El primero contiene la lógica; el segundo configura los controles.
+- **¿Para qué sirve `Tema.Aplicar(this)`?** Aplica colores, fuentes y propiedades visuales al ejecutar, después de `InitializeComponent()`.
+- **¿Por qué el diseñador puede verse diferente a F5?** Porque ciertos estilos se aplican cuando corre el código y no se muestran en la vista de diseño.
+- **¿Qué significa el aviso de escalado al 125 %?** Visual Studio indica que el DPI podría afectar cómo se representan los tamaños; se revisa la distribución sin cambiar la lógica.
 
 ## Preguntas adicionales para la defensa
 
