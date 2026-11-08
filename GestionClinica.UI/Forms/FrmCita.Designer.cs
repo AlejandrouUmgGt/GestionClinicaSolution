@@ -51,13 +51,14 @@
             this.lblMedico.Text = "Médico";
             this.lblMedico.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblMedico.TabIndex = 0;
+            this.lblMedico.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblMedico.Name = "lblMedico";
             // 
             // cmbMedicos
             // 
-            this.cmbMedicos.BackColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.cmbMedicos.BackColor = System.Drawing.Color.FromArgb(30, 50, 90);
             this.cmbMedicos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbMedicos.ForeColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.cmbMedicos.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.cmbMedicos.FormattingEnabled = true;
             this.cmbMedicos.Location = new System.Drawing.Point(185, 25);
             this.cmbMedicos.Size = new System.Drawing.Size(290, 28);
@@ -71,13 +72,14 @@
             this.lblPaciente.Text = "Paciente";
             this.lblPaciente.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblPaciente.TabIndex = 2;
+            this.lblPaciente.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblPaciente.Name = "lblPaciente";
             // 
             // cmbPacientes
             // 
-            this.cmbPacientes.BackColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.cmbPacientes.BackColor = System.Drawing.Color.FromArgb(30, 50, 90);
             this.cmbPacientes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbPacientes.ForeColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.cmbPacientes.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.cmbPacientes.FormattingEnabled = true;
             this.cmbPacientes.Location = new System.Drawing.Point(185, 71);
             this.cmbPacientes.Size = new System.Drawing.Size(290, 28);
@@ -91,6 +93,7 @@
             this.lblFecha.Text = "Fecha";
             this.lblFecha.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblFecha.TabIndex = 4;
+            this.lblFecha.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblFecha.Name = "lblFecha";
             // 
             // dtpFecha
@@ -108,6 +111,7 @@
             this.lblHora.Text = "Hora";
             this.lblHora.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblHora.TabIndex = 6;
+            this.lblHora.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblHora.Name = "lblHora";
             // 
             // dtpHora
@@ -126,14 +130,15 @@
             this.lblMotivo.Text = "Motivo";
             this.lblMotivo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblMotivo.TabIndex = 8;
+            this.lblMotivo.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblMotivo.Name = "lblMotivo";
             // 
             // txtMotivo
             // 
             this.txtMotivo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMotivo.BackColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.txtMotivo.BackColor = System.Drawing.Color.FromArgb(30, 50, 90);
             this.txtMotivo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtMotivo.ForeColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.txtMotivo.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.txtMotivo.Location = new System.Drawing.Point(185, 209);
             this.txtMotivo.Size = new System.Drawing.Size(290, 27);
             this.txtMotivo.TabIndex = 9;
@@ -146,14 +151,15 @@
             this.lblEstado.Text = "Estado";
             this.lblEstado.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblEstado.TabIndex = 10;
+            this.lblEstado.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblEstado.Name = "lblEstado";
             // 
             // cmbEstado
             // 
             this.cmbEstado.Items.AddRange(new object[] {"Programada", "Atendida", "Cancelada"});
-            this.cmbEstado.BackColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.cmbEstado.BackColor = System.Drawing.Color.FromArgb(30, 50, 90);
             this.cmbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbEstado.ForeColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.cmbEstado.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.cmbEstado.FormattingEnabled = true;
             this.cmbEstado.Location = new System.Drawing.Point(185, 255);
             this.cmbEstado.Size = new System.Drawing.Size(290, 28);
@@ -162,32 +168,34 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.BackColor = System.Drawing.Color.FromArgb(46, 134, 222);
+            this.btnGuardar.BackColor = System.Drawing.Color.FromArgb(33, 150, 243);
             this.btnGuardar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGuardar.FlatAppearance.BorderSize = 0;
             this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGuardar.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.btnGuardar.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.btnGuardar.Location = new System.Drawing.Point(185, 311);
             this.btnGuardar.Size = new System.Drawing.Size(110, 36);
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = false;
             this.btnGuardar.TabIndex = 12;
+            this.btnGuardar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // btnCancelar
             // 
-            this.btnCancelar.BackColor = System.Drawing.Color.FromArgb(46, 134, 222);
+            this.btnCancelar.BackColor = System.Drawing.Color.FromArgb(33, 150, 243);
             this.btnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancelar.FlatAppearance.BorderSize = 0;
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancelar.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.btnCancelar.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.btnCancelar.Location = new System.Drawing.Point(305, 311);
             this.btnCancelar.Size = new System.Drawing.Size(110, 36);
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = false;
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancelar.TabIndex = 13;
+            this.btnCancelar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnCancelar.Name = "btnCancelar";
             // 
             // FrmCita
@@ -209,11 +217,11 @@
             this.AcceptButton = this.btnGuardar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.BackColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.BackColor = System.Drawing.Color.FromArgb(10, 20, 40);
             this.CancelButton = this.btnCancelar;
             this.ClientSize = new System.Drawing.Size(500, 365);
             this.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;

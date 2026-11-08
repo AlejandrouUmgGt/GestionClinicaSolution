@@ -16,6 +16,7 @@ public partial class UcCitas : UserControl
     public UcCitas()
     {
         InitializeComponent();
+        GestionClinica.UI.Estilo.Tema.Aplicar(this);
         ICitaRepositorio repositorio = new CitaRepositorio();
         _gestor = new GestorCitas(repositorio);
         if (Sesion.TieneRol(Usuario.RolMedico))

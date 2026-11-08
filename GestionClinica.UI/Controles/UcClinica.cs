@@ -11,6 +11,7 @@ public partial class UcClinica : UserControl
     public UcClinica()
     {
         InitializeComponent();
+        GestionClinica.UI.Estilo.Tema.Aplicar(this);
     }
 
     private void UcClinica_Load(object? sender, EventArgs e)

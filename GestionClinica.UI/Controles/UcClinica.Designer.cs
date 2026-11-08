@@ -42,9 +42,9 @@
             // 
             // lstMedicos
             // 
-            this.lstMedicos.BackColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.lstMedicos.BackColor = System.Drawing.Color.FromArgb(30, 50, 90);
             this.lstMedicos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lstMedicos.ForeColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.lstMedicos.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.lstMedicos.FormattingEnabled = true;
             this.lstMedicos.Location = new System.Drawing.Point(0, 205);
             this.lstMedicos.Size = new System.Drawing.Size(1000, 395);
@@ -58,6 +58,7 @@
             this.lblMedicosAsociados.Text = "Médicos asociados (agregación)";
             this.lblMedicosAsociados.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblMedicosAsociados.TabIndex = 1;
+            this.lblMedicosAsociados.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblMedicosAsociados.Name = "lblMedicosAsociados";
             // 
             // pnlFormulario
@@ -67,7 +68,7 @@
             this.pnlFormulario.Controls.Add(this.lblUbicacion);
             this.pnlFormulario.Controls.Add(this.txtUbicacion);
             this.pnlFormulario.Controls.Add(this.btnGuardar);
-            this.pnlFormulario.BackColor = System.Drawing.Color.FromArgb(18, 41, 77);
+            this.pnlFormulario.BackColor = System.Drawing.Color.FromArgb(20, 32, 60);
             this.pnlFormulario.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlFormulario.Location = new System.Drawing.Point(0, 0);
             this.pnlFormulario.Size = new System.Drawing.Size(1000, 150);
@@ -81,14 +82,15 @@
             this.lblNombre.Text = "Nombre";
             this.lblNombre.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblNombre.TabIndex = 0;
+            this.lblNombre.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblNombre.Name = "lblNombre";
             // 
             // txtNombre
             // 
             this.txtNombre.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNombre.BackColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.txtNombre.BackColor = System.Drawing.Color.FromArgb(30, 50, 90);
             this.txtNombre.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtNombre.ForeColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.txtNombre.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.txtNombre.Location = new System.Drawing.Point(160, 15);
             this.txtNombre.Size = new System.Drawing.Size(500, 27);
             this.txtNombre.TabIndex = 1;
@@ -101,14 +103,15 @@
             this.lblUbicacion.Text = "Ubicación";
             this.lblUbicacion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblUbicacion.TabIndex = 2;
+            this.lblUbicacion.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblUbicacion.Name = "lblUbicacion";
             // 
             // txtUbicacion
             // 
             this.txtUbicacion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtUbicacion.BackColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.txtUbicacion.BackColor = System.Drawing.Color.FromArgb(30, 50, 90);
             this.txtUbicacion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtUbicacion.ForeColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.txtUbicacion.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.txtUbicacion.Location = new System.Drawing.Point(160, 60);
             this.txtUbicacion.Size = new System.Drawing.Size(500, 27);
             this.txtUbicacion.TabIndex = 3;
@@ -116,16 +119,17 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.BackColor = System.Drawing.Color.FromArgb(46, 134, 222);
+            this.btnGuardar.BackColor = System.Drawing.Color.FromArgb(33, 150, 243);
             this.btnGuardar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGuardar.FlatAppearance.BorderSize = 0;
             this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGuardar.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.btnGuardar.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.btnGuardar.Location = new System.Drawing.Point(160, 102);
             this.btnGuardar.Size = new System.Drawing.Size(110, 36);
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = false;
             this.btnGuardar.TabIndex = 4;
+            this.btnGuardar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
@@ -137,6 +141,7 @@
             this.lblTitulo.Text = "Información de la clínica";
             this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.lblTitulo.TabIndex = 3;
+            this.lblTitulo.ForeColor = System.Drawing.Color.FromArgb(41, 182, 246);
             this.lblTitulo.Name = "lblTitulo";
             // 
             // UcClinica
@@ -147,9 +152,9 @@
             this.Controls.Add(this.lblTitulo);
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.BackColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.BackColor = System.Drawing.Color.FromArgb(10, 20, 40);
             this.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.Size = new System.Drawing.Size(1000, 600);
             this.Name = "UcClinica";
             this.Load += new System.EventHandler(this.UcClinica_Load);

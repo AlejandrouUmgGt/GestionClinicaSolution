@@ -11,6 +11,7 @@ public partial class UcInicio : UserControl
     public UcInicio(Usuario usuario)
     {
         InitializeComponent();
+        GestionClinica.UI.Estilo.Tema.Aplicar(this);
         _usuario = usuario;
         lblTitulo.Text = "Bienvenido, " + _usuario.NombreUsuario + " (" + _usuario.Rol + ")";
     }

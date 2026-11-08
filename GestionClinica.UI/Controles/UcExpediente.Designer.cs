@@ -62,7 +62,7 @@
             this.tblExpediente.SetColumnSpan(this.lblHistorial, 2);
             this.tblExpediente.Controls.Add(this.txtHistorial, 0, 4);
             this.tblExpediente.SetColumnSpan(this.txtHistorial, 2);
-            this.tblExpediente.BackColor = System.Drawing.Color.FromArgb(18, 41, 77);
+            this.tblExpediente.BackColor = System.Drawing.Color.FromArgb(20, 32, 60);
             this.tblExpediente.ColumnCount = 2;
             this.tblExpediente.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblExpediente.Location = new System.Drawing.Point(0, 98);
@@ -78,6 +78,7 @@
             this.lblAntecedentes.Text = "Antecedentes";
             this.lblAntecedentes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblAntecedentes.TabIndex = 0;
+            this.lblAntecedentes.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblAntecedentes.Name = "lblAntecedentes";
             // 
             // lblAlergias
@@ -87,14 +88,15 @@
             this.lblAlergias.Text = "Alergias";
             this.lblAlergias.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblAlergias.TabIndex = 1;
+            this.lblAlergias.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblAlergias.Name = "lblAlergias";
             // 
             // txtAntecedentes
             // 
-            this.txtAntecedentes.BackColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.txtAntecedentes.BackColor = System.Drawing.Color.FromArgb(30, 50, 90);
             this.txtAntecedentes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtAntecedentes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtAntecedentes.ForeColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.txtAntecedentes.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.txtAntecedentes.Multiline = true;
             this.txtAntecedentes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtAntecedentes.Size = new System.Drawing.Size(100, 100);
@@ -103,10 +105,10 @@
             // 
             // txtAlergias
             // 
-            this.txtAlergias.BackColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.txtAlergias.BackColor = System.Drawing.Color.FromArgb(30, 50, 90);
             this.txtAlergias.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtAlergias.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtAlergias.ForeColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.txtAlergias.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.txtAlergias.Multiline = true;
             this.txtAlergias.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtAlergias.Size = new System.Drawing.Size(100, 100);
@@ -115,15 +117,16 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.BackColor = System.Drawing.Color.FromArgb(46, 134, 222);
+            this.btnGuardar.BackColor = System.Drawing.Color.FromArgb(33, 150, 243);
             this.btnGuardar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGuardar.FlatAppearance.BorderSize = 0;
             this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGuardar.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.btnGuardar.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.btnGuardar.Size = new System.Drawing.Size(190, 34);
             this.btnGuardar.Text = "Guardar expediente";
             this.btnGuardar.UseVisualStyleBackColor = false;
             this.btnGuardar.TabIndex = 4;
+            this.btnGuardar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
@@ -134,15 +137,16 @@
             this.lblHistorial.Text = "Historial: composición de citas y tratamientos";
             this.lblHistorial.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblHistorial.TabIndex = 5;
+            this.lblHistorial.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblHistorial.Name = "lblHistorial";
             // 
             // txtHistorial
             // 
-            this.txtHistorial.BackColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.txtHistorial.BackColor = System.Drawing.Color.FromArgb(30, 50, 90);
             this.txtHistorial.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtHistorial.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtHistorial.Font = new System.Drawing.Font("Consolas", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtHistorial.ForeColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.txtHistorial.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.txtHistorial.Multiline = true;
             this.txtHistorial.ReadOnly = true;
             this.txtHistorial.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -154,7 +158,7 @@
             // 
             this.pnlPaciente.Controls.Add(this.lblPaciente);
             this.pnlPaciente.Controls.Add(this.cmbPacientes);
-            this.pnlPaciente.BackColor = System.Drawing.Color.FromArgb(18, 41, 77);
+            this.pnlPaciente.BackColor = System.Drawing.Color.FromArgb(20, 32, 60);
             this.pnlPaciente.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlPaciente.Location = new System.Drawing.Point(0, 0);
             this.pnlPaciente.Size = new System.Drawing.Size(1000, 48);
@@ -168,13 +172,14 @@
             this.lblPaciente.Text = "Paciente";
             this.lblPaciente.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblPaciente.TabIndex = 0;
+            this.lblPaciente.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblPaciente.Name = "lblPaciente";
             // 
             // cmbPacientes
             // 
-            this.cmbPacientes.BackColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.cmbPacientes.BackColor = System.Drawing.Color.FromArgb(30, 50, 90);
             this.cmbPacientes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbPacientes.ForeColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.cmbPacientes.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.cmbPacientes.FormattingEnabled = true;
             this.cmbPacientes.Location = new System.Drawing.Point(85, 10);
             this.cmbPacientes.Size = new System.Drawing.Size(320, 28);
@@ -190,6 +195,7 @@
             this.lblTitulo.Text = "Expediente e historial médico";
             this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.lblTitulo.TabIndex = 2;
+            this.lblTitulo.ForeColor = System.Drawing.Color.FromArgb(41, 182, 246);
             this.lblTitulo.Name = "lblTitulo";
             // 
             // UcExpediente
@@ -199,9 +205,9 @@
             this.Controls.Add(this.lblTitulo);
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.BackColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.BackColor = System.Drawing.Color.FromArgb(10, 20, 40);
             this.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.Size = new System.Drawing.Size(1000, 600);
             this.Name = "UcExpediente";
             this.Load += new System.EventHandler(this.UcExpediente_Load);

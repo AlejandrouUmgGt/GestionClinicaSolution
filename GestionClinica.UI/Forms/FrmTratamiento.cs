@@ -12,6 +12,7 @@ public partial class FrmTratamiento : Form
     public FrmTratamiento(Tratamiento? tratamiento)
     {
         InitializeComponent();
+        GestionClinica.UI.Estilo.Tema.Aplicar(this);
         _tratamiento = tratamiento;
         if (tratamiento == null)
             Text = "Nuevo tratamiento";

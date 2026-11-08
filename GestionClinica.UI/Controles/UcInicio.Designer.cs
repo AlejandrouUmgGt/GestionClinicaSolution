@@ -61,7 +61,7 @@
             // 
             this.pnlTarjetaMedicos.Controls.Add(this.lblTotalMedicos);
             this.pnlTarjetaMedicos.Controls.Add(this.lblTituloTarjetaMedicos);
-            this.pnlTarjetaMedicos.BackColor = System.Drawing.Color.FromArgb(18, 41, 77);
+            this.pnlTarjetaMedicos.BackColor = System.Drawing.Color.FromArgb(20, 32, 60);
             this.pnlTarjetaMedicos.Location = new System.Drawing.Point(10, 10);
             this.pnlTarjetaMedicos.Padding = new System.Windows.Forms.Padding(12);
             this.pnlTarjetaMedicos.Size = new System.Drawing.Size(220, 130);
@@ -76,6 +76,7 @@
             this.lblTotalMedicos.Text = "0";
             this.lblTotalMedicos.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblTotalMedicos.TabIndex = 0;
+            this.lblTotalMedicos.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblTotalMedicos.Name = "lblTotalMedicos";
             // 
             // lblTituloTarjetaMedicos
@@ -85,13 +86,14 @@
             this.lblTituloTarjetaMedicos.Text = "Médicos";
             this.lblTituloTarjetaMedicos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblTituloTarjetaMedicos.TabIndex = 1;
+            this.lblTituloTarjetaMedicos.ForeColor = System.Drawing.Color.FromArgb(41, 182, 246);
             this.lblTituloTarjetaMedicos.Name = "lblTituloTarjetaMedicos";
             // 
             // pnlTarjetaPacientes
             // 
             this.pnlTarjetaPacientes.Controls.Add(this.lblTotalPacientes);
             this.pnlTarjetaPacientes.Controls.Add(this.lblTituloTarjetaPacientes);
-            this.pnlTarjetaPacientes.BackColor = System.Drawing.Color.FromArgb(18, 41, 77);
+            this.pnlTarjetaPacientes.BackColor = System.Drawing.Color.FromArgb(20, 32, 60);
             this.pnlTarjetaPacientes.Location = new System.Drawing.Point(250, 10);
             this.pnlTarjetaPacientes.Padding = new System.Windows.Forms.Padding(12);
             this.pnlTarjetaPacientes.Size = new System.Drawing.Size(220, 130);
@@ -106,6 +108,7 @@
             this.lblTotalPacientes.Text = "0";
             this.lblTotalPacientes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblTotalPacientes.TabIndex = 0;
+            this.lblTotalPacientes.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblTotalPacientes.Name = "lblTotalPacientes";
             // 
             // lblTituloTarjetaPacientes
@@ -115,13 +118,14 @@
             this.lblTituloTarjetaPacientes.Text = "Pacientes";
             this.lblTituloTarjetaPacientes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblTituloTarjetaPacientes.TabIndex = 1;
+            this.lblTituloTarjetaPacientes.ForeColor = System.Drawing.Color.FromArgb(41, 182, 246);
             this.lblTituloTarjetaPacientes.Name = "lblTituloTarjetaPacientes";
             // 
             // pnlTarjetaCitas
             // 
             this.pnlTarjetaCitas.Controls.Add(this.lblTotalCitas);
             this.pnlTarjetaCitas.Controls.Add(this.lblTituloTarjetaCitas);
-            this.pnlTarjetaCitas.BackColor = System.Drawing.Color.FromArgb(18, 41, 77);
+            this.pnlTarjetaCitas.BackColor = System.Drawing.Color.FromArgb(20, 32, 60);
             this.pnlTarjetaCitas.Location = new System.Drawing.Point(490, 10);
             this.pnlTarjetaCitas.Padding = new System.Windows.Forms.Padding(12);
             this.pnlTarjetaCitas.Size = new System.Drawing.Size(220, 130);
@@ -136,6 +140,7 @@
             this.lblTotalCitas.Text = "0";
             this.lblTotalCitas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblTotalCitas.TabIndex = 0;
+            this.lblTotalCitas.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblTotalCitas.Name = "lblTotalCitas";
             // 
             // lblTituloTarjetaCitas
@@ -145,6 +150,7 @@
             this.lblTituloTarjetaCitas.Text = "Citas de hoy";
             this.lblTituloTarjetaCitas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblTituloTarjetaCitas.TabIndex = 1;
+            this.lblTituloTarjetaCitas.ForeColor = System.Drawing.Color.FromArgb(41, 182, 246);
             this.lblTituloTarjetaCitas.Name = "lblTituloTarjetaCitas";
             // 
             // lblTitulo
@@ -155,6 +161,7 @@
             this.lblTitulo.Text = "Bienvenido";
             this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblTitulo.TabIndex = 1;
+            this.lblTitulo.ForeColor = System.Drawing.Color.FromArgb(41, 182, 246);
             this.lblTitulo.Name = "lblTitulo";
             // 
             // UcInicio
@@ -163,9 +170,9 @@
             this.Controls.Add(this.lblTitulo);
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.BackColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.BackColor = System.Drawing.Color.FromArgb(10, 20, 40);
             this.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.Size = new System.Drawing.Size(1000, 600);
             this.Name = "UcInicio";
             this.Load += new System.EventHandler(this.UcInicio_Load);

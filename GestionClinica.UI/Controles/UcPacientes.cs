@@ -13,6 +13,7 @@ public partial class UcPacientes : UserControl
     public UcPacientes()
     {
         InitializeComponent();
+        GestionClinica.UI.Estilo.Tema.Aplicar(this);
         if (Sesion.TieneRol(Usuario.RolMedico))
         {
             btnNuevo.Visible = false;

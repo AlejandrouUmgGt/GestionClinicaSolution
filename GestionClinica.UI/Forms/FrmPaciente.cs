@@ -11,6 +11,7 @@ public partial class FrmPaciente : Form
     public FrmPaciente(Paciente? paciente)
     {
         InitializeComponent();
+        GestionClinica.UI.Estilo.Tema.Aplicar(this);
         Load += FrmPaciente_Load;
         _paciente = paciente;
         if (paciente == null)

@@ -13,6 +13,7 @@ public partial class UcTratamientos : UserControl
     public UcTratamientos()
     {
         InitializeComponent();
+        GestionClinica.UI.Estilo.Tema.Aplicar(this);
         if (Sesion.TieneRol(Usuario.RolMedico))
         {
             btnEliminar.Visible = false;

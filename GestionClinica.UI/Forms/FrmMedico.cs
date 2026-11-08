@@ -12,6 +12,7 @@ public partial class FrmMedico : Form
     public FrmMedico(Medico? medico)
     {
         InitializeComponent();
+        GestionClinica.UI.Estilo.Tema.Aplicar(this);
         _medico = medico;
         if (medico == null)
             Text = "Nuevo médico";

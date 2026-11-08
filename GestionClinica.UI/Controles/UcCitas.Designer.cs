@@ -54,17 +54,17 @@
             // 
             // dgvCitas
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(46, 134, 222);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(46, 134, 222);
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(11, 31, 58);
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(46, 134, 222);
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(33, 150, 243);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(33, 150, 243);
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(10, 20, 40);
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(33, 150, 243);
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.dgvCitas.AllowUserToAddRows = false;
             this.dgvCitas.AllowUserToDeleteRows = false;
             this.dgvCitas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvCitas.BackgroundColor = System.Drawing.Color.FromArgb(18, 41, 77);
+            this.dgvCitas.BackgroundColor = System.Drawing.Color.FromArgb(20, 32, 60);
             this.dgvCitas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvCitas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCitas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -83,6 +83,13 @@
             this.dgvCitas.Location = new System.Drawing.Point(0, 0);
             this.dgvCitas.Size = new System.Drawing.Size(800, 300);
             this.dgvCitas.TabIndex = 0;
+            this.dgvCitas.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvCitas.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(26, 54, 108);
+            this.dgvCitas.ColumnHeadersDefaultCellStyle.ForeColor = System.Drawing.Color.White;
+            this.dgvCitas.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(30, 50, 90);
+            this.dgvCitas.DefaultCellStyle.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
+            this.dgvCitas.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(33, 150, 243);
+            this.dgvCitas.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.White;
             this.dgvCitas.Name = "dgvCitas";
             // 
             // colFecha
@@ -123,7 +130,7 @@
             this.pnlBotones.Controls.Add(this.btnAtendida);
             this.pnlBotones.Controls.Add(this.btnCancelar);
             this.pnlBotones.Controls.Add(this.btnActualizar);
-            this.pnlBotones.BackColor = System.Drawing.Color.FromArgb(18, 41, 77);
+            this.pnlBotones.BackColor = System.Drawing.Color.FromArgb(20, 32, 60);
             this.pnlBotones.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlBotones.Location = new System.Drawing.Point(0, 0);
             this.pnlBotones.Size = new System.Drawing.Size(1000, 55);
@@ -132,91 +139,97 @@
             // 
             // btnNuevo
             // 
-            this.btnNuevo.BackColor = System.Drawing.Color.FromArgb(46, 134, 222);
+            this.btnNuevo.BackColor = System.Drawing.Color.FromArgb(33, 150, 243);
             this.btnNuevo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnNuevo.FlatAppearance.BorderSize = 0;
             this.btnNuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNuevo.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.btnNuevo.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.btnNuevo.Location = new System.Drawing.Point(10, 9);
             this.btnNuevo.Size = new System.Drawing.Size(90, 36);
             this.btnNuevo.Text = "Nuevo";
             this.btnNuevo.UseVisualStyleBackColor = false;
             this.btnNuevo.TabIndex = 0;
+            this.btnNuevo.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnNuevo.Name = "btnNuevo";
             this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
             // btnEditar
             // 
-            this.btnEditar.BackColor = System.Drawing.Color.FromArgb(46, 134, 222);
+            this.btnEditar.BackColor = System.Drawing.Color.FromArgb(33, 150, 243);
             this.btnEditar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEditar.FlatAppearance.BorderSize = 0;
             this.btnEditar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEditar.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.btnEditar.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.btnEditar.Location = new System.Drawing.Point(110, 9);
             this.btnEditar.Size = new System.Drawing.Size(90, 36);
             this.btnEditar.Text = "Editar";
             this.btnEditar.UseVisualStyleBackColor = false;
             this.btnEditar.TabIndex = 1;
+            this.btnEditar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
             // btnEliminar
             // 
-            this.btnEliminar.BackColor = System.Drawing.Color.FromArgb(46, 134, 222);
+            this.btnEliminar.BackColor = System.Drawing.Color.FromArgb(33, 150, 243);
             this.btnEliminar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEliminar.FlatAppearance.BorderSize = 0;
             this.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEliminar.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.btnEliminar.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.btnEliminar.Location = new System.Drawing.Point(210, 9);
             this.btnEliminar.Size = new System.Drawing.Size(100, 36);
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = false;
             this.btnEliminar.TabIndex = 2;
+            this.btnEliminar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnAtendida
             // 
-            this.btnAtendida.BackColor = System.Drawing.Color.FromArgb(46, 134, 222);
+            this.btnAtendida.BackColor = System.Drawing.Color.FromArgb(33, 150, 243);
             this.btnAtendida.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAtendida.FlatAppearance.BorderSize = 0;
             this.btnAtendida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAtendida.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.btnAtendida.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.btnAtendida.Location = new System.Drawing.Point(320, 9);
             this.btnAtendida.Size = new System.Drawing.Size(150, 36);
             this.btnAtendida.Text = "Marcar atendida";
             this.btnAtendida.UseVisualStyleBackColor = false;
             this.btnAtendida.TabIndex = 3;
+            this.btnAtendida.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnAtendida.Name = "btnAtendida";
             this.btnAtendida.Click += new System.EventHandler(this.btnAtendida_Click);
             // 
             // btnCancelar
             // 
-            this.btnCancelar.BackColor = System.Drawing.Color.FromArgb(46, 134, 222);
+            this.btnCancelar.BackColor = System.Drawing.Color.FromArgb(33, 150, 243);
             this.btnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancelar.FlatAppearance.BorderSize = 0;
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancelar.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.btnCancelar.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.btnCancelar.Location = new System.Drawing.Point(480, 9);
             this.btnCancelar.Size = new System.Drawing.Size(130, 36);
             this.btnCancelar.Text = "Cancelar cita";
             this.btnCancelar.UseVisualStyleBackColor = false;
             this.btnCancelar.TabIndex = 4;
+            this.btnCancelar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnActualizar
             // 
-            this.btnActualizar.BackColor = System.Drawing.Color.FromArgb(46, 134, 222);
+            this.btnActualizar.BackColor = System.Drawing.Color.FromArgb(33, 150, 243);
             this.btnActualizar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnActualizar.FlatAppearance.BorderSize = 0;
             this.btnActualizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnActualizar.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.btnActualizar.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.btnActualizar.Location = new System.Drawing.Point(620, 9);
             this.btnActualizar.Size = new System.Drawing.Size(110, 36);
             this.btnActualizar.Text = "Actualizar";
             this.btnActualizar.UseVisualStyleBackColor = false;
             this.btnActualizar.TabIndex = 5;
+            this.btnActualizar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
             // 
@@ -224,7 +237,7 @@
             // 
             this.pnlFiltros.Controls.Add(this.chkTodos);
             this.pnlFiltros.Controls.Add(this.cmbMedicos);
-            this.pnlFiltros.BackColor = System.Drawing.Color.FromArgb(18, 41, 77);
+            this.pnlFiltros.BackColor = System.Drawing.Color.FromArgb(20, 32, 60);
             this.pnlFiltros.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlFiltros.Location = new System.Drawing.Point(0, 0);
             this.pnlFiltros.Size = new System.Drawing.Size(1000, 48);
@@ -243,9 +256,9 @@
             // 
             // cmbMedicos
             // 
-            this.cmbMedicos.BackColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.cmbMedicos.BackColor = System.Drawing.Color.FromArgb(30, 50, 90);
             this.cmbMedicos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbMedicos.ForeColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.cmbMedicos.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.cmbMedicos.FormattingEnabled = true;
             this.cmbMedicos.Location = new System.Drawing.Point(85, 10);
             this.cmbMedicos.Size = new System.Drawing.Size(280, 28);
@@ -261,6 +274,7 @@
             this.lblTitulo.Text = "Citas";
             this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.lblTitulo.TabIndex = 3;
+            this.lblTitulo.ForeColor = System.Drawing.Color.FromArgb(41, 182, 246);
             this.lblTitulo.Name = "lblTitulo";
             // 
             // UcCitas
@@ -271,9 +285,9 @@
             this.Controls.Add(this.lblTitulo);
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.BackColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.BackColor = System.Drawing.Color.FromArgb(10, 20, 40);
             this.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.Size = new System.Drawing.Size(1000, 600);
             this.Name = "UcCitas";
             this.Load += new System.EventHandler(this.UcCitas_Load);

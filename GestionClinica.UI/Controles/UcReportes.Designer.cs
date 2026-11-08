@@ -110,7 +110,7 @@
             this.tabMedico.Controls.Add(this.dgvMedico);
             this.tabMedico.Controls.Add(this.lblMedico);
             this.tabMedico.Controls.Add(this.pnlFiltrosMedico);
-            this.tabMedico.BackColor = System.Drawing.Color.FromArgb(18, 41, 77);
+            this.tabMedico.BackColor = System.Drawing.Color.FromArgb(20, 32, 60);
             this.tabMedico.Location = new System.Drawing.Point(4, 29);
             this.tabMedico.Padding = new System.Windows.Forms.Padding(3);
             this.tabMedico.Size = new System.Drawing.Size(992, 467);
@@ -121,17 +121,17 @@
             // 
             // dgvMedico
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(46, 134, 222);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(46, 134, 222);
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(11, 31, 58);
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(46, 134, 222);
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(33, 150, 243);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(33, 150, 243);
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(10, 20, 40);
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(33, 150, 243);
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.dgvMedico.AllowUserToAddRows = false;
             this.dgvMedico.AllowUserToDeleteRows = false;
             this.dgvMedico.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvMedico.BackgroundColor = System.Drawing.Color.FromArgb(18, 41, 77);
+            this.dgvMedico.BackgroundColor = System.Drawing.Color.FromArgb(20, 32, 60);
             this.dgvMedico.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvMedico.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMedico.DefaultCellStyle = dataGridViewCellStyle2;
@@ -144,6 +144,13 @@
             this.dgvMedico.Location = new System.Drawing.Point(0, 0);
             this.dgvMedico.Size = new System.Drawing.Size(800, 300);
             this.dgvMedico.TabIndex = 0;
+            this.dgvMedico.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvMedico.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(26, 54, 108);
+            this.dgvMedico.ColumnHeadersDefaultCellStyle.ForeColor = System.Drawing.Color.White;
+            this.dgvMedico.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(30, 50, 90);
+            this.dgvMedico.DefaultCellStyle.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
+            this.dgvMedico.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(33, 150, 243);
+            this.dgvMedico.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.White;
             this.dgvMedico.Name = "dgvMedico";
             // 
             // lblMedico
@@ -153,6 +160,7 @@
             this.lblMedico.Text = "Total de filas: 0";
             this.lblMedico.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblMedico.TabIndex = 1;
+            this.lblMedico.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblMedico.Name = "lblMedico";
             // 
             // pnlFiltrosMedico
@@ -177,9 +185,9 @@
             // 
             // cmbMedico
             // 
-            this.cmbMedico.BackColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.cmbMedico.BackColor = System.Drawing.Color.FromArgb(30, 50, 90);
             this.cmbMedico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbMedico.ForeColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.cmbMedico.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.cmbMedico.FormattingEnabled = true;
             this.cmbMedico.Location = new System.Drawing.Point(85, 10);
             this.cmbMedico.Size = new System.Drawing.Size(260, 28);
@@ -188,16 +196,17 @@
             // 
             // btnCitasMedico
             // 
-            this.btnCitasMedico.BackColor = System.Drawing.Color.FromArgb(46, 134, 222);
+            this.btnCitasMedico.BackColor = System.Drawing.Color.FromArgb(33, 150, 243);
             this.btnCitasMedico.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCitasMedico.FlatAppearance.BorderSize = 0;
             this.btnCitasMedico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCitasMedico.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.btnCitasMedico.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.btnCitasMedico.Location = new System.Drawing.Point(355, 6);
             this.btnCitasMedico.Size = new System.Drawing.Size(110, 36);
             this.btnCitasMedico.Text = "Generar";
             this.btnCitasMedico.UseVisualStyleBackColor = false;
             this.btnCitasMedico.TabIndex = 2;
+            this.btnCitasMedico.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnCitasMedico.Name = "btnCitasMedico";
             this.btnCitasMedico.Click += new System.EventHandler(this.btnCitasMedico_Click);
             // 
@@ -206,7 +215,7 @@
             this.tabPaciente.Controls.Add(this.dgvPaciente);
             this.tabPaciente.Controls.Add(this.lblPaciente);
             this.tabPaciente.Controls.Add(this.pnlFiltrosPaciente);
-            this.tabPaciente.BackColor = System.Drawing.Color.FromArgb(18, 41, 77);
+            this.tabPaciente.BackColor = System.Drawing.Color.FromArgb(20, 32, 60);
             this.tabPaciente.Location = new System.Drawing.Point(4, 29);
             this.tabPaciente.Padding = new System.Windows.Forms.Padding(3);
             this.tabPaciente.Size = new System.Drawing.Size(992, 467);
@@ -217,17 +226,17 @@
             // 
             // dgvPaciente
             // 
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(46, 134, 222);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(46, 134, 222);
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(11, 31, 58);
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(46, 134, 222);
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(33, 150, 243);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(33, 150, 243);
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(10, 20, 40);
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(33, 150, 243);
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.dgvPaciente.AllowUserToAddRows = false;
             this.dgvPaciente.AllowUserToDeleteRows = false;
             this.dgvPaciente.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvPaciente.BackgroundColor = System.Drawing.Color.FromArgb(18, 41, 77);
+            this.dgvPaciente.BackgroundColor = System.Drawing.Color.FromArgb(20, 32, 60);
             this.dgvPaciente.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvPaciente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPaciente.DefaultCellStyle = dataGridViewCellStyle4;
@@ -240,6 +249,13 @@
             this.dgvPaciente.Location = new System.Drawing.Point(0, 0);
             this.dgvPaciente.Size = new System.Drawing.Size(800, 300);
             this.dgvPaciente.TabIndex = 0;
+            this.dgvPaciente.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvPaciente.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(26, 54, 108);
+            this.dgvPaciente.ColumnHeadersDefaultCellStyle.ForeColor = System.Drawing.Color.White;
+            this.dgvPaciente.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(30, 50, 90);
+            this.dgvPaciente.DefaultCellStyle.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
+            this.dgvPaciente.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(33, 150, 243);
+            this.dgvPaciente.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.White;
             this.dgvPaciente.Name = "dgvPaciente";
             // 
             // lblPaciente
@@ -249,6 +265,7 @@
             this.lblPaciente.Text = "Total de filas: 0";
             this.lblPaciente.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblPaciente.TabIndex = 1;
+            this.lblPaciente.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblPaciente.Name = "lblPaciente";
             // 
             // pnlFiltrosPaciente
@@ -273,9 +290,9 @@
             // 
             // cmbPaciente
             // 
-            this.cmbPaciente.BackColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.cmbPaciente.BackColor = System.Drawing.Color.FromArgb(30, 50, 90);
             this.cmbPaciente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbPaciente.ForeColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.cmbPaciente.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.cmbPaciente.FormattingEnabled = true;
             this.cmbPaciente.Location = new System.Drawing.Point(85, 10);
             this.cmbPaciente.Size = new System.Drawing.Size(260, 28);
@@ -284,16 +301,17 @@
             // 
             // btnCitasPaciente
             // 
-            this.btnCitasPaciente.BackColor = System.Drawing.Color.FromArgb(46, 134, 222);
+            this.btnCitasPaciente.BackColor = System.Drawing.Color.FromArgb(33, 150, 243);
             this.btnCitasPaciente.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCitasPaciente.FlatAppearance.BorderSize = 0;
             this.btnCitasPaciente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCitasPaciente.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.btnCitasPaciente.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.btnCitasPaciente.Location = new System.Drawing.Point(355, 6);
             this.btnCitasPaciente.Size = new System.Drawing.Size(110, 36);
             this.btnCitasPaciente.Text = "Generar";
             this.btnCitasPaciente.UseVisualStyleBackColor = false;
             this.btnCitasPaciente.TabIndex = 2;
+            this.btnCitasPaciente.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnCitasPaciente.Name = "btnCitasPaciente";
             this.btnCitasPaciente.Click += new System.EventHandler(this.btnCitasPaciente_Click);
             // 
@@ -301,7 +319,7 @@
             // 
             this.tabTratamientos.Controls.Add(this.dgvTratamientos);
             this.tabTratamientos.Controls.Add(this.lblTratamientos);
-            this.tabTratamientos.BackColor = System.Drawing.Color.FromArgb(18, 41, 77);
+            this.tabTratamientos.BackColor = System.Drawing.Color.FromArgb(20, 32, 60);
             this.tabTratamientos.Location = new System.Drawing.Point(4, 29);
             this.tabTratamientos.Padding = new System.Windows.Forms.Padding(3);
             this.tabTratamientos.Size = new System.Drawing.Size(992, 467);
@@ -312,17 +330,17 @@
             // 
             // dgvTratamientos
             // 
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(46, 134, 222);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(46, 134, 222);
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(11, 31, 58);
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(46, 134, 222);
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(33, 150, 243);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(33, 150, 243);
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(10, 20, 40);
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(33, 150, 243);
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.dgvTratamientos.AllowUserToAddRows = false;
             this.dgvTratamientos.AllowUserToDeleteRows = false;
             this.dgvTratamientos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvTratamientos.BackgroundColor = System.Drawing.Color.FromArgb(18, 41, 77);
+            this.dgvTratamientos.BackgroundColor = System.Drawing.Color.FromArgb(20, 32, 60);
             this.dgvTratamientos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvTratamientos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTratamientos.DefaultCellStyle = dataGridViewCellStyle6;
@@ -335,6 +353,13 @@
             this.dgvTratamientos.Location = new System.Drawing.Point(0, 0);
             this.dgvTratamientos.Size = new System.Drawing.Size(800, 300);
             this.dgvTratamientos.TabIndex = 0;
+            this.dgvTratamientos.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvTratamientos.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(26, 54, 108);
+            this.dgvTratamientos.ColumnHeadersDefaultCellStyle.ForeColor = System.Drawing.Color.White;
+            this.dgvTratamientos.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(30, 50, 90);
+            this.dgvTratamientos.DefaultCellStyle.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
+            this.dgvTratamientos.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(33, 150, 243);
+            this.dgvTratamientos.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.White;
             this.dgvTratamientos.Name = "dgvTratamientos";
             // 
             // lblTratamientos
@@ -344,6 +369,7 @@
             this.lblTratamientos.Text = "Total de filas: 0";
             this.lblTratamientos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblTratamientos.TabIndex = 1;
+            this.lblTratamientos.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblTratamientos.Name = "lblTratamientos";
             // 
             // tabHistorial
@@ -351,7 +377,7 @@
             this.tabHistorial.Controls.Add(this.txtHistorial);
             this.tabHistorial.Controls.Add(this.lblHistorial);
             this.tabHistorial.Controls.Add(this.pnlFiltrosHistorial);
-            this.tabHistorial.BackColor = System.Drawing.Color.FromArgb(18, 41, 77);
+            this.tabHistorial.BackColor = System.Drawing.Color.FromArgb(20, 32, 60);
             this.tabHistorial.Location = new System.Drawing.Point(4, 29);
             this.tabHistorial.Padding = new System.Windows.Forms.Padding(3);
             this.tabHistorial.Size = new System.Drawing.Size(992, 467);
@@ -362,11 +388,11 @@
             // 
             // txtHistorial
             // 
-            this.txtHistorial.BackColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.txtHistorial.BackColor = System.Drawing.Color.FromArgb(30, 50, 90);
             this.txtHistorial.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtHistorial.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtHistorial.Font = new System.Drawing.Font("Consolas", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtHistorial.ForeColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.txtHistorial.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.txtHistorial.Multiline = true;
             this.txtHistorial.ReadOnly = true;
             this.txtHistorial.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -381,6 +407,7 @@
             this.lblHistorial.Text = "Total de filas: 0";
             this.lblHistorial.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblHistorial.TabIndex = 1;
+            this.lblHistorial.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblHistorial.Name = "lblHistorial";
             // 
             // pnlFiltrosHistorial
@@ -400,13 +427,14 @@
             this.lblPacienteHistorial.Text = "Paciente";
             this.lblPacienteHistorial.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblPacienteHistorial.TabIndex = 0;
+            this.lblPacienteHistorial.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblPacienteHistorial.Name = "lblPacienteHistorial";
             // 
             // cmbHistorial
             // 
-            this.cmbHistorial.BackColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.cmbHistorial.BackColor = System.Drawing.Color.FromArgb(30, 50, 90);
             this.cmbHistorial.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbHistorial.ForeColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.cmbHistorial.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.cmbHistorial.FormattingEnabled = true;
             this.cmbHistorial.Location = new System.Drawing.Point(85, 10);
             this.cmbHistorial.Size = new System.Drawing.Size(280, 28);
@@ -417,7 +445,7 @@
             // tabDirectorio
             // 
             this.tabDirectorio.Controls.Add(this.tblDirectorio);
-            this.tabDirectorio.BackColor = System.Drawing.Color.FromArgb(18, 41, 77);
+            this.tabDirectorio.BackColor = System.Drawing.Color.FromArgb(20, 32, 60);
             this.tabDirectorio.Location = new System.Drawing.Point(4, 29);
             this.tabDirectorio.Padding = new System.Windows.Forms.Padding(3);
             this.tabDirectorio.Size = new System.Drawing.Size(992, 467);
@@ -454,21 +482,22 @@
             this.lblDirectorio.Text = "Directorio de personas (clase base Persona)";
             this.lblDirectorio.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblDirectorio.TabIndex = 0;
+            this.lblDirectorio.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblDirectorio.Name = "lblDirectorio";
             // 
             // dgvDirectorio
             // 
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(46, 134, 222);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(46, 134, 222);
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(11, 31, 58);
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(46, 134, 222);
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(33, 150, 243);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(33, 150, 243);
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(10, 20, 40);
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(33, 150, 243);
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.dgvDirectorio.AllowUserToAddRows = false;
             this.dgvDirectorio.AllowUserToDeleteRows = false;
             this.dgvDirectorio.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvDirectorio.BackgroundColor = System.Drawing.Color.FromArgb(18, 41, 77);
+            this.dgvDirectorio.BackgroundColor = System.Drawing.Color.FromArgb(20, 32, 60);
             this.dgvDirectorio.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvDirectorio.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDirectorio.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -484,6 +513,13 @@
             this.dgvDirectorio.Location = new System.Drawing.Point(3, 31);
             this.dgvDirectorio.Size = new System.Drawing.Size(980, 180);
             this.dgvDirectorio.TabIndex = 1;
+            this.dgvDirectorio.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvDirectorio.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(26, 54, 108);
+            this.dgvDirectorio.ColumnHeadersDefaultCellStyle.ForeColor = System.Drawing.Color.White;
+            this.dgvDirectorio.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(30, 50, 90);
+            this.dgvDirectorio.DefaultCellStyle.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
+            this.dgvDirectorio.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(33, 150, 243);
+            this.dgvDirectorio.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.White;
             this.dgvDirectorio.Name = "dgvDirectorio";
             // 
             // colDirRol
@@ -505,21 +541,22 @@
             this.lblResumibles.Text = "Lista de objetos IResumible";
             this.lblResumibles.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblResumibles.TabIndex = 2;
+            this.lblResumibles.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblResumibles.Name = "lblResumibles";
             // 
             // dgvResumibles
             // 
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(46, 134, 222);
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(46, 134, 222);
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(11, 31, 58);
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(46, 134, 222);
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(33, 150, 243);
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(33, 150, 243);
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(10, 20, 40);
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(33, 150, 243);
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.dgvResumibles.AllowUserToAddRows = false;
             this.dgvResumibles.AllowUserToDeleteRows = false;
             this.dgvResumibles.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvResumibles.BackgroundColor = System.Drawing.Color.FromArgb(18, 41, 77);
+            this.dgvResumibles.BackgroundColor = System.Drawing.Color.FromArgb(20, 32, 60);
             this.dgvResumibles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dgvResumibles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvResumibles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -535,6 +572,13 @@
             this.dgvResumibles.Location = new System.Drawing.Point(3, 31);
             this.dgvResumibles.Size = new System.Drawing.Size(980, 180);
             this.dgvResumibles.TabIndex = 3;
+            this.dgvResumibles.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvResumibles.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(26, 54, 108);
+            this.dgvResumibles.ColumnHeadersDefaultCellStyle.ForeColor = System.Drawing.Color.White;
+            this.dgvResumibles.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(30, 50, 90);
+            this.dgvResumibles.DefaultCellStyle.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
+            this.dgvResumibles.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(33, 150, 243);
+            this.dgvResumibles.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.White;
             this.dgvResumibles.Name = "dgvResumibles";
             // 
             // colResTipo
@@ -556,6 +600,7 @@
             this.lblTotalDirectorio.Text = "Total de filas: 0";
             this.lblTotalDirectorio.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblTotalDirectorio.TabIndex = 4;
+            this.lblTotalDirectorio.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblTotalDirectorio.Name = "lblTotalDirectorio";
             // 
             // lblTitulo
@@ -566,6 +611,7 @@
             this.lblTitulo.Text = "Consultas y reportes";
             this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.lblTitulo.TabIndex = 1;
+            this.lblTitulo.ForeColor = System.Drawing.Color.FromArgb(41, 182, 246);
             this.lblTitulo.Name = "lblTitulo";
             // 
             // UcReportes
@@ -574,9 +620,9 @@
             this.Controls.Add(this.lblTitulo);
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.BackColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.BackColor = System.Drawing.Color.FromArgb(10, 20, 40);
             this.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.Size = new System.Drawing.Size(1000, 600);
             this.Name = "UcReportes";
             this.Load += new System.EventHandler(this.UcReportes_Load);

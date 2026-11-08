@@ -15,6 +15,7 @@ public partial class FrmCita : Form
     public FrmCita(Cita? cita, GestorCitas gestor)
     {
         InitializeComponent();
+        GestionClinica.UI.Estilo.Tema.Aplicar(this);
         _cita = cita;
         _gestor = gestor;
         cmbMedicos.SelectedIndexChanged += cmbMedicos_SelectedIndexChanged;

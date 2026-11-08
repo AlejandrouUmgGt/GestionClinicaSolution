@@ -54,17 +54,17 @@
             // 
             // dgvPacientes
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(46, 134, 222);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(46, 134, 222);
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(11, 31, 58);
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(46, 134, 222);
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(33, 150, 243);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(33, 150, 243);
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(10, 20, 40);
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(33, 150, 243);
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.dgvPacientes.AllowUserToAddRows = false;
             this.dgvPacientes.AllowUserToDeleteRows = false;
             this.dgvPacientes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvPacientes.BackgroundColor = System.Drawing.Color.FromArgb(18, 41, 77);
+            this.dgvPacientes.BackgroundColor = System.Drawing.Color.FromArgb(20, 32, 60);
             this.dgvPacientes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvPacientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPacientes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -84,6 +84,13 @@
             this.dgvPacientes.Location = new System.Drawing.Point(0, 0);
             this.dgvPacientes.Size = new System.Drawing.Size(800, 300);
             this.dgvPacientes.TabIndex = 0;
+            this.dgvPacientes.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvPacientes.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(26, 54, 108);
+            this.dgvPacientes.ColumnHeadersDefaultCellStyle.ForeColor = System.Drawing.Color.White;
+            this.dgvPacientes.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(30, 50, 90);
+            this.dgvPacientes.DefaultCellStyle.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
+            this.dgvPacientes.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(33, 150, 243);
+            this.dgvPacientes.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.White;
             this.dgvPacientes.Name = "dgvPacientes";
             // 
             // colNombre
@@ -128,7 +135,7 @@
             this.pnlBotones.Controls.Add(this.btnEditar);
             this.pnlBotones.Controls.Add(this.btnEliminar);
             this.pnlBotones.Controls.Add(this.btnActualizar);
-            this.pnlBotones.BackColor = System.Drawing.Color.FromArgb(18, 41, 77);
+            this.pnlBotones.BackColor = System.Drawing.Color.FromArgb(20, 32, 60);
             this.pnlBotones.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlBotones.Location = new System.Drawing.Point(0, 0);
             this.pnlBotones.Size = new System.Drawing.Size(1000, 55);
@@ -137,61 +144,65 @@
             // 
             // btnNuevo
             // 
-            this.btnNuevo.BackColor = System.Drawing.Color.FromArgb(46, 134, 222);
+            this.btnNuevo.BackColor = System.Drawing.Color.FromArgb(33, 150, 243);
             this.btnNuevo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnNuevo.FlatAppearance.BorderSize = 0;
             this.btnNuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNuevo.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.btnNuevo.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.btnNuevo.Location = new System.Drawing.Point(10, 9);
             this.btnNuevo.Size = new System.Drawing.Size(100, 36);
             this.btnNuevo.Text = "Nuevo";
             this.btnNuevo.UseVisualStyleBackColor = false;
             this.btnNuevo.TabIndex = 0;
+            this.btnNuevo.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnNuevo.Name = "btnNuevo";
             this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
             // btnEditar
             // 
-            this.btnEditar.BackColor = System.Drawing.Color.FromArgb(46, 134, 222);
+            this.btnEditar.BackColor = System.Drawing.Color.FromArgb(33, 150, 243);
             this.btnEditar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEditar.FlatAppearance.BorderSize = 0;
             this.btnEditar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEditar.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.btnEditar.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.btnEditar.Location = new System.Drawing.Point(120, 9);
             this.btnEditar.Size = new System.Drawing.Size(100, 36);
             this.btnEditar.Text = "Editar";
             this.btnEditar.UseVisualStyleBackColor = false;
             this.btnEditar.TabIndex = 1;
+            this.btnEditar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
             // btnEliminar
             // 
-            this.btnEliminar.BackColor = System.Drawing.Color.FromArgb(46, 134, 222);
+            this.btnEliminar.BackColor = System.Drawing.Color.FromArgb(33, 150, 243);
             this.btnEliminar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEliminar.FlatAppearance.BorderSize = 0;
             this.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEliminar.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.btnEliminar.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.btnEliminar.Location = new System.Drawing.Point(230, 9);
             this.btnEliminar.Size = new System.Drawing.Size(100, 36);
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = false;
             this.btnEliminar.TabIndex = 2;
+            this.btnEliminar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnActualizar
             // 
-            this.btnActualizar.BackColor = System.Drawing.Color.FromArgb(46, 134, 222);
+            this.btnActualizar.BackColor = System.Drawing.Color.FromArgb(33, 150, 243);
             this.btnActualizar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnActualizar.FlatAppearance.BorderSize = 0;
             this.btnActualizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnActualizar.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.btnActualizar.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.btnActualizar.Location = new System.Drawing.Point(340, 9);
             this.btnActualizar.Size = new System.Drawing.Size(110, 36);
             this.btnActualizar.Text = "Actualizar";
             this.btnActualizar.UseVisualStyleBackColor = false;
             this.btnActualizar.TabIndex = 3;
+            this.btnActualizar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
             // 
@@ -200,7 +211,7 @@
             this.pnlFiltros.Controls.Add(this.lblBuscar);
             this.pnlFiltros.Controls.Add(this.txtBuscar);
             this.pnlFiltros.Controls.Add(this.btnBuscar);
-            this.pnlFiltros.BackColor = System.Drawing.Color.FromArgb(18, 41, 77);
+            this.pnlFiltros.BackColor = System.Drawing.Color.FromArgb(20, 32, 60);
             this.pnlFiltros.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlFiltros.Location = new System.Drawing.Point(0, 0);
             this.pnlFiltros.Size = new System.Drawing.Size(1000, 48);
@@ -214,13 +225,14 @@
             this.lblBuscar.Text = "Buscar";
             this.lblBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblBuscar.TabIndex = 0;
+            this.lblBuscar.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblBuscar.Name = "lblBuscar";
             // 
             // txtBuscar
             // 
-            this.txtBuscar.BackColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.txtBuscar.BackColor = System.Drawing.Color.FromArgb(30, 50, 90);
             this.txtBuscar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtBuscar.ForeColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.txtBuscar.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.txtBuscar.Location = new System.Drawing.Point(75, 10);
             this.txtBuscar.Size = new System.Drawing.Size(280, 27);
             this.txtBuscar.TabIndex = 1;
@@ -228,16 +240,17 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.BackColor = System.Drawing.Color.FromArgb(46, 134, 222);
+            this.btnBuscar.BackColor = System.Drawing.Color.FromArgb(33, 150, 243);
             this.btnBuscar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnBuscar.FlatAppearance.BorderSize = 0;
             this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBuscar.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.btnBuscar.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.btnBuscar.Location = new System.Drawing.Point(365, 6);
             this.btnBuscar.Size = new System.Drawing.Size(110, 36);
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = false;
             this.btnBuscar.TabIndex = 2;
+            this.btnBuscar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
@@ -249,6 +262,7 @@
             this.lblTitulo.Text = "Pacientes";
             this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.lblTitulo.TabIndex = 3;
+            this.lblTitulo.ForeColor = System.Drawing.Color.FromArgb(41, 182, 246);
             this.lblTitulo.Name = "lblTitulo";
             // 
             // UcPacientes
@@ -259,9 +273,9 @@
             this.Controls.Add(this.lblTitulo);
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.BackColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.BackColor = System.Drawing.Color.FromArgb(10, 20, 40);
             this.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.Size = new System.Drawing.Size(1000, 600);
             this.Name = "UcPacientes";
             this.Load += new System.EventHandler(this.UcPacientes_Load);

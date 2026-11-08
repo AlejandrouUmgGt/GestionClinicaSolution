@@ -51,13 +51,14 @@
             this.lblCita.Text = "Cita";
             this.lblCita.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblCita.TabIndex = 0;
+            this.lblCita.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblCita.Name = "lblCita";
             // 
             // cmbCitas
             // 
-            this.cmbCitas.BackColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.cmbCitas.BackColor = System.Drawing.Color.FromArgb(30, 50, 90);
             this.cmbCitas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbCitas.ForeColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.cmbCitas.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.cmbCitas.FormattingEnabled = true;
             this.cmbCitas.Location = new System.Drawing.Point(185, 25);
             this.cmbCitas.Size = new System.Drawing.Size(310, 28);
@@ -71,14 +72,15 @@
             this.lblDescripcion.Text = "Descripción";
             this.lblDescripcion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblDescripcion.TabIndex = 2;
+            this.lblDescripcion.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblDescripcion.Name = "lblDescripcion";
             // 
             // txtDescripcion
             // 
             this.txtDescripcion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtDescripcion.BackColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.txtDescripcion.BackColor = System.Drawing.Color.FromArgb(30, 50, 90);
             this.txtDescripcion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtDescripcion.ForeColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.txtDescripcion.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.txtDescripcion.Location = new System.Drawing.Point(185, 71);
             this.txtDescripcion.Size = new System.Drawing.Size(310, 27);
             this.txtDescripcion.TabIndex = 3;
@@ -91,14 +93,15 @@
             this.lblIndicaciones.Text = "Indicaciones";
             this.lblIndicaciones.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblIndicaciones.TabIndex = 4;
+            this.lblIndicaciones.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblIndicaciones.Name = "lblIndicaciones";
             // 
             // txtIndicaciones
             // 
             this.txtIndicaciones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtIndicaciones.BackColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.txtIndicaciones.BackColor = System.Drawing.Color.FromArgb(30, 50, 90);
             this.txtIndicaciones.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtIndicaciones.ForeColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.txtIndicaciones.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.txtIndicaciones.Location = new System.Drawing.Point(185, 117);
             this.txtIndicaciones.Multiline = true;
             this.txtIndicaciones.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -113,6 +116,7 @@
             this.lblInicio.Text = "Fecha inicio";
             this.lblInicio.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblInicio.TabIndex = 6;
+            this.lblInicio.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblInicio.Name = "lblInicio";
             // 
             // dtpInicio
@@ -139,6 +143,7 @@
             this.lblFin.Text = "Fecha fin";
             this.lblFin.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblFin.TabIndex = 9;
+            this.lblFin.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblFin.Name = "lblFin";
             // 
             // dtpFin
@@ -160,32 +165,34 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.BackColor = System.Drawing.Color.FromArgb(46, 134, 222);
+            this.btnGuardar.BackColor = System.Drawing.Color.FromArgb(33, 150, 243);
             this.btnGuardar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGuardar.FlatAppearance.BorderSize = 0;
             this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGuardar.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.btnGuardar.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.btnGuardar.Location = new System.Drawing.Point(185, 363);
             this.btnGuardar.Size = new System.Drawing.Size(110, 36);
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = false;
             this.btnGuardar.TabIndex = 12;
+            this.btnGuardar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // btnCancelar
             // 
-            this.btnCancelar.BackColor = System.Drawing.Color.FromArgb(46, 134, 222);
+            this.btnCancelar.BackColor = System.Drawing.Color.FromArgb(33, 150, 243);
             this.btnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancelar.FlatAppearance.BorderSize = 0;
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancelar.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.btnCancelar.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.btnCancelar.Location = new System.Drawing.Point(305, 363);
             this.btnCancelar.Size = new System.Drawing.Size(110, 36);
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = false;
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancelar.TabIndex = 13;
+            this.btnCancelar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnCancelar.Name = "btnCancelar";
             // 
             // FrmTratamiento
@@ -207,11 +214,11 @@
             this.AcceptButton = this.btnGuardar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.BackColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.BackColor = System.Drawing.Color.FromArgb(10, 20, 40);
             this.CancelButton = this.btnCancelar;
             this.ClientSize = new System.Drawing.Size(520, 424);
             this.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;

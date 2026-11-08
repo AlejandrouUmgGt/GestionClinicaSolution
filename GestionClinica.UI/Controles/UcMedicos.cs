@@ -13,6 +13,7 @@ public partial class UcMedicos : UserControl
     public UcMedicos(bool soloConsulta)
     {
         InitializeComponent();
+        GestionClinica.UI.Estilo.Tema.Aplicar(this);
         _soloConsulta = soloConsulta;
         // Recepción solo consulta: se ocultan los botones que modifican datos
         if (_soloConsulta)

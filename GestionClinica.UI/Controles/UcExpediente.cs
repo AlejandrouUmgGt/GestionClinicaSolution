@@ -13,6 +13,7 @@ public partial class UcExpediente : UserControl
     public UcExpediente()
     {
         InitializeComponent();
+        GestionClinica.UI.Estilo.Tema.Aplicar(this);
     }
 
     private void UcExpediente_Load(object? sender, EventArgs e)

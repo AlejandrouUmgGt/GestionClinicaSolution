@@ -10,6 +10,7 @@ public partial class UcLogin : UserControl
     public UcLogin(FrmPrincipal principal)
     {
         InitializeComponent();
+        GestionClinica.UI.Estilo.Tema.Aplicar(this);
         _principal = principal;
     }
 

@@ -53,14 +53,15 @@
             this.lblNombres.Text = "Nombres";
             this.lblNombres.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblNombres.TabIndex = 0;
+            this.lblNombres.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblNombres.Name = "lblNombres";
             // 
             // txtNombres
             // 
             this.txtNombres.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNombres.BackColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.txtNombres.BackColor = System.Drawing.Color.FromArgb(30, 50, 90);
             this.txtNombres.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtNombres.ForeColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.txtNombres.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.txtNombres.Location = new System.Drawing.Point(185, 25);
             this.txtNombres.Size = new System.Drawing.Size(290, 27);
             this.txtNombres.TabIndex = 1;
@@ -73,14 +74,15 @@
             this.lblApellidos.Text = "Apellidos";
             this.lblApellidos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblApellidos.TabIndex = 2;
+            this.lblApellidos.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblApellidos.Name = "lblApellidos";
             // 
             // txtApellidos
             // 
             this.txtApellidos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtApellidos.BackColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.txtApellidos.BackColor = System.Drawing.Color.FromArgb(30, 50, 90);
             this.txtApellidos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtApellidos.ForeColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.txtApellidos.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.txtApellidos.Location = new System.Drawing.Point(185, 71);
             this.txtApellidos.Size = new System.Drawing.Size(290, 27);
             this.txtApellidos.TabIndex = 3;
@@ -93,14 +95,15 @@
             this.lblDpi.Text = "DPI";
             this.lblDpi.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblDpi.TabIndex = 4;
+            this.lblDpi.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblDpi.Name = "lblDpi";
             // 
             // txtDpi
             // 
             this.txtDpi.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtDpi.BackColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.txtDpi.BackColor = System.Drawing.Color.FromArgb(30, 50, 90);
             this.txtDpi.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtDpi.ForeColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.txtDpi.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.txtDpi.Location = new System.Drawing.Point(185, 117);
             this.txtDpi.Size = new System.Drawing.Size(290, 27);
             this.txtDpi.TabIndex = 5;
@@ -113,14 +116,15 @@
             this.lblTelefono.Text = "Teléfono";
             this.lblTelefono.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblTelefono.TabIndex = 6;
+            this.lblTelefono.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblTelefono.Name = "lblTelefono";
             // 
             // txtTelefono
             // 
             this.txtTelefono.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTelefono.BackColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.txtTelefono.BackColor = System.Drawing.Color.FromArgb(30, 50, 90);
             this.txtTelefono.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTelefono.ForeColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.txtTelefono.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.txtTelefono.Location = new System.Drawing.Point(185, 163);
             this.txtTelefono.Size = new System.Drawing.Size(290, 27);
             this.txtTelefono.TabIndex = 7;
@@ -133,6 +137,7 @@
             this.lblNacimiento.Text = "Fecha nacimiento";
             this.lblNacimiento.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblNacimiento.TabIndex = 8;
+            this.lblNacimiento.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblNacimiento.Name = "lblNacimiento";
             // 
             // dtpNacimiento
@@ -150,14 +155,15 @@
             this.lblColegiado.Text = "Colegiado";
             this.lblColegiado.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblColegiado.TabIndex = 10;
+            this.lblColegiado.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblColegiado.Name = "lblColegiado";
             // 
             // txtColegiado
             // 
             this.txtColegiado.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtColegiado.BackColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.txtColegiado.BackColor = System.Drawing.Color.FromArgb(30, 50, 90);
             this.txtColegiado.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtColegiado.ForeColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.txtColegiado.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.txtColegiado.Location = new System.Drawing.Point(185, 255);
             this.txtColegiado.Size = new System.Drawing.Size(290, 27);
             this.txtColegiado.TabIndex = 11;
@@ -170,14 +176,15 @@
             this.lblEspecialidad.Text = "Especialidad";
             this.lblEspecialidad.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblEspecialidad.TabIndex = 12;
+            this.lblEspecialidad.ForeColor = System.Drawing.Color.FromArgb(120, 170, 230);
             this.lblEspecialidad.Name = "lblEspecialidad";
             // 
             // txtEspecialidad
             // 
             this.txtEspecialidad.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtEspecialidad.BackColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.txtEspecialidad.BackColor = System.Drawing.Color.FromArgb(30, 50, 90);
             this.txtEspecialidad.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtEspecialidad.ForeColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.txtEspecialidad.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.txtEspecialidad.Location = new System.Drawing.Point(185, 301);
             this.txtEspecialidad.Size = new System.Drawing.Size(290, 27);
             this.txtEspecialidad.TabIndex = 13;
@@ -185,32 +192,34 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.BackColor = System.Drawing.Color.FromArgb(46, 134, 222);
+            this.btnGuardar.BackColor = System.Drawing.Color.FromArgb(33, 150, 243);
             this.btnGuardar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGuardar.FlatAppearance.BorderSize = 0;
             this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGuardar.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.btnGuardar.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.btnGuardar.Location = new System.Drawing.Point(185, 357);
             this.btnGuardar.Size = new System.Drawing.Size(110, 36);
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = false;
             this.btnGuardar.TabIndex = 14;
+            this.btnGuardar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // btnCancelar
             // 
-            this.btnCancelar.BackColor = System.Drawing.Color.FromArgb(46, 134, 222);
+            this.btnCancelar.BackColor = System.Drawing.Color.FromArgb(33, 150, 243);
             this.btnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancelar.FlatAppearance.BorderSize = 0;
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancelar.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.btnCancelar.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.btnCancelar.Location = new System.Drawing.Point(305, 357);
             this.btnCancelar.Size = new System.Drawing.Size(110, 36);
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = false;
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancelar.TabIndex = 15;
+            this.btnCancelar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnCancelar.Name = "btnCancelar";
             // 
             // FrmMedico
@@ -234,11 +243,11 @@
             this.AcceptButton = this.btnGuardar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.BackColor = System.Drawing.Color.FromArgb(11, 31, 58);
+            this.BackColor = System.Drawing.Color.FromArgb(10, 20, 40);
             this.CancelButton = this.btnCancelar;
             this.ClientSize = new System.Drawing.Size(500, 410);
             this.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.FromArgb(234, 240, 250);
+            this.ForeColor = System.Drawing.Color.FromArgb(210, 230, 255);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;

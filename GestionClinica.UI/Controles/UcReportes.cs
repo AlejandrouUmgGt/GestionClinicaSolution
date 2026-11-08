@@ -13,6 +13,7 @@ public partial class UcReportes : UserControl
     public UcReportes()
     {
         InitializeComponent();
+        GestionClinica.UI.Estilo.Tema.Aplicar(this);
     }
 
     private void UcReportes_Load(object? sender, EventArgs e)

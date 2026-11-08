@@ -12,6 +12,7 @@ public partial class FrmPrincipal : Form
     public FrmPrincipal()
     {
         InitializeComponent();
+        GestionClinica.UI.Estilo.Tema.Aplicar(this);
         WindowState = FormWindowState.Maximized;
         // Antes del login no se muestran ni el menú ni la barra superior
         pnlMenu.Visible = false;
